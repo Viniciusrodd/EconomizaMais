@@ -3,8 +3,8 @@
 export interface User {
    id: string; // UUID
    name: string;
-   residenceName?: string;
-   numberOfResidents?: number;
+   residenceName: string;
+   numberOfResidents: number;
    createdAt: Date;
    updatedAt: Date;
 };
