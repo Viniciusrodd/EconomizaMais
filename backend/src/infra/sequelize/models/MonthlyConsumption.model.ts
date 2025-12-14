@@ -12,7 +12,7 @@ import type { MonthlyConsumption } from '@interfaces/Entities.interface';
 // class - Monthly Consumption model
 class MonthlyConsumptionModel extends Model<MonthlyConsumption> {
    public id!: string;
-   public userId!: string;
+   public user_id!: string;
    public year!: number;
    public month!: number;
    public energyKwh!: number;
@@ -31,7 +31,7 @@ MonthlyConsumptionModel.init({
       allowNull: false,
       primaryKey: true
    },
-   userId: {
+   user_id: {
       type: DataTypes.CHAR(36),
       allowNull: false
    },

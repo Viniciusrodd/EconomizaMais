@@ -13,7 +13,7 @@ export interface User {
 // Tariff
 export interface Tariff {
    id: string; // UUID
-   userId: string;
+   user_id: string;
    energyTariff: number;
    waterTariff: number;
    gasTariff: number;
@@ -25,7 +25,7 @@ export interface Tariff {
 // Monthly Consumption
 export interface MonthlyConsumption {
    id: string; // UUID
-   userId: string;
+   user_id: string;
    year: number;   // ex: 2025
    month: number;  // 1–12
    energyKwh: number;
@@ -45,7 +45,7 @@ export type SimulationTargetType =
 
 export interface Simulation {
    id: string; // UUID
-   userId: string;
+   user_id: string;
    reductionPercent: number;
    targetType: SimulationTargetType;
    calculatedSaving: number;
@@ -62,7 +62,7 @@ export type AIInsightCategory =
 
 export interface AIInsight {
    id: string; // UUID
-   userId: string;
+   user_id: string;
    inputSummary: string;
    aiResponse: string;
    insightCategory: AIInsightCategory;
@@ -73,7 +73,7 @@ export interface AIInsight {
 // Export History
 export interface ExportHistory {
    id: string; // UUID
-   userId: string;
+   user_id: string;
    filePath: string;
    exportedAt: Date;
 };

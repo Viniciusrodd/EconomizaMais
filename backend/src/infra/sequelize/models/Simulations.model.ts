@@ -13,7 +13,7 @@ import type { SimulationTargetType } from "@interfaces/Entities.interface";
 // class - simulation model
 class SimulationModel extends Model<Simulation> {
    public id!: string;
-   public userId!: string;
+   public user_id!: string;
    public reductionPercent!: number;
    public targetType!: SimulationTargetType;
    public calculatedSaving!: number;
@@ -30,7 +30,7 @@ SimulationModel.init({
       allowNull: false,
       primaryKey: true
    },
-   userId: {
+   user_id: {
       type: DataTypes.CHAR(36),
       allowNull: false
    },

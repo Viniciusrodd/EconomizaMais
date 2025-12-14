@@ -12,7 +12,7 @@ import type { Tariff } from "@interfaces/Entities.interface";
 // class - tariff model
 class TariffModel extends Model<Tariff> {
    public id!: string;
-   public userId!: string;
+   public user_id!: string;
    public energyTariff!: number;
    public waterTariff!: number;
    public gasTariff!: number;
@@ -29,7 +29,7 @@ TariffModel.init({
       allowNull: false,
       primaryKey: true
    },
-   userId: {
+   user_id: {
       type: DataTypes.CHAR(36),
       allowNull: false
    },

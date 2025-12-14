@@ -15,7 +15,7 @@ import type { AIInsightCategory } from '@interfaces/Entities.interface';
 // class - ai-insight model
 class AiInsightModel extends Model<AIInsight> {
    public id!: string;
-   public userId!: string;
+   public user_id!: string;
    public inputSummary!: string;
    public aiResponse!: number;
    public insightCategory!: AIInsightCategory;
@@ -31,7 +31,7 @@ AiInsightModel.init({
       allowNull: false,
       primaryKey: true
    },
-   userId: {
+   user_id: {
       type: DataTypes.CHAR(36),
       allowNull: false,
    },

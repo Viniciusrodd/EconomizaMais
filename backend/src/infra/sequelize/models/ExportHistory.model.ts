@@ -12,7 +12,7 @@ import type { ExportHistory } from '@interfaces/Entities.interface';
 // class - export history model
 class ExportHistoryModel extends Model<ExportHistory> {
    public id!: string;
-   public userId!: string;
+   public user_id!: string;
    public filePath!: string;
    public exportedAt!: Date;
 };
@@ -26,7 +26,7 @@ ExportHistoryModel.init({
       allowNull: false,
       primaryKey: true
    },
-   userId: {
+   user_id: {
       type: DataTypes.CHAR(36),
       allowNull: false,
    },
