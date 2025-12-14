@@ -11,10 +11,12 @@ import dotenv from 'dotenv';
 dotenv.config({});
 
 
+
 // class - server
 export class Server {
    // express instance
    private app: Application;
+
 
    // constructor
    constructor(app: Application){
@@ -26,6 +28,7 @@ export class Server {
    public start(): void {
       this.startServer(this.app);
       this.securityMiddlewares(this.app);
+      this.dataMiddlewaresConfig(this.app);
    };
 
 
@@ -41,6 +44,19 @@ export class Server {
 
       console.log('✔️ Security middlewares');
    };
+
+
+   // data middlewares config
+   private dataMiddlewaresConfig(app: Application): void {
+      app.use(compression()); // compresses the data from HTTP responses
+      app.use(json({ limit: '50mb' }));
+      app.use(urlencoded({
+         extended: true,
+         limit: '50mb'
+      }));
+
+      console.log('✔️ Data middlewares');
+   };   
 
 
    // start server
