@@ -9,6 +9,9 @@ import compression from 'compression';
 // import routes
 import { userRouter } from "@routes/user.routes";
 
+// import database connection 
+import { ConnectionDatabase } from '@config/database';
+
 // import env
 import dotenv from 'dotenv';
 dotenv.config({});
@@ -17,7 +20,7 @@ dotenv.config({});
 
 // class - server
 export class Server {
-   // express instance
+   // properties
    private app: Application;
 
 
@@ -28,7 +31,11 @@ export class Server {
 
 
    // start methods
-   public start(): void {
+   public async start(): Promise<void> {
+      // database
+      await this.databaseAuthentication();
+
+      // server configs
       this.startServer(this.app);
       this.securityMiddlewares(this.app);
       this.dataMiddlewaresConfig(this.app);
@@ -68,6 +75,22 @@ export class Server {
       app.use('/user/', userRouter); // user routes
 
       console.log('✔️ routes');
+   };
+
+   
+   // connection authenticate
+   private async databaseAuthentication(): Promise<void> {
+      try{
+         await ConnectionDatabase.authenticate();
+         console.log('✔️ Database authentication');
+
+         ConnectionDatabase.sync();
+         console.log('✔️ Database synchronization');
+      }
+      catch(error){
+         console.error('❌ Database authentication error: ', error);
+         process.exit(1); // close app if database doesn't connect
+      }
    };
 
 
