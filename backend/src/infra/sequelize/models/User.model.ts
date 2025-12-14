@@ -1,6 +1,6 @@
 
 // imports
-import { DataTypes, Model, Optional } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 
 // import connection
 import { ConnectionDatabase } from "@config/database";

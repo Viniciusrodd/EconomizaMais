@@ -6,23 +6,25 @@ import { DataTypes, Model } from "sequelize";
 import { ConnectionDatabase } from "@config/database";
 
 // import interfaces
-import type { Tariff } from "@interfaces/Entities.interface";
+import type { MonthlyConsumption } from '@interfaces/Entities.interface';
 
 
-// class - tariff model
-class TariffModel extends Model<Tariff> {
+// class - Monthly Consumption model
+class MonthlyConsumptionModel extends Model<MonthlyConsumption> {
    public id!: string;
    public userId!: string;
-   public energyTariff!: number;
-   public waterTariff!: number;
-   public gasTariff!: number;
+   public year!: number;
+   public month!: number;
+   public energyKwh!: number;
+   public waterM3!: number;
+   public gasM3!: number;
    public createdAt!: Date;
    public updatedAt!: Date;
 };
 
 
 // mapping
-TariffModel.init({
+MonthlyConsumptionModel.init({
    id: {
       type: DataTypes.CHAR(36),
       defaultValue: DataTypes.UUIDV4,
@@ -33,16 +35,24 @@ TariffModel.init({
       type: DataTypes.CHAR(36),
       allowNull: false
    },
-   energyTariff: {
-      type: DataTypes.DECIMAL(10, 4),
+   year: {
+      type: DataTypes.INTEGER,
+      allowNull: false      
+   },
+   month: {
+      type: DataTypes.INTEGER,
       allowNull: false
    },
-   waterTariff: {
-      type: DataTypes.DECIMAL(10, 4),
+   energyKwh: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
    },
-   gasTariff: {
-      type: DataTypes.DECIMAL(10, 4),
+   waterM3: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false
+   },
+   gasM3: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
    },
    createdAt: {
@@ -57,9 +67,10 @@ TariffModel.init({
    }
 }, {
    sequelize: ConnectionDatabase,
-   modelName: 'Tariff',
+   modelName: 'MonthlyConsumption',
    timestamps: true,
-   tableName: 'Tariffs'
+   tableName: 'MonthlyConsumptions'
 });
 
-export default TariffModel;
+
+export default MonthlyConsumptionModel;
