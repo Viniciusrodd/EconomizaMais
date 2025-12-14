@@ -6,38 +6,43 @@ import { DataTypes, Model, Optional } from "sequelize";
 import { ConnectionDatabase } from "@config/database";
 
 // import interfaces
-import type { User } from '@interfaces/Entities.interface';
+import type { Tariff } from "@interfaces/Entities.interface";
 
 
-// class - user model
-class UserModel extends Model<User> {
+// class - tariff model
+class TariffModel extends Model<Tariff> {
    public id!: string;
-   public name!: string;
-   public residenceName!: string;
-   public numberOfResidents!: number;
+   public userId!: string;
+   public energyTariff!: number;
+   public waterTariff!: number;
+   public gasTariff!: number;
    public createdAt!: Date;
    public updatedAt!: Date;
 };
 
 
 // mapping
-UserModel.init({
+TariffModel.init({
    id: {
       type: DataTypes.CHAR(36),
       defaultValue: DataTypes.UUIDV4,
       allowNull: false,
       primaryKey: true
    },
-   name: {
-      type: DataTypes.STRING(120),
+   userId: {
+      type: DataTypes.CHAR(36),
       allowNull: false
    },
-   residenceName: {
-      type: DataTypes.STRING(150),
+   energyTariff: {
+      type: DataTypes.DECIMAL(10, 4),
       allowNull: false
    },
-   numberOfResidents: {
-      type: DataTypes.INTEGER,
+   waterTariff: {
+      type: DataTypes.DECIMAL(10, 4),
+      allowNull: false
+   },
+   gasTariff: {
+      type: DataTypes.DECIMAL(10, 4),
       allowNull: false
    },
    createdAt: {
@@ -52,10 +57,9 @@ UserModel.init({
    }
 }, {
    sequelize: ConnectionDatabase,
-   modelName: 'User',
+   modelName: 'Tariff',
    timestamps: true,
-   tableName: 'Users'
+   tableName: 'Tariffs'
 });
 
-
-export default UserModel;
+export default TariffModel;
