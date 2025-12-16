@@ -37,3 +37,9 @@ userRouter.put(
    validate,
    userController.updateUser
 );
+
+// delete user - DELETE
+userRouter.delete(
+   '/user',
+   userController.deleteUser
+);
