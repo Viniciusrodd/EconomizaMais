@@ -1,6 +1,6 @@
 
 // imports
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 
 // import controllers
 import { userController } from "@controllers/User.controller";

@@ -1,11 +1,9 @@
 
-// imports
-
-
 // import DTOs
 import { 
    CreateUserDTO, 
-   UserResponseDTO 
+   UserResponseDTO,
+   UpdateUserDTO
 } from "@DTOs/User.dtos";
 
 // import models
@@ -48,6 +46,18 @@ class UserService {
       const user = await models.UserModel.findOne(); // because must have only 1 user, always
       if(!user) throw new Error('❌ User fot found');
 
+      return user;
+   };
+
+
+   // update user - public
+   public async updateUserService(
+      userData: UpdateUserDTO
+   ): Promise<UserResponseDTO> {
+      const user = await models.UserModel.findOne();
+      if (!user) throw new Error('❌ User not found');
+
+      await user.update(userData);
       return user;
    };
 
