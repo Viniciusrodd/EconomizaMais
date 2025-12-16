@@ -8,6 +8,9 @@ import { iApiResponse } from "@interfaces/ApiResponse.interface";
 // import services
 import { userService } from "@services/User.service";
 
+// import utils
+import { getErrorMessage } from "@utils/ErrorHandler.util";
+
 // import DTOs
 import { 
    CreateUserDTO, 
@@ -40,7 +43,7 @@ class UserController {
          return res.status(500).json({
             success: false,
             message: '❌ Internal server error at User creation',
-            data: error
+            data: getErrorMessage(error)
          });
       }
    };
@@ -66,7 +69,7 @@ class UserController {
          return res.status(500).json({
             success: false,
             message: '❌ Internal server error at Get user',
-            data: error
+            data: getErrorMessage(error)
          });
       }
    };
@@ -74,7 +77,7 @@ class UserController {
 
    // update user
    public async updateUser(
-      req: Request,
+      req: Request<{}, {}, UpdateUserDTO>,
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
@@ -92,7 +95,7 @@ class UserController {
          return res.status(500).json({
             success: false,
             message: '❌ Internal server error at Update user',
-            data: error
+            data: getErrorMessage(error)
          });
       }
    };
@@ -117,7 +120,7 @@ class UserController {
          return res.status(500).json({
             success: false,
             message: '❌ Internal server error at Delete user',
-            data: error
+            data: getErrorMessage(error)
          });
       }
    };
