@@ -49,16 +49,26 @@ class UserController {
    // get user
    public async getUser(
       req: Request,
-      res: Response<iApiResponse<UserResponseDTO>>
+      res: Response<iApiResponse>
    ): Promise<Response> {
-      const userId = req.params.id;
-      
-
-
-      return res.status(201).json({
-         success: true,
-         message: '✔️ User successfully get',
-      });
+      try{
+         // get user - service
+         const user: UserResponseDTO = await userService.getUserService();
+   
+         return res.status(200).json({
+            success: true,
+            message: '✔️ User get successfully',
+            data: user
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Get user: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Get user',
+            data: error
+         });
+      }
    };
 
 };

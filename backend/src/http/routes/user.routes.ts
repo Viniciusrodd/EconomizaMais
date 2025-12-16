@@ -13,10 +13,19 @@ import { validations } from "@middlewares/ControllerValidations/UserValidations.
 export const userRouter: Router = Router();
 
 
+//// user routes - 5115
+
+
 // user creation - POST
 userRouter.post(
    '/user', 
    validations.userRegisterValidation(),
    validate,
    userController.createUser
+);
+
+// get user - GET
+userRouter.get(
+   '/user',
+   userController.getUser
 );
