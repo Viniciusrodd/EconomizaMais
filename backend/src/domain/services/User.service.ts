@@ -20,14 +20,15 @@ class UserService {
       userData: CreateUserDTO
    ): Promise<UserResponseDTO> {
       // validations
-      if(!userData.name || !userData.residenceName || !userData.numberOfResidents){
+      if(!userData.name || !userData.residence_name || !userData.number_of_residents){
          throw new Error('❌ User data fields its required');
       }
       
+      // user DB creation
       const user = await models.UserModel.create({
          name: userData.name,
-         residenceName: userData.residenceName,
-         numberOfResidents: userData.numberOfResidents
+         residence_name: userData.residence_name,
+         number_of_residents: userData.number_of_residents
       });
 
       return user;    

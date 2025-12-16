@@ -72,7 +72,7 @@ export class Server {
 
    // route config
    private routerConfig(app: Application): void {
-      app.use('/user/', userRouter); // user routes
+      app.use('/', userRouter); // user routes
 
       console.log('✔️ routes');
    };

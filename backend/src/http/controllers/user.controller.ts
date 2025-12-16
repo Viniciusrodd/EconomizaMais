@@ -5,6 +5,9 @@ import { Request, Response } from "express";
 // import interfaces
 import { iApiResponse } from "@interfaces/ApiResponse.interface";
 
+// import services
+import { userService } from "@services/User.service";
+
 // import DTOs
 import { 
    CreateUserDTO, 
@@ -22,22 +25,15 @@ class UserController {
       req: Request<{}, {}, CreateUserDTO>,
       res: Response<iApiResponse>
    ): Promise<Response> {
-      const { name, residenceName, numberOfResidents } = req.body;
-      
-      try{
-         const userData: CreateUserDTO = {
-            name,
-            residenceName,
-            numberOfResidents
-         };
-
-         // call service...
-         // const user: UserResponseDTO = await service(userData);
+      try{         
+         // create user - service
+         const user: UserResponseDTO = await userService.createUserService(req.body);
    
          return res.status(201).json({
             success: true,
-            message: '✔️ User successfully created'
-         })
+            message: '✔️ User successfully created',
+            data: user
+         });
       }
       catch(error){
          console.error('❌ Internal server error at User creation: ', error);

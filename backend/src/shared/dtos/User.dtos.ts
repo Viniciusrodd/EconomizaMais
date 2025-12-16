@@ -2,23 +2,23 @@
 // create user DTO
 export interface CreateUserDTO {
    name: string;
-   residenceName: string;
-   numberOfResidents: number;
+   residence_name: string;
+   number_of_residents: number;
 };
 
 // update user DTO
 export interface UpdateUserDTO {
    name?: string;
-   residenceName?: string;
-   numberOfResidents?: number;
+   residence_name?: string;
+   number_of_residents?: number;
 };
 
 // user response DTO
 export interface UserResponseDTO {
    id: string;
    name: string;
-   residenceName: string;
-   numberOfResidents: number;
-   createdAt: Date;
-   updatedAt: Date;
+   residence_name: string;
+   number_of_residents: number;
+   created_at: Date;
+   updated_at: Date;
 };

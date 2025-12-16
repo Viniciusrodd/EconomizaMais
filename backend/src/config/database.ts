@@ -15,6 +15,11 @@ export const ConnectionDatabase = new Sequelize(
    {
       host: 'localhost',
       dialect: 'mysql',
-      timezone: '-03:00'
+      timezone: '-03:00',
+      define: {
+         underscored: true, // Convert camelCase to snake_case automaticaly
+         createdAt: 'created_at',
+         updatedAt: 'updated_at'
+      }
    }
 );

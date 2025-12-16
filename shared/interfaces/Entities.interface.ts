@@ -3,10 +3,10 @@
 export interface User {
    id?: string; // UUID
    name: string;
-   residenceName: string;
-   numberOfResidents: number;
-   createdAt?: Date;
-   updatedAt?: Date;
+   residence_name: string;
+   number_of_residents: number;
+   created_at?: Date;
+   updated_at?: Date;
 };
 
 

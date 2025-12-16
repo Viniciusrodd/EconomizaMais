@@ -13,10 +13,10 @@ import type { User } from '@interfaces/Entities.interface';
 class UserModel extends Model<User> {
    public id!: string;
    public name!: string;
-   public residenceName!: string;
-   public numberOfResidents!: number;
-   public createdAt!: Date;
-   public updatedAt!: Date;
+   public residence_name!: string;
+   public number_of_residents!: number;
+   public created_at!: Date;
+   public updated_at!: Date;
 };
 
 
@@ -32,11 +32,11 @@ UserModel.init({
       type: DataTypes.STRING(120),
       allowNull: false
    },
-   residenceName: {
+   residence_name: {
       type: DataTypes.STRING(150),
       allowNull: false
    },
-   numberOfResidents: {
+   number_of_residents: {
       type: DataTypes.INTEGER,
       allowNull: false
    }
@@ -44,6 +44,7 @@ UserModel.init({
    sequelize: ConnectionDatabase,
    modelName: 'User',
    timestamps: true,
+   underscored: true, // Convert camelCase to snake_case automaticaly
    tableName: 'Users'
 });
 
