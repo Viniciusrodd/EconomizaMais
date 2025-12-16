@@ -20,15 +20,22 @@ class UserService {
       userData: CreateUserDTO
    ): Promise<UserResponseDTO> {
       // validations
-      if(!userData.name || !userData.residence_name || !userData.number_of_residents){
-         throw new Error('❌ User data fields its required');
+      const { name, residence_name, number_of_residents } = userData;
+      if(!name || !residence_name || !number_of_residents){
+         throw new Error('❌ All user fields are required');
+      }
+
+      // check existing user counts
+      const existingUserCount = await models.UserModel.count();
+      if(existingUserCount > 0){
+         throw new Error('❌ Only one user is allowed per installation');
       }
       
       // user DB creation
       const user = await models.UserModel.create({
-         name: userData.name,
-         residence_name: userData.residence_name,
-         number_of_residents: userData.number_of_residents
+         name,
+         residence_name,
+         number_of_residents
       });
 
       return user;    
