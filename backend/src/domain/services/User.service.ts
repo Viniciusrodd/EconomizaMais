@@ -61,5 +61,14 @@ class UserService {
       return user;
    };
 
+
+   // delete user - public
+   public async deleteUserService(): Promise<void> {
+      const user = await models.UserModel.findOne();
+      if (!user) throw new Error('❌ User not found');
+
+      await user.destroy();
+   };
+
 };
 export const userService: UserService = new UserService();
