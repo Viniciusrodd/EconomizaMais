@@ -29,3 +29,11 @@ userRouter.get(
    '/user',
    userController.getUser
 );
+
+// update user - PUT
+userRouter.put(
+   '/user',
+   validations.userUpdateValidation(),
+   validate,
+   userController.updateUser
+);
