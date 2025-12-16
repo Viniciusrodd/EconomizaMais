@@ -13,8 +13,8 @@ import type { ExportHistory } from '@interfaces/Entities.interface';
 class ExportHistoryModel extends Model<ExportHistory> {
    public id!: string;
    public user_id!: string;
-   public filePath!: string;
-   public exportedAt!: Date;
+   public file_path!: string;
+   public exported_at!: Date;
 };
 
 
@@ -30,19 +30,15 @@ ExportHistoryModel.init({
       type: DataTypes.CHAR(36),
       allowNull: false,
    },
-   filePath: {
+   file_path: {
       type: DataTypes.STRING(255),
       allowNull: false,
-   },
-   exportedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
    }
 }, {
    sequelize: ConnectionDatabase,
    modelName: 'ExportHistory',
    timestamps: true,
+   underscored: true, // Convert camelCase to snake_case automaticaly   
    tableName: 'ExportHistorys'
 });
 

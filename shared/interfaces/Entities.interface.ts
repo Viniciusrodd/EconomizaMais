@@ -31,8 +31,8 @@ export interface MonthlyConsumption {
    energy_kwh: number;
    water_m3: number;
    gas_m3: number;
-   created_at: Date;
-   updated_at: Date;
+   created_at?: Date;
+   updated_at?: Date;
 };
 
 
@@ -50,7 +50,7 @@ export interface Simulation {
    target_type: SimulationTargetType;
    calculated_saving: number;
    calculated_environmental_impact: string;
-   created_at: Date;
+   created_at?: Date;
 };
 
 
@@ -66,7 +66,7 @@ export interface AIInsight {
    input_summary: string;
    ai_response: string;
    insight_category: AIInsightCategory;
-   created_at: Date;
+   created_at?: Date;
 };
 
 
@@ -75,5 +75,5 @@ export interface ExportHistory {
    id: string; // UUID
    user_id: string;
    file_path: string;
-   exported_at: Date;
+   exported_at?: Date;
 };

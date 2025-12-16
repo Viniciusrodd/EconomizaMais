@@ -14,11 +14,11 @@ import type { SimulationTargetType } from "@interfaces/Entities.interface";
 class SimulationModel extends Model<Simulation> {
    public id!: string;
    public user_id!: string;
-   public reductionPercent!: number;
-   public targetType!: SimulationTargetType;
-   public calculatedSaving!: number;
-   public calculatedEnvironmentalImpact!: string;
-   public createdAt!: Date;
+   public reduction_percent!: number;
+   public target_type!: SimulationTargetType;
+   public calculated_saving!: number;
+   public calculated_environmental_impact!: string;
+   public created_at!: Date;
 };
 
 
@@ -34,31 +34,27 @@ SimulationModel.init({
       type: DataTypes.CHAR(36),
       allowNull: false
    },
-   reductionPercent: {
+   reduction_percent: {
       type: DataTypes.DECIMAL(5, 2),
       allowNull: false
    },
-   targetType: {
+   target_type: {
       type: DataTypes.ENUM('energy', 'water', 'gas', 'all'),
       allowNull: false
    },
-   calculatedSaving: {
+   calculated_saving: {
       type: DataTypes.DECIMAL(5, 2),
       allowNull: false
    },
-   calculatedEnvironmentalImpact: {
+   calculated_environmental_impact: {
       type: DataTypes.STRING(255),
       allowNull: false
-   },
-   createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
    }
 }, {
    sequelize: ConnectionDatabase,
    modelName: 'Simulation',
    timestamps: true,
+   underscored: true, // Convert camelCase to snake_case automaticaly
    tableName: 'Simulations'
 });
 

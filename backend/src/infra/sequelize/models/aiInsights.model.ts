@@ -16,10 +16,10 @@ import type { AIInsightCategory } from '@interfaces/Entities.interface';
 class AiInsightModel extends Model<AIInsight> {
    public id!: string;
    public user_id!: string;
-   public inputSummary!: string;
-   public aiResponse!: number;
-   public insightCategory!: AIInsightCategory;
-   public createdAt!: Date;
+   public input_summary!: string;
+   public ai_response!: number;
+   public insight_category!: AIInsightCategory;
+   public created_at!: Date;
 };
 
 
@@ -35,27 +35,23 @@ AiInsightModel.init({
       type: DataTypes.CHAR(36),
       allowNull: false,
    },
-   inputSummary: {
+   input_summary: {
       type: DataTypes.TEXT,
       allowNull: false,
    },
-   aiResponse: {
+   ai_response: {
       type: DataTypes.TEXT,
       allowNull: false,
    },
-   insightCategory: {
+   insight_category: {
       type: DataTypes.ENUM('tips', 'patterns', 'anomalies'),
       allowNull: false,
-   },
-   createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
    }
 }, {
    sequelize: ConnectionDatabase,
    modelName: 'aiInsights',
    timestamps: true,
+   underscored: true, // Convert camelCase to snake_case automaticaly   
    tableName: 'aiInsights'
 });
 

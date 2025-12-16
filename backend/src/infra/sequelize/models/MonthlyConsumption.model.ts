@@ -15,11 +15,11 @@ class MonthlyConsumptionModel extends Model<MonthlyConsumption> {
    public user_id!: string;
    public year!: number;
    public month!: number;
-   public energyKwh!: number;
-   public waterM3!: number;
-   public gasM3!: number;
-   public createdAt!: Date;
-   public updatedAt!: Date;
+   public energy_kwh!: number;
+   public water_m3!: number;
+   public gas_m3!: number;
+   public created_at!: Date;
+   public updated_at!: Date;
 };
 
 
@@ -43,32 +43,23 @@ MonthlyConsumptionModel.init({
       type: DataTypes.INTEGER,
       allowNull: false
    },
-   energyKwh: {
+   energy_kwh: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false
    },
-   waterM3: {
+   water_m3: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false
    },
-   gasM3: {
+   gas_m3: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false
-   },
-   createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-   },
-   updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
    }
 }, {
    sequelize: ConnectionDatabase,
    modelName: 'MonthlyConsumption',
    timestamps: true,
+   underscored: true, // Convert camelCase to snake_case automaticaly   
    tableName: 'MonthlyConsumptions'
 });
 
