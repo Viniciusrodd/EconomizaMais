@@ -14,11 +14,11 @@ export interface User {
 export interface Tariff {
    id: string; // UUID
    user_id: string;
-   energyTariff: number;
-   waterTariff: number;
-   gasTariff: number;
-   createdAt: Date;
-   updatedAt: Date;
+   energy_tariff: number;
+   water_tariff: number;
+   gas_tariff: number;
+   created_at?: Date;
+   updated_at?: Date;
 };
 
 
@@ -28,11 +28,11 @@ export interface MonthlyConsumption {
    user_id: string;
    year: number;   // ex: 2025
    month: number;  // 1–12
-   energyKwh: number;
-   waterM3: number;
-   gasM3: number;
-   createdAt: Date;
-   updatedAt: Date;
+   energy_kwh: number;
+   water_m3: number;
+   gas_m3: number;
+   created_at: Date;
+   updated_at: Date;
 };
 
 
@@ -46,11 +46,11 @@ export type SimulationTargetType =
 export interface Simulation {
    id: string; // UUID
    user_id: string;
-   reductionPercent: number;
-   targetType: SimulationTargetType;
-   calculatedSaving: number;
-   calculatedEnvironmentalImpact: string;
-   createdAt: Date;
+   reduction_percent: number;
+   target_type: SimulationTargetType;
+   calculated_saving: number;
+   calculated_environmental_impact: string;
+   created_at: Date;
 };
 
 
@@ -63,10 +63,10 @@ export type AIInsightCategory =
 export interface AIInsight {
    id: string; // UUID
    user_id: string;
-   inputSummary: string;
-   aiResponse: string;
-   insightCategory: AIInsightCategory;
-   createdAt: Date;
+   input_summary: string;
+   ai_response: string;
+   insight_category: AIInsightCategory;
+   created_at: Date;
 };
 
 
@@ -74,6 +74,6 @@ export interface AIInsight {
 export interface ExportHistory {
    id: string; // UUID
    user_id: string;
-   filePath: string;
-   exportedAt: Date;
+   file_path: string;
+   exported_at: Date;
 };

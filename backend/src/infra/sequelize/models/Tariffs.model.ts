@@ -13,11 +13,11 @@ import type { Tariff } from "@interfaces/Entities.interface";
 class TariffModel extends Model<Tariff> {
    public id!: string;
    public user_id!: string;
-   public energyTariff!: number;
-   public waterTariff!: number;
-   public gasTariff!: number;
-   public createdAt!: Date;
-   public updatedAt!: Date;
+   public energy_tariff!: number;
+   public water_tariff!: number;
+   public gas_tariff!: number;
+   public created_at!: Date;
+   public updated_at!: Date;
 };
 
 
@@ -33,32 +33,23 @@ TariffModel.init({
       type: DataTypes.CHAR(36),
       allowNull: false
    },
-   energyTariff: {
+   energy_tariff: {
       type: DataTypes.DECIMAL(10, 4),
       allowNull: false
    },
-   waterTariff: {
+   water_tariff: {
       type: DataTypes.DECIMAL(10, 4),
       allowNull: false
    },
-   gasTariff: {
+   gas_tariff: {
       type: DataTypes.DECIMAL(10, 4),
       allowNull: false
-   },
-   createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-   },
-   updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
    }
 }, {
    sequelize: ConnectionDatabase,
    modelName: 'Tariff',
    timestamps: true,
+   underscored: true, // Convert camelCase to snake_case automaticaly
    tableName: 'Tariffs'
 });
 
