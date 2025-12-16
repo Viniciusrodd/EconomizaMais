@@ -1,12 +1,12 @@
 
 // User
 export interface User {
-   id: string; // UUID
+   id?: string; // UUID
    name: string;
    residenceName: string;
    numberOfResidents: number;
-   createdAt: Date;
-   updatedAt: Date;
+   createdAt?: Date;
+   updatedAt?: Date;
 };
 
 

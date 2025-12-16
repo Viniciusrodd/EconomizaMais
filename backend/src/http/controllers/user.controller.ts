@@ -18,15 +18,21 @@ import {
 class UserController {
 
    // create user
-   async createUser(
+   public async createUser(
       req: Request<{}, {}, CreateUserDTO>,
       res: Response<iApiResponse>
    ): Promise<Response> {
+      const { name, residenceName, numberOfResidents } = req.body;
+      
       try{
-         const { name, residenceName, numberOfResidents } = req.body;
-         
+         const userData: CreateUserDTO = {
+            name,
+            residenceName,
+            numberOfResidents
+         };
+
          // call service...
-         // const user: UserResponseDTO = await service(name, residenceName, numberOfResidents);
+         // const user: UserResponseDTO = await service(userData);
    
          return res.status(201).json({
             success: true,
