@@ -1,9 +1,9 @@
 
 // imports
-import { body, ValidationChain } from 'express-validator';
+import { body, param, ValidationChain } from 'express-validator';
 
 
-// register
+// user creation
 const userRegisterValidation = (): ValidationChain[] => {
    return [
       // invalid name
@@ -29,7 +29,19 @@ const userRegisterValidation = (): ValidationChain[] => {
 };
 
 
+// get user
+const getUserValidation = (): ValidationChain[] => {
+   return [
+      param('id')
+         .notEmpty().withMessage('User id params is required')
+         .isString().withMessage('User id must be a string')
+         .isLength({ min: 32, max: 36 }).withMessage('User id must be between 32 and 36 characters')
+   ];
+};
+
+
 // export
 export const validations = {
-   userRegisterValidation
+   userRegisterValidation,
+   getUserValidation
 };

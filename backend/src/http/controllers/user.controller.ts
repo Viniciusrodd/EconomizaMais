@@ -45,5 +45,21 @@ class UserController {
       }
    };
 
+
+   // get user
+   public async getUser(
+      req: Request,
+      res: Response<iApiResponse<UserResponseDTO>>
+   ): Promise<Response> {
+      const userId = req.params.id;
+      
+
+
+      return res.status(201).json({
+         success: true,
+         message: '✔️ User successfully get',
+      });
+   };
+
 };
 export const userController: UserController = new UserController();
