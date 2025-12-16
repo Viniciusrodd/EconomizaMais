@@ -41,5 +41,15 @@ class UserService {
       return user;    
    };
 
+
+   // get user - public
+   public async getUserService(): Promise<UserResponseDTO> {
+      // get user - DB
+      const user = await models.UserModel.findOne(); // because must have only 1 user, always
+      if(!user) throw new Error('❌ User fot found');
+
+      return user;
+   };
+
 };
 export const userService: UserService = new UserService();
