@@ -27,7 +27,32 @@ const tariffCreationValidation = (): ValidationChain[] => {
 };
 
 
+// tariffs update
+const tariffsUpdateValidations = (): ValidationChain[] => {
+   return [
+      // invalid energy_tariff
+      body('energy_tariff')
+         .optional()
+         .isFloat({ min: 0 }).withMessage('Tarifa de energia deve ser no minímo 0')
+         .toFloat(),
+
+      // invalid water_tariff
+      body('water_tariff')
+         .optional()
+         .isFloat({ min: 0 }).withMessage('Tarifa de água deve ser no minímo 0')
+         .toFloat(),
+
+      // invalid gas_tariff
+      body('gas_tariff')
+         .optional()
+         .isFloat({ min: 0 }).withMessage('Tarifa de gás deve ser no minímo 0')
+         .toFloat()  
+   ];
+};
+
+
 // export validations
 export const tariffsValidations = {
-   tariffCreationValidation
+   tariffCreationValidation,
+   tariffsUpdateValidations
 };
