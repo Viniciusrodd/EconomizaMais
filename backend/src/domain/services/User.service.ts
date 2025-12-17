@@ -21,13 +21,13 @@ class UserService {
       // validations
       const { name, residence_name, number_of_residents } = userData;
       if(!name || !residence_name || !number_of_residents){
-         throw new Error('❌ All user fields are required');
+         throw new Error('All user fields are required');
       }
 
       // check existing user counts
       const existingUserCount = await models.UserModel.count();
       if(existingUserCount > 0){
-         throw new Error('❌ Only one user is allowed per installation');
+         throw new Error('Only one user is allowed per installation');
       }
       
       // user DB creation
@@ -45,7 +45,7 @@ class UserService {
    public async getUserService(): Promise<UserResponseDTO> {
       // get user - DB
       const user = await models.UserModel.findOne(); // because must have only 1 user, always
-      if(!user) throw new Error('❌ User fot found');
+      if(!user) throw new Error('User fot found');
 
       return user;
    };
@@ -56,7 +56,7 @@ class UserService {
       userData: UpdateUserDTO
    ): Promise<UserResponseDTO> {
       const user = await models.UserModel.findOne();
-      if (!user) throw new Error('❌ User not found');
+      if (!user) throw new Error('User not found');
 
       await user.update(userData);
       return user;
@@ -66,7 +66,7 @@ class UserService {
    // delete user - public
    public async deleteUserService(): Promise<void> {
       const user = await models.UserModel.findOne();
-      if (!user) throw new Error('❌ User not found');
+      if (!user) throw new Error('User not found');
 
       await user.destroy();
    };

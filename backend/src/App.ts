@@ -3,7 +3,7 @@
 import express, { Express, Application } from "express";
 
 // import server
-import { Server } from '@root/server';
+import { Server } from '@root/Server';
 
 
 // class - app

@@ -19,11 +19,12 @@ export const tariffsRoutes: Router = Router();
 // tariff creation - POST
 tariffsRoutes.post(
    '/tariff',
-   tariffsValidations.tariffCreationValidation,
+   tariffsValidations.tariffCreationValidation(),
    validate,
-   // controller
+   tariffController.createTariff
 );
 
+/*
 // get tariff - GET
 tariffsRoutes.get(
    '/tariff',
@@ -38,3 +39,4 @@ tariffsRoutes.put(
    validate,
    // controller
 );
+*/
