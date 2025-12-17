@@ -10,7 +10,8 @@ import {
 import { models } from "@root/infra/sequelize/Relations";
 
 
-// user service - class
+
+// class - user service
 class UserService {
 
    // create user - public
