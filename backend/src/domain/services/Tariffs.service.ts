@@ -56,6 +56,16 @@ class TariffService {
    
 
    // update tariff - public
+   public async updateTariffService(
+      tariffData: UpdateTariffDTO
+   ): Promise<TariffResponseDTO> {
+      // get tariff - DB
+      const tariffs = await models.TariffModel.findOne();
+      if (!tariffs) throw new Error('Tariffs not found');
+
+      await tariffs.update(tariffData);
+      return tariffs;
+   };
 
 };
 export const tariffService: TariffService = new TariffService();

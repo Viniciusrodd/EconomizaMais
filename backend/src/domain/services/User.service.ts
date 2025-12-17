@@ -55,6 +55,7 @@ class UserService {
    public async updateUserService(
       userData: UpdateUserDTO
    ): Promise<UserResponseDTO> {
+      // get user - DB
       const user = await models.UserModel.findOne();
       if (!user) throw new Error('User not found');
 
@@ -65,6 +66,7 @@ class UserService {
 
    // delete user - public
    public async deleteUserService(): Promise<void> {
+      // get user - DB
       const user = await models.UserModel.findOne();
       if (!user) throw new Error('User not found');
 
