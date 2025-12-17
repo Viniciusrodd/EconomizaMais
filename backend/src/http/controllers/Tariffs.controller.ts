@@ -76,6 +76,29 @@ class TariffController {
    };
 
    // update tariff
+   public async updateUser(
+      req: Request<{}, {}, UpdateTariffDTO>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // update tariff - service
+         const tariffs: TariffResponseDTO = await tariffService.updateTariffService(req.body);
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Update tariffs successfully',
+            data: tariffs
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Update tariffs: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Update tariffs',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 }
 export const tariffController: TariffController = new TariffController();

@@ -31,12 +31,10 @@ tariffsRoutes.get(
 );
    
    
-/*
 // update tariff - PUT
 tariffsRoutes.put(
    '/tariff',
-   tariffsValidations.tariffsUpdateValidations,
+   tariffsValidations.tariffsUpdateValidations(),
    validate,
-   // controller
+   tariffController.updateUser
 );
-*/
