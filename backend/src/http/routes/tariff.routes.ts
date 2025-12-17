@@ -24,14 +24,14 @@ tariffsRoutes.post(
    tariffController.createTariff
 );
 
-/*
 // get tariff - GET
 tariffsRoutes.get(
    '/tariff',
-   // controller
+   tariffController.getTariff
 );
-
-
+   
+   
+/*
 // update tariff - PUT
 tariffsRoutes.put(
    '/tariff',

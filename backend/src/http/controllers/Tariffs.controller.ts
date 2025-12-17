@@ -51,7 +51,29 @@ class TariffController {
 
 
    // get tariff
+   public async getTariff(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // get tariff - service
+         const tariffs: TariffResponseDTO = await tariffService.getTariffService();
 
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Tariff get successfully',
+            data: tariffs
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Get Tariff: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Get Tariff',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
    // update tariff
 
