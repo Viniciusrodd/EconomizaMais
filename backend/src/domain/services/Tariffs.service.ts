@@ -46,7 +46,14 @@ class TariffService {
 
 
    // get tariff - public
+   public async getTariffService(): Promise<TariffResponseDTO> {
+      // get tariff - DB
+      const tariffs = await models.TariffModel.findOne(); // because must have only 1 tariffs per user, always
+      if(!tariffs) throw new Error('Tariffs fot found');
 
+      return tariffs;
+   };
+   
 
    // update tariff - public
 
