@@ -7,7 +7,7 @@ import { userController } from "@controllers/User.controller";
 
 // import middlewares
 import { validate } from "@middlewares/HandleValidation.middleware";
-import { validations } from "@middlewares/ControllerValidations/UserValidations.middleware";
+import { userValidations } from "@middlewares/ControllerValidations/UserValidations.middleware";
 
 // export router
 export const userRoutes: Router = Router();
@@ -19,7 +19,7 @@ export const userRoutes: Router = Router();
 // user creation - POST
 userRoutes.post(
    '/user', 
-   validations.userRegisterValidation(),
+   userValidations.userRegisterValidation(),
    validate,
    userController.createUser
 );
@@ -33,7 +33,7 @@ userRoutes.get(
 // update user - PUT
 userRoutes.put(
    '/user',
-   validations.userUpdateValidation(),
+   userValidations.userUpdateValidation(),
    validate,
    userController.updateUser
 );

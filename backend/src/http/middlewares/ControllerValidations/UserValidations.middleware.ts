@@ -1,6 +1,6 @@
 
 // imports
-import { body, param, ValidationChain } from 'express-validator';
+import { body, ValidationChain } from 'express-validator';
 
 
 // user creation
@@ -8,22 +8,22 @@ const userRegisterValidation = (): ValidationChain[] => {
    return [
       // invalid name
       body('name')
-         .notEmpty().withMessage('Name is required')
-         .isString().withMessage('Name must be a string')
-         .isLength({ min: 4, max: 120 }).withMessage('Name must be between 4 and 120 characters')
+         .notEmpty().withMessage('Nome é obrigatório')
+         .isString().withMessage('Nome apenas em caracteres')
+         .isLength({ min: 4, max: 120 }).withMessage('Nome deve ser entre 4 e 120 caracteres')
          .trim(),
 
       // invalid residence name
       body('residence_name')
-         .notEmpty().withMessage('Residence name is required')
-         .isString().withMessage('Residence name must be a string')
-         .isLength({ max: 150 }).withMessage('Residence name must have maximum 150 characteres')
+         .notEmpty().withMessage('Nome de residencia é obrigatório')
+         .isString().withMessage('Nome de residencia apenas em caracteres')
+         .isLength({ max: 150 }).withMessage('Nome de residencia deve ter no máximo 150 caracteres')
          .trim(),
 
       // invalid number of residents
       body('number_of_residents')
-         .notEmpty().withMessage('Number of residents is required')
-         .isInt({ min: 1 }).withMessage('Number of residents must be at least 1')
+         .notEmpty().withMessage('Número da residencia é obrigatório')
+         .isInt({ min: 1 }).withMessage('Número da residencia deve ser no minímo 1')
          .toInt()
    ];
 };
@@ -35,28 +35,28 @@ const userUpdateValidation = (): ValidationChain[] => {
       // invalid name
       body('name')
          .optional()
-         .isString().withMessage('Name must be a string')
-         .isLength({ min: 4, max: 120 }).withMessage('Name must be between 4 and 120 characters')
+         .isString().withMessage('Nome deve ser em caracteres')
+         .isLength({ min: 4, max: 120 }).withMessage('Nome deve ser entre 4 e 120 caracteres')
          .trim(),
 
       // invalid residence name
       body('residence_name')
          .optional()
-         .isString().withMessage('Residence name must be a string')
-         .isLength({ max: 150 }).withMessage('Residence name must have maximum 150 characteres')
+         .isString().withMessage('Nome de residencia deve ser em caracteres')
+         .isLength({ max: 150 }).withMessage('Nome de residencia deve ter no máximo 150 caracteres')
          .trim(),
 
       // invalid number of residents
       body('number_of_residents')
          .optional()
-         .isInt({ min: 1 }).withMessage('Number of residents must be at least 1')
+         .isInt({ min: 1 }).withMessage('Número da residencia deve ser no minímo 1')
          .toInt()
    ];
 };
 
 
-// export
-export const validations = {
+// export validations
+export const userValidations = {
    userRegisterValidation,
    userUpdateValidation
 };

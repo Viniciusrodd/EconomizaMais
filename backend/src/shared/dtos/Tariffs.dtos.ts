@@ -1,7 +1,6 @@
 
 // create tariff DTO
 export interface CreateTariffDTO {
-   userId: string;
    energy_tariff: number;
    water_tariff: number;
    gas_tariff: number;
