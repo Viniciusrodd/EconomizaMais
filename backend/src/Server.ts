@@ -7,7 +7,7 @@ import hpp from 'hpp';
 import compression from 'compression';
 
 // import routes
-import { userRouter } from "@routes/user.routes";
+import { routes } from "@routes/index.routes";
 
 // import database connection 
 import { ConnectionDatabase } from '@config/database';
@@ -72,7 +72,7 @@ export class Server {
 
    // route config
    private routerConfig(app: Application): void {
-      app.use('/', userRouter); // user routes
+      app.use('/api', routes); // index routes
 
       console.log('✔️ routes');
    };

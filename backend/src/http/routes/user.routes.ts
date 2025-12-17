@@ -10,14 +10,14 @@ import { validate } from "@middlewares/HandleValidation.middleware";
 import { validations } from "@middlewares/ControllerValidations/UserValidations.middleware";
 
 // export router
-export const userRouter: Router = Router();
+export const userRoutes: Router = Router();
 
 
 //// user routes - 5115
 
 
 // user creation - POST
-userRouter.post(
+userRoutes.post(
    '/user', 
    validations.userRegisterValidation(),
    validate,
@@ -25,13 +25,13 @@ userRouter.post(
 );
 
 // get user - GET
-userRouter.get(
+userRoutes.get(
    '/user',
    userController.getUser
 );
 
 // update user - PUT
-userRouter.put(
+userRoutes.put(
    '/user',
    validations.userUpdateValidation(),
    validate,
@@ -39,7 +39,7 @@ userRouter.put(
 );
 
 // delete user - DELETE
-userRouter.delete(
+userRoutes.delete(
    '/user',
    userController.deleteUser
 );
