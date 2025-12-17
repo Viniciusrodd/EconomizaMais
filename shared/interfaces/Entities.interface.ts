@@ -12,8 +12,8 @@ export interface User {
 
 // Tariff
 export interface Tariff {
-   id: string; // UUID
-   user_id: string;
+   id?: string; // UUID
+   user_id?: string;
    energy_tariff: number;
    water_tariff: number;
    gas_tariff: number;
