@@ -75,6 +75,32 @@ class MonthlyConsumptionController {
    };
    
    // update monthlyConsumption
+   public async updateMonthCons(
+      req: Request<{id: string}, {}, UpdateMonthlyConsumptionDTO>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // id params
+         const { id } = req.params;
+
+         // update monthlyConsumption - service
+         const monthlyConsumptions = await monthlyConsumptionService.updateMonthConsService(id, req.body);
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Update Monthly Consumption successfully',
+            data: monthlyConsumptions
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Update Monthly Consumption: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Update Monthly Consumption',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 
    // delete monthlyConsumption

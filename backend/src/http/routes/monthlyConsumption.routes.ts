@@ -33,6 +33,12 @@ monthConsRoutes.get(
    
    
 // update monthlyConsumption - PUT
+monthConsRoutes.put(
+   '/monthly-consumption/:id',
+   monthlyConsumptionValidations.updateMonthlyConsValidation(),
+   validate,
+   monthlyConsumptionController.updateMonthCons
+);
 
 
 // delete monthlyConsumption - DELETE
