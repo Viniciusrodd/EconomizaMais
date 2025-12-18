@@ -45,7 +45,32 @@ const createMonthlyConsValidation = (): ValidationChain[] => {
 };
 
 
+// monthlyConsumption update
+const updateMonthlyConsValidation = (): ValidationChain[] => {
+   return [
+      // invalid energy
+      body('energy_kwh')
+         .optional()         
+         .isFloat({ min: 0 }).withMessage('Kwh de energia deve ser no minímo 0')
+         .toFloat(),
+
+      // invalid water
+      body('water_m3')
+         .optional()         
+         .isFloat({ min: 0 }).withMessage('M3 de água deve ser no minímo 0')
+         .toFloat(),
+
+      // invalid gas
+      body('gas_m3')
+         .optional()         
+         .isFloat({ min: 0 }).withMessage('M3 de gás deve ser no minímo 0')
+         .toFloat()   
+   ];
+};
+
+
 // export validations
 export const monthlyConsumptionValidations = {
-   createMonthlyConsValidation
+   createMonthlyConsValidation,
+   updateMonthlyConsValidation
 };
