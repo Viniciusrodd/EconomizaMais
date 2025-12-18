@@ -25,7 +25,29 @@ import {
 class MonthlyConsumptionController {
 
    // create monthlyConsumption
+   public async createMonthCons(
+      req: Request<{}, {}, CreateMonthlyConsumptionDTO>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // create monthlyConsumption - service
+         const monthlyConsumption = await monthlyConsumptionService.createMonthConsService(req.body);
 
+         return res.status(201).json({
+            success: true,
+            message: '✔️ Monthly Consumption successfully created',
+            data: monthlyConsumption
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Monthly Consumption creation: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Monthly Consumption creation',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
    // get monthlyConsumption
    

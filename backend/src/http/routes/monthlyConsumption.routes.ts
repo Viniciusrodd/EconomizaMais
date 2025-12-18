@@ -10,13 +10,19 @@ import { validate } from "@middlewares/HandleValidation.middleware";
 import { monthlyConsumptionValidations } from "@middlewares/ControllerValidations/MonthlyConsumption.middleware"; 
 
 // export router
-export const monthlyConsumptionRoutes: Router = Router();
+export const monthConsRoutes: Router = Router();
 
 
 //// monthlyConsumption routes - 5115
 
 
 // create monthlyConsumption - POST
+monthConsRoutes.post(
+   '/monthly-consumption',
+   monthlyConsumptionValidations.createMonthlyConsValidation(),
+   validate,
+   monthlyConsumptionController.createMonthCons
+);
 
 
 // get monthlyConsumption - GET
