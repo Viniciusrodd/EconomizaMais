@@ -1,6 +1,6 @@
 
 // imports
-import { body, ValidationChain } from 'express-validator';
+import { body, param, ValidationChain } from 'express-validator';
 
 
 // monthlyConsumption creation
@@ -48,6 +48,11 @@ const createMonthlyConsValidation = (): ValidationChain[] => {
 // monthlyConsumption update
 const updateMonthlyConsValidation = (): ValidationChain[] => {
    return [
+      // invalid id
+      param('id')
+         .exists().withMessage('ID é obrigatório')
+         .isUUID().withMessage('ID inválido'),
+
       // invalid energy
       body('energy_kwh')
          .optional()         
@@ -69,8 +74,20 @@ const updateMonthlyConsValidation = (): ValidationChain[] => {
 };
 
 
+// monthlyConsumption delete
+const deleteMonthlyConsValidation = (): ValidationChain[] => {
+   return [
+      // invalid id
+      param('id')
+         .exists().withMessage('ID é obrigatório')
+         .isUUID().withMessage('ID inválido'),
+   ]
+};
+
+
 // export validations
 export const monthlyConsumptionValidations = {
    createMonthlyConsValidation,
-   updateMonthlyConsValidation
+   updateMonthlyConsValidation,
+   deleteMonthlyConsValidation
 };
