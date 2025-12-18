@@ -33,7 +33,7 @@ export interface MonthlyConsumptionResponseDTO {
 
 // get monthly_consumption summary DTO
 export interface MonthlyConsumptionSummaryDTO {
-   average_energy: number;
-   highest_energy_month: number;
+   average_consume: number;
+   highest_consume_month: number;
    variation_last_month: number;
 };
