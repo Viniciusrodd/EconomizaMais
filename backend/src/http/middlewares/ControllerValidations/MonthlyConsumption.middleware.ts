@@ -85,9 +85,23 @@ const deleteMonthlyConsValidation = (): ValidationChain[] => {
 };
 
 
+// get monthlyConsumption summary
+const getMonthlyConsSummaryValidation = (): ValidationChain[] => {
+   return [
+      // invalid consume
+      param('consume')
+         .isString().withMessage('Parâmetro de consumo deve ser em characteres')
+         .isIn([
+            'energy_kwh', 'water_m3', 'gas_m3'
+         ]).withMessage('Parâmetro de consumo deve ser apenas energia, água ou gás')
+   ]
+};
+
+
 // export validations
 export const monthlyConsumptionValidations = {
    createMonthlyConsValidation,
    updateMonthlyConsValidation,
-   deleteMonthlyConsValidation
+   deleteMonthlyConsValidation,
+   getMonthlyConsSummaryValidation
 };

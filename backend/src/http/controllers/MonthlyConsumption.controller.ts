@@ -19,6 +19,9 @@ import {
    MonthlyConsumptionSummaryDTO
 } from '@DTOs/monthlyConsumption.dtos';
 
+// utils
+type Consume = 'energy_kwh' | 'water_m3' | 'gas_m3';
+
 
 
 // class - MonthlyConsumption controller
@@ -132,6 +135,32 @@ class MonthlyConsumptionController {
 
 
    // get summary monthlyConsumption
+   public async getMonthConsSummary(
+      req: Request<{consume: Consume}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // consume params
+         const { consume } = req.params;
+
+         // get monthlyConsumption summary - service
+         const summary = await monthlyConsumptionService.getMonthConsSummaryService(consume);
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Get Monthly Consumption Summary successfully',
+            data: summary
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Get Monthly Consumption Summary: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Get Monthly Consumption Summary',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 };
 export const monthlyConsumptionController: MonthlyConsumptionController = new MonthlyConsumptionController();

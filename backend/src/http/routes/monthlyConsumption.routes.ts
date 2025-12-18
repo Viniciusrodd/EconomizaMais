@@ -51,3 +51,9 @@ monthConsRoutes.delete(
 
 
 // get summary monthlyConsumption - GET
+monthConsRoutes.get(
+   '/monthly-consumption/:consume',
+   monthlyConsumptionValidations.getMonthlyConsSummaryValidation(),
+   validate,
+   monthlyConsumptionController.getMonthConsSummary
+);
