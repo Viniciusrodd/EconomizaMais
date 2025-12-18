@@ -41,6 +41,17 @@ class MonthlyConsumptionService {
 
 
    // get monthlyConsumption - public
+   public async getMonthConsService(
+      user_id: string
+   ): Promise<MonthlyConsumptionResponseDTO[]> {
+      // get monthlyConsumption
+      const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll({
+         where: { user_id }
+      });
+      if(monthlyConsumptions.length <= 0) throw new Error('Monthly consumption fot found');
+
+      return monthlyConsumptions;
+   };
    
    
    // update monthlyConsumption - public
