@@ -32,6 +32,9 @@ class TariffService {
 
       // get user id
       const user = await models.UserModel.findOne();
+      if(!user){
+         throw new Error('User not found');
+      }
 
       // tariff DB creation
       const tariffs = await models.TariffModel.create({

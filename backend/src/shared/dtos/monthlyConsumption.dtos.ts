@@ -1,7 +1,7 @@
 
 // create monthly_consumption DTO
 export interface CreateMonthlyConsumptionDTO {
-   userId: string;
+   user_id: string;
    year: number;
    month: number;
    energy_kwh: number;

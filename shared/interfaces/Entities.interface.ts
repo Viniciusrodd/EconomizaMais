@@ -24,7 +24,7 @@ export interface Tariff {
 
 // Monthly Consumption
 export interface MonthlyConsumption {
-   id: string; // UUID
+   id?: string; // UUID
    user_id: string;
    year: number;   // ex: 2025
    month: number;  // 1–12
