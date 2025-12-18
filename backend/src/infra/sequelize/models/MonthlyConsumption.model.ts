@@ -57,10 +57,10 @@ MonthlyConsumptionModel.init({
    }
 }, {
    sequelize: ConnectionDatabase,
-   modelName: 'MonthlyConsumption',
+   modelName: 'Monthly_consumption',
    timestamps: true,
    underscored: true, // Convert camelCase to snake_case automaticaly   
-   tableName: 'MonthlyConsumptions'
+   tableName: 'Monthly_consumptions'
 });
 
 
