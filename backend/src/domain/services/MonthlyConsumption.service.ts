@@ -10,6 +10,12 @@ import {
 // import models
 import { models } from "@root/infra/sequelize/Relations";
 
+// import entity
+import { MonthlyConsumptionHistoryEntity } from '@entities/MonthlyConsumptionHistory.entity';
+
+
+// utils
+type Consume = 'energy_kwh' | 'water_m3' | 'gas_m3';
 
 
 // class - MonthlyConsumption service
@@ -75,6 +81,21 @@ class MonthlyConsumptionService {
 
 
    // get summary monthlyConsumption - public
+   public async getMonthConsSummaryService(
+      consume: Consume
+   ): Promise<MonthlyConsumptionSummaryDTO> {
+      // get all monthlyConsumptions
+      const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll();
+      if(monthlyConsumptions.length <= 0) throw new Error('Monthly consumptions fot found');
+
+      // MonthlyConsumptionHistoryEntity initialize
+      const monthlyConsumptionHistoryEntity = new MonthlyConsumptionHistoryEntity(monthlyConsumptions);
+
+      // summary
+      const summary = monthlyConsumptionHistoryEntity.buildSummary(consume);
+
+      return summary;
+   };
 
 };
 export const monthlyConsumptionService: MonthlyConsumptionService = new MonthlyConsumptionService();
