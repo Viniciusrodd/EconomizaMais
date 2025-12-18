@@ -12,6 +12,9 @@ import { routes } from "@routes/index.routes";
 // import database connection 
 import { ConnectionDatabase } from '@config/database';
 
+// import middlewares
+import { loggingMiddleware } from '@middlewares/Logging.middleware';
+
 // import env
 import dotenv from 'dotenv';
 dotenv.config({});
@@ -39,6 +42,7 @@ export class Server {
       this.startServer(this.app);
       this.securityMiddlewares(this.app);
       this.dataMiddlewaresConfig(this.app);
+      this.customMiddlewares(this.app);
       this.routerConfig(this.app);
    };
 
@@ -67,7 +71,14 @@ export class Server {
       }));
 
       console.log('✔️ Data middlewares');
-   };   
+   };
+   
+   
+   // custom middlewares
+   private customMiddlewares(app: Application): void {
+      app.use(loggingMiddleware); // logging mid
+      console.log('✔️ Custom middlewares');
+   };
 
 
    // route config
