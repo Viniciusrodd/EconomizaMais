@@ -22,12 +22,12 @@ export class MonthlyConsumptionHistoryEntity {
 
    // filter by consume
    private filterByConsume(type: Consume): MonthlyConsumption[] {
-      return this.consumptions.filter(c => c[type] > 0);
+      return this.consumptions.filter(c => Number(c[type]) > 0);
    };
 
    // total consume
    private totalConsume(type: Consume): number {
-      return this.consumptions.reduce((sum, c) => sum + c[type], 0);
+      return this.consumptions.reduce((sum, c) => sum + Number(c[type]), 0);
    };
 
    // max consume
