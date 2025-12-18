@@ -104,6 +104,31 @@ class MonthlyConsumptionController {
 
 
    // delete monthlyConsumption
+   public async deleteMonthCons(
+      req: Request<{id: string}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // id params
+         const { id } = req.params;
+
+         // delete monthlyConsumption - service
+         await monthlyConsumptionService.deleteMonthConsService(id);
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Delete Monthly Consumption successfully'
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Delete Monthly Consumption: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Delete Monthly Consumption',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 
    // get summary monthlyConsumption
