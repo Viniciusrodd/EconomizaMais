@@ -27,7 +27,7 @@ monthConsRoutes.post(
 
 // get monthlyConsumption - GET
 monthConsRoutes.get(
-   '/monthly-consumption/:user_id',
+   '/monthly-consumption',
    monthlyConsumptionController.getMonthCons
 );
    

@@ -55,10 +55,8 @@ class MonthlyConsumptionController {
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         const { user_id } = req.params;
-
          // get monthlyConsumption - service
-         const monthlyConsumptions = await monthlyConsumptionService.getMonthConsService(user_id);
+         const monthlyConsumptions = await monthlyConsumptionService.getMonthConsService();
 
          return res.status(200).json({
             success: true,
