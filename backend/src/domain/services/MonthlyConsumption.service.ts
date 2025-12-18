@@ -65,6 +65,15 @@ class MonthlyConsumptionService {
 
 
    // delete monthlyConsumption - public
+   public async deleteMonthConsService(
+      id: string   
+   ): Promise<void> {
+      // get monthly consumption
+      const monthlyConsumption = await models.MonthlyConsumptionModel.findByPk(id);
+      if(!monthlyConsumption) throw new Error('Monthly consumption fot found');
+
+      await monthlyConsumption.destroy();
+   };
 
 
    // get summary monthlyConsumption - public
