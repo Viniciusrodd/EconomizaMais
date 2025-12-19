@@ -109,9 +109,16 @@ class SimulationsService {
    };
 
 
-
    // delete simulation - public
+   public async deleteSimulationsService(
+      id: string
+   ): Promise<void> {
+      // get simulation
+      const simulation = await models.SimulationModel.findByPk(id);
+      if(!simulation) throw new Error('Simulation not found');
 
+      await simulation.destroy();
+   };
 
 };
 export const simulationsService: SimulationsService = new SimulationsService();
