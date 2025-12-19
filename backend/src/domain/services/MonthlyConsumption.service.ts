@@ -7,6 +7,9 @@ import {
    MonthlyConsumptionSummaryDTO
 } from '@DTOs/MonthlyConsumption.dtos';
 
+// import interfaces
+import { MonthlyConsumption } from '@interfaces/Entities.interface';
+
 // import models
 import { models } from "@root/infra/sequelize/Relations";
 
@@ -95,6 +98,16 @@ class MonthlyConsumptionService {
       const summary = monthlyConsumptionHistoryEntity.buildSummary(consume);
 
       return summary;
+   };
+
+
+   // get all monthlyConsumption - public
+   public async getAllMonthConsService(): Promise<MonthlyConsumption[]> {
+      // get all monthlyConsumptions
+      const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll();
+      if(monthlyConsumptions.length <= 0) throw new Error('Monthly consumptions fot found');
+
+      return monthlyConsumptions;
    };
 
 };
