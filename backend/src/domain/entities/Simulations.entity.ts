@@ -54,16 +54,16 @@ export class SimulationsEntities {
       // "water" or "all"
       if (this.targetType === 'water' || this.targetType === 'all') {
          saving +=
-         this.averageConsumption.energy * 
-         this.tariffs.energy *
+         this.averageConsumption.water * 
+         this.tariffs.water *
          (this.reductionPercent / 100);
       }
 
       // "gas" or "all"
       if (this.targetType === 'gas' || this.targetType === 'all') {
          saving +=
-         this.averageConsumption.energy * 
-         this.tariffs.energy *
+         this.averageConsumption.gas * 
+         this.tariffs.gas *
          (this.reductionPercent / 100);
       }
 
@@ -86,7 +86,7 @@ export class SimulationsEntities {
       }
 
       if (this.targetType === 'water' || this.targetType === 'all') {
-         impact += this.averageConsumption.water * 0.0005; // 0.0005 kg CO₂ per liter saved
+         impact += (this.averageConsumption.water * 1000) * 0.0005; // 0.0005 kg CO₂ per m3 saved
       }
 
       if (this.targetType === 'gas' || this.targetType === 'all') {

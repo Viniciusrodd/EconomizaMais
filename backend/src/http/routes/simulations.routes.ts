@@ -21,11 +21,15 @@ simulationsRoutes.post(
    '/simulation',
    simulationsValidations.createSimulationsValidation(),
    validate,
-   simulationsController.createTariff
+   simulationsController.createSimulations
 );
 
 
 // get simulations - GET
+simulationsRoutes.get(
+   '/simulation',
+   simulationsController.getSimulations
+);
 
 
 // delete simulation - DELETE

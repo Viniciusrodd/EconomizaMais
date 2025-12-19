@@ -23,7 +23,7 @@ import {
 class SimulationsController {
 
    // create simulations
-   public async createTariff(
+   public async createSimulations(
       req: Request<{}, {}, CreateSimulationDTO>,
       res: Response<iApiResponse>
    ): Promise<Response> {
@@ -49,6 +49,29 @@ class SimulationsController {
 
 
    // get simulations
+   public async getSimulations(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // get simulations - service
+         const simulations: SimulationResponseDTO[] = await simulationsService.getSimulationsService();
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Simulations get successfully',
+            data: simulations
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Get Simulations: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Get Simulations',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 
    // delete simulation
