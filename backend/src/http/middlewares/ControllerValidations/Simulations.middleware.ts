@@ -23,7 +23,19 @@ const createSimulationsValidation = (): ValidationChain[] => {
 };
 
 
+// simulations delete
+const deleteSimulationsValidation = (): ValidationChain[] => {
+   return [
+      // invalid id
+      param('id')
+         .exists().withMessage('ID é obrigatório')
+         .isUUID().withMessage('ID inválido'),
+   ];
+};
+
+
 // export validations
 export const simulationsValidations = {
-   createSimulationsValidation
+   createSimulationsValidation,
+   deleteSimulationsValidation
 };

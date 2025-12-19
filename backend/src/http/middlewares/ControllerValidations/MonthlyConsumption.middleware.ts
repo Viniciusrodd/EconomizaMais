@@ -81,7 +81,7 @@ const deleteMonthlyConsValidation = (): ValidationChain[] => {
       param('id')
          .exists().withMessage('ID é obrigatório')
          .isUUID().withMessage('ID inválido'),
-   ]
+   ];
 };
 
 
@@ -94,7 +94,7 @@ const getMonthlyConsSummaryValidation = (): ValidationChain[] => {
          .isIn([
             'energy_kwh', 'water_m3', 'gas_m3'
          ]).withMessage('Parâmetro de consumo deve ser apenas energia, água ou gás')
-   ]
+   ];
 };
 
 
