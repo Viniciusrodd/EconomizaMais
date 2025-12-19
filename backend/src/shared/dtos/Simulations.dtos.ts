@@ -12,6 +12,6 @@ export interface SimulationResponseDTO {
    reduction_percent: number;
    monthly_saving: number;
    annual_saving: number;
-   environmental_impact: string;
+   environmental_impact: number;
    created_at: Date;
 };

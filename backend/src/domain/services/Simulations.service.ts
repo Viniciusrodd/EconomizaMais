@@ -75,14 +75,19 @@ class SimulationsService {
       // monthly / annual saving
       const monthly_saving = simulationEntity.calculateMonthlySaving();
       const annual_saving = simulationEntity.calculateAnnualSaving();
+      const environmental_impact = simulationEntity.calculateEnvironmentalImpact();
 
       // get environmental impact prompt
       const simulationPrompt = new SimulationsPrompt();
       const prompt = simulationPrompt.environmentalImpactPrompt(simulationsData);
 
       // AI model request
-      const environmental_impact = await aiService.modelRequest(prompt, 'mistral');
-   
+      const aiResponse = await aiService.modelRequest(prompt, 'mistral');
+
+      console.log('------------------------')
+      console.log('AI RAW RESPONSE:', JSON.stringify(aiResponse));
+      console.log('------------------------')
+
       // simulations DB creation
       const simulations = await models.SimulationModel.create({
          user_id: user.id,

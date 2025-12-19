@@ -18,7 +18,7 @@ class SimulationModel extends Model<Simulation> {
    public target_type!: SimulationTargetType;
    public monthly_saving!: number;
    public annual_saving!: number;
-   public environmental_impact!: string;
+   public environmental_impact!: number;
    public created_at!: Date;
 };
 
@@ -52,7 +52,7 @@ SimulationModel.init({
       allowNull: false
    },
    environmental_impact: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false
    }
 }, {

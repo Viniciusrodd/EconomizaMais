@@ -50,7 +50,7 @@ export interface Simulation {
    target_type: SimulationTargetType;
    monthly_saving: number;
    annual_saving: number;
-   environmental_impact: string;
+   environmental_impact: number;
    created_at?: Date;
 };
 

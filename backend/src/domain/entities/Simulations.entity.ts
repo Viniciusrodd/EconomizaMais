@@ -75,4 +75,26 @@ export class SimulationsEntities {
    public calculateAnnualSaving(): number {
       return Number((this.calculateMonthlySaving() * 12).toFixed(2));
    };
+
+
+   // calculate Environmental Impact
+   public calculateEnvironmentalImpact(): number {
+      let impact = 0;
+
+      if (this.targetType === 'energy' || this.targetType === 'all') {
+         impact += this.averageConsumption.energy * 0.084; // 0.084 kg CO₂ per kWh saved
+      }
+
+      if (this.targetType === 'water' || this.targetType === 'all') {
+         impact += this.averageConsumption.water * 0.0005; // 0.0005 kg CO₂ per liter saved
+      }
+
+      if (this.targetType === 'gas' || this.targetType === 'all') {
+         impact += this.averageConsumption.gas * 2.0; // 2.0 kg CO₂ per m³ saved
+      }
+
+      impact = impact * (this.reductionPercent / 100);
+
+      return Number(impact.toFixed(2));
+   };
 }
