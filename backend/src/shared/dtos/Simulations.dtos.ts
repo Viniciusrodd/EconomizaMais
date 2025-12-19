@@ -9,7 +9,7 @@ export interface CreateSimulationDTO {
 export interface SimulationResponseDTO {
    id: string;
    target_type: 'energy' | 'water' | 'gas' | 'all';
-   reduction_tercent: number;
+   reduction_percent: number;
    monthly_saving: number;
    annual_saving: number;
    environmental_impact: string;

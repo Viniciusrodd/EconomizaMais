@@ -8,12 +8,24 @@ import {
 // import models
 import { models } from "@root/infra/sequelize/Relations";
 
+// import services 
+import { monthlyConsumptionService } from './MonthlyConsumption.service';
+import { tariffService } from './Tariffs.service';
+import { aiService } from './AiServices/AI.service';
+
+// import entities
+import { MonthlyConsumptionHistoryEntity } from '@entities/MonthlyConsumptionHistory.entity';
+import { SimulationsEntities } from '@entities/Simulations.entity';
+
+// import utils
+import { SimulationsPrompt } from '@utils/SimulationsPrompt.utils';
+
 
 
 // class - simulations service
 class SimulationsService {
 
-   /* create simulations - public
+   // create simulations - public
    public async createSimulationsService(
       simulationsData: CreateSimulationDTO
    ): Promise<SimulationResponseDTO> {
@@ -29,9 +41,60 @@ class SimulationsService {
          throw new Error('User not found');
       }
 
+      // get monthly consumptions
+      const consumptions = await monthlyConsumptionService.getAllMonthConsService();
 
+      // get monthlyConsumptions entity
+      const historyMonthlyConsumptions = new MonthlyConsumptionHistoryEntity(consumptions);
+
+      // average consumption build
+      const averageConsumption = {
+         energy: historyMonthlyConsumptions.buildSummary('energy_kwh').average_consume,
+         water: historyMonthlyConsumptions.buildSummary('water_m3').average_consume,
+         gas: historyMonthlyConsumptions.buildSummary('gas_m3').average_consume,
+      };
+
+      // get tariffs
+      const tariff = await tariffService.getTariffService();
+
+      // tariff build
+      const tariffs = {
+         energy: tariff.energy_tariff,
+         water: tariff.water_tariff,
+         gas: tariff.gas_tariff
+      };
+
+      // get simulations entity
+      const simulationEntity = new SimulationsEntities(
+         simulationsData.target_type,
+         simulationsData.reduction_percent,
+         averageConsumption,
+         tariffs
+      );
+
+      // monthly / annual saving
+      const monthly_saving = simulationEntity.calculateMonthlySaving();
+      const annual_saving = simulationEntity.calculateAnnualSaving();
+
+      // get environmental impact prompt
+      const simulationPrompt = new SimulationsPrompt();
+      const prompt = simulationPrompt.environmentalImpactPrompt(simulationsData);
+
+      // AI model request
+      const environmental_impact = await aiService.modelRequest(prompt, 'mistral');
+   
+      // simulations DB creation
+      const simulations = await models.SimulationModel.create({
+         user_id: user.id,
+         reduction_percent, 
+         target_type,
+         monthly_saving,
+         annual_saving,
+         environmental_impact
+      });
+
+      return simulations;
    };
-   */
 
 
    // get simulations - public
