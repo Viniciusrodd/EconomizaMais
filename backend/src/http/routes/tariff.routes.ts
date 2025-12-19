@@ -16,7 +16,7 @@ export const tariffsRoutes: Router = Router();
 //// tariff routes - 5115
 
 
-// tariff creation - POST
+// create tariff - POST
 tariffsRoutes.post(
    '/tariff',
    tariffsValidations.tariffCreationValidation(),

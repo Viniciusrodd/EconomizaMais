@@ -6,6 +6,7 @@ import { Router } from "express";
 import { userRoutes } from "./user.routes";
 import { tariffsRoutes } from "./tariff.routes";
 import { monthConsRoutes } from "./monthlyConsumption.routes";
+import { simulationsRoutes } from "./simulations.routes";
 
 
 // router
@@ -16,3 +17,4 @@ export const routes: Router = Router();
 routes.use('/users', userRoutes);
 routes.use('/tariffs', tariffsRoutes);
 routes.use('/monthCons', monthConsRoutes);
+routes.use('/simulations', simulationsRoutes);
