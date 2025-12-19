@@ -5,7 +5,7 @@ import {
    UpdateMonthlyConsumptionDTO,
    MonthlyConsumptionResponseDTO,
    MonthlyConsumptionSummaryDTO
-} from '@DTOs/monthlyConsumption.dtos';
+} from '@DTOs/MonthlyConsumption.dtos';
 
 // import models
 import { models } from "@root/infra/sequelize/Relations";

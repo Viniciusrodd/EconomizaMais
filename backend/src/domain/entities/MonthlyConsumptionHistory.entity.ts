@@ -1,7 +1,7 @@
 
 // import interfaces
 import { MonthlyConsumption } from "@interfaces/Entities.interface";
-import { MonthlyConsumptionSummaryDTO } from "@DTOs/monthlyConsumption.dtos";
+import { MonthlyConsumptionSummaryDTO } from "@DTOs/MonthlyConsumption.dtos";
 
 // type
 type Consume = 'energy_kwh' | 'water_m3' | 'gas_m3';
