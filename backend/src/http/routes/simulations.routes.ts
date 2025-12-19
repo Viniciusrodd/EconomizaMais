@@ -17,6 +17,12 @@ export const simulationsRoutes: Router = Router();
 
 
 // create simulations - POST
+simulationsRoutes.post(
+   '/simulation',
+   simulationsValidations.createSimulationsValidation(),
+   validate,
+   simulationsController.createTariff
+);
 
 
 // get simulations - GET

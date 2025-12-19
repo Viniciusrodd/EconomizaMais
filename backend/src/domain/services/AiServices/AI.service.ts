@@ -27,7 +27,7 @@ class AiService {
             'model': model,
             'prompt': prompt,
             'stream': false
-         }, { timeout: 5000 });
+         });
 
          // get result
          const result = typeof modelResponse.data === 'string'
