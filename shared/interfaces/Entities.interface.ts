@@ -51,6 +51,7 @@ export interface Simulation {
    monthly_saving: number;
    annual_saving: number;
    environmental_impact: number;
+   feedback: string;
    created_at?: Date;
 };
 

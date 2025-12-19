@@ -82,11 +82,7 @@ class SimulationsService {
       const prompt = simulationPrompt.environmentalImpactPrompt(simulationsData);
 
       // AI model request
-      const aiResponse = await aiService.modelRequest(prompt, 'mistral');
-
-      console.log('------------------------')
-      console.log('AI RAW RESPONSE:', JSON.stringify(aiResponse));
-      console.log('------------------------')
+      const feedback = await aiService.modelRequest(prompt, 'mistral');
 
       // simulations DB creation
       const simulations = await models.SimulationModel.create({
@@ -95,7 +91,8 @@ class SimulationsService {
          target_type,
          monthly_saving,
          annual_saving,
-         environmental_impact
+         environmental_impact,
+         feedback
       });
 
       return simulations;
