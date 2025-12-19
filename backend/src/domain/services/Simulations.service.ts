@@ -100,6 +100,14 @@ class SimulationsService {
 
 
    // get simulations - public
+   public async getSimulationsService(): Promise<SimulationResponseDTO[]> {
+      // get simulations - DB
+      const simulations = await models.SimulationModel.findAll();
+      if(simulations.length <= 0) throw new Error('Simulations not found');
+
+      return simulations;
+   };
+
 
 
    // delete simulation - public
