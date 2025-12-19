@@ -44,7 +44,7 @@ export type SimulationTargetType =
    | 'all';
 
 export interface Simulation {
-   id: string; // UUID
+   id?: string; // UUID
    user_id: string;
    reduction_percent: number;
    target_type: SimulationTargetType;

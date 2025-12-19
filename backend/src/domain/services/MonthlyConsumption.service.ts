@@ -26,8 +26,8 @@ class MonthlyConsumptionService {
       monthCons: CreateMonthlyConsumptionDTO
    ): Promise<MonthlyConsumptionResponseDTO> {
       // validations
-      const { user_id, year, month, energy_kwh, water_m3, gas_m3 } = monthCons;
-      if(!user_id || !year || !month || !energy_kwh || !water_m3 || !gas_m3){
+      const { year, month, energy_kwh, water_m3, gas_m3 } = monthCons;
+      if(!year || !month || !energy_kwh || !water_m3 || !gas_m3){
          throw new Error('All monthly consumption fields are required');
       }
 
@@ -39,7 +39,7 @@ class MonthlyConsumptionService {
 
       // monthly consumption DB creation
       const monthlyConsumptions = await models.MonthlyConsumptionModel.create({
-         user_id, year, month, energy_kwh, water_m3, gas_m3
+         user_id: user.id, year, month, energy_kwh, water_m3, gas_m3
       });
 
       return monthlyConsumptions;
