@@ -16,8 +16,9 @@ class SimulationModel extends Model<Simulation> {
    public user_id!: string;
    public reduction_percent!: number;
    public target_type!: SimulationTargetType;
-   public calculated_saving!: number;
-   public calculated_environmental_impact!: string;
+   public monthly_saving!: number;
+   public annual_saving!: number;
+   public environmental_impact!: string;
    public created_at!: Date;
 };
 
@@ -42,11 +43,15 @@ SimulationModel.init({
       type: DataTypes.ENUM('energy', 'water', 'gas', 'all'),
       allowNull: false
    },
-   calculated_saving: {
+   monthly_saving: {
       type: DataTypes.DECIMAL(5, 2),
       allowNull: false
    },
-   calculated_environmental_impact: {
+   annual_saving: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: false
+   },
+   environmental_impact: {
       type: DataTypes.STRING(255),
       allowNull: false
    }

@@ -48,8 +48,9 @@ export interface Simulation {
    user_id: string;
    reduction_percent: number;
    target_type: SimulationTargetType;
-   calculated_saving: number;
-   calculated_environmental_impact: string;
+   monthly_saving: number;
+   annual_saving: number;
+   environmental_impact: string;
    created_at?: Date;
 };
 
