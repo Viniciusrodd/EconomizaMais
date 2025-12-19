@@ -33,3 +33,9 @@ simulationsRoutes.get(
 
 
 // delete simulation - DELETE
+simulationsRoutes.delete(
+   '/simulation/:id',
+   simulationsValidations.deleteSimulationsValidation(),
+   validate,
+   simulationsController.deleteSimulation
+);

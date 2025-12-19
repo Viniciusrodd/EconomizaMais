@@ -75,7 +75,30 @@ class SimulationsController {
 
 
    // delete simulation
+   public async deleteSimulation(
+      req: Request<{id: string}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         const { id } = req.params;
 
+         // delete simulation - service
+         await simulationsService.deleteSimulationService(id);
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Delete simulation successfully',
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Delete Simulations: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Delete Simulations',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 };
 export const simulationsController: SimulationsController = new SimulationsController();

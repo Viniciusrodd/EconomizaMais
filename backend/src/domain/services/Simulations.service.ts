@@ -110,7 +110,7 @@ class SimulationsService {
 
 
    // delete simulation - public
-   public async deleteSimulationsService(
+   public async deleteSimulationService(
       id: string
    ): Promise<void> {
       // get simulation
