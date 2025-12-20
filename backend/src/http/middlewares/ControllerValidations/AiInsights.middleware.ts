@@ -25,7 +25,19 @@ const createAiInsightsValidation = (): ValidationChain[] => {
 };
 
 
+// ai insights delete
+const deleteAiInsightsValidation = (): ValidationChain[] => {
+   return [
+      // invalid id
+      param('id')
+         .exists().withMessage('ID é obrigatório')
+         .isUUID().withMessage('ID inválido'),
+   ];
+};
+
+
 // export validations
 export const aiInsightsValidations = {
-   createAiInsightsValidation
+   createAiInsightsValidation,
+   deleteAiInsightsValidation
 };
