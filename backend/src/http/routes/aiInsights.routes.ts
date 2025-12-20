@@ -18,6 +18,12 @@ export const aiInsightsRoutes: Router = Router();
 
 
 // create ai insight - POST
+aiInsightsRoutes.post(
+   '/insight',
+   aiInsightsValidations.createAiInsightsValidation(),
+   validate,
+   aiInsightsController.createAiInsights
+);
 
 
 // get ai insights - GET
