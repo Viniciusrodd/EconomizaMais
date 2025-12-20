@@ -9,9 +9,9 @@ import {
 import { models } from "@root/infra/sequelize/Relations";
 
 // import services 
-import { monthlyConsumptionService } from './MonthlyConsumption.service';
-import { tariffService } from './Tariffs.service';
-import { aiService } from './AiServices/AI.service';
+import { monthlyConsumptionService } from '@services/MonthlyConsumption.service';
+import { tariffService } from '@services/Tariffs.service';
+import { aiService } from '@services/AiServices/AI.service';
 
 // import entities
 import { MonthlyConsumptionHistoryEntity } from '@entities/MonthlyConsumptionHistory.entity';
