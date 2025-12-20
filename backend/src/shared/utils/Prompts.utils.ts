@@ -33,21 +33,32 @@ export class Prompts {
          variation_last_month 
       } = data;
 
-      return `
-         You are an assistant that analyzes household consumption.
-
-         Data:
-            - Consumption type: ${ consume_type }
-            - Average monthly consumption: ${ average_consume } m³
-            - Month of highest consumption: ${ highest_consume_month }
-            - Variation compared to previous month: +${ variation_last_month }%
-
-         Task:
-            - Identify the pattern: ${ insight_category }.
-            - Explain in simple terms, without technical language.
-            - Return a single short paragraph.
-            - Classify as: ${ insight_category }.
-      `;
+      return [
+         'You are an assistant that analyzes household consumption.',
+         '',
+         'Data:',
+         `- Consumption type: ${consume_type}`,
+         `- Average monthly consumption: ${average_consume}`,
+         `- Month of highest consumption: ${highest_consume_month}`,
+         `- Variation compared to previous month: +${variation_last_month}%`,
+         '',
+         'Task:',
+         `- Identify the pattern: ${insight_category}.`,
+         '- Explain in simple terms, without technical language.',
+         '- Return the response in a structured format:',
+         '  • First line: a brief summary sentence.',
+         '  • Blank line.',
+         '  • Then 2 to 4 short lines with practical guidance.',
+         `- Classify as: ${insight_category}.`,
+         '',
+         'Formatting rules:',
+         '- Use line breaks to separate ideas.',
+         '- Do NOT use markdown symbols (*, #, **).',
+         '- Do NOT use emojis.',
+         '- Keep the text simple and accessible.',
+         '',
+         'Response language: PORTUGUESE'
+      ].join('\n');
    };
 
 };
