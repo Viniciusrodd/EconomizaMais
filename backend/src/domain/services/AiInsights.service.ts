@@ -105,6 +105,16 @@ class AIinsightsService {
 
 
    // get ai insight by category - public
+   public async getAiInsightsByCategoryService(
+      insight_category: string
+   ): Promise<AIInsightResponseDTO[]> {
+      const aiInsights = await models.AiInsightModel.findAll({
+         where: { insight_category }
+      });
+      if(aiInsights.length <= 0) throw new Error('AI insights not found');
+      
+      return aiInsights;
+   };
 
 
    // delete ai insight - public
