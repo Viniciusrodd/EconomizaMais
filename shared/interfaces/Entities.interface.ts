@@ -62,13 +62,19 @@ export type AIInsightCategory =
    | 'padroes'
    | 'anomalias';
 
+export type AIInsightConsumeType =
+   | 'energy'
+   | 'water'
+   | 'gas'
 export interface AIInsight {
    id: string; // UUID
    user_id: string;
    input_summary: string;
    ai_response: string;
    insight_category: AIInsightCategory;
+   consume_type: AIInsightConsumeType;
    created_at?: Date;
+   updated_at?: Date;
 };
 
 

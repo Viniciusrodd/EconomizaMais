@@ -8,7 +8,7 @@ import { ConnectionDatabase } from "@config/database";
 
 // import interfaces
 import type { AIInsight } from '@interfaces/Entities.interface';
-import type { AIInsightCategory } from '@interfaces/Entities.interface';
+import type { AIInsightCategory, AIInsightConsumeType } from '@interfaces/Entities.interface';
 
 
 
@@ -19,7 +19,9 @@ class AiInsightModel extends Model<AIInsight> {
    public input_summary!: string;
    public ai_response!: number;
    public insight_category!: AIInsightCategory;
+   public consume_type!: AIInsightConsumeType;
    public created_at!: Date;
+   public updated_at!: Date;
 };
 
 
@@ -46,13 +48,17 @@ AiInsightModel.init({
    insight_category: {
       type: DataTypes.ENUM('tips', 'patterns', 'anomalies'),
       allowNull: false,
+   },
+   consume_type: {
+      type: DataTypes.ENUM('energy', 'water', 'gas'),
+      allowNull: false,
    }
 }, {
    sequelize: ConnectionDatabase,
-   modelName: 'aiInsights',
+   modelName: 'ai_insight',
    timestamps: true,
    underscored: true, // Convert camelCase to snake_case automaticaly   
-   tableName: 'aiInsights'
+   tableName: 'ai_insights'
 });
 
 
