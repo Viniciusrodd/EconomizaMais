@@ -67,7 +67,7 @@ export type AIInsightConsumeType =
    | 'water'
    | 'gas'
 export interface AIInsight {
-   id: string; // UUID
+   id?: string; // UUID
    user_id: string;
    input_summary: string;
    ai_response: string;

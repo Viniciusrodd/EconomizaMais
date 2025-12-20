@@ -17,7 +17,7 @@ class AiInsightModel extends Model<AIInsight> {
    public id!: string;
    public user_id!: string;
    public input_summary!: string;
-   public ai_response!: number;
+   public ai_response!: string;
    public insight_category!: AIInsightCategory;
    public consume_type!: AIInsightConsumeType;
    public created_at!: Date;
