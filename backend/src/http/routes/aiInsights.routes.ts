@@ -6,6 +6,7 @@ import { Router } from "express";
 import { aiInsightsController } from "@controllers/AiInsights.controller";
 
 // import middlewares
+import { aiInsightsValidations } from "@middlewares/ControllerValidations/AiInsights.middleware";
 import { validate } from "@middlewares/HandleValidation.middleware";
 
 
