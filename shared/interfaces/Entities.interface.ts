@@ -58,9 +58,9 @@ export interface Simulation {
 
 // AI Insight
 export type AIInsightCategory =
-   | 'dicas'
-   | 'padroes'
-   | 'anomalias';
+   | 'tips'
+   | 'patterns'
+   | 'anomalies';
 
 export type AIInsightConsumeType =
    | 'energy'
