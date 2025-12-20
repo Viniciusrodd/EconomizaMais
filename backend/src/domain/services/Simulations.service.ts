@@ -18,7 +18,7 @@ import { MonthlyConsumptionHistoryEntity } from '@entities/MonthlyConsumptionHis
 import { SimulationsEntities } from '@entities/Simulations.entity';
 
 // import utils
-import { SimulationsPrompt } from '@utils/SimulationsPrompt.utils';
+import { Prompts } from '@utils/Prompts.utils';
 
 
 
@@ -78,7 +78,7 @@ class SimulationsService {
       const environmental_impact = simulationEntity.calculateEnvironmentalImpact();
 
       // get environmental impact prompt
-      const simulationPrompt = new SimulationsPrompt();
+      const simulationPrompt = new Prompts();
       const prompt = simulationPrompt.environmentalImpactPrompt(simulationsData);
 
       // AI model request
