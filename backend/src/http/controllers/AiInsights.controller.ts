@@ -49,7 +49,29 @@ class AIinsightsController {
 
 
    // get ai insights
+   public async getAiInsights(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // get aiInsights - service
+         const aiInsights: AIInsightResponseDTO[] = await aiInsightsService.getAiInsightsService();
 
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Ai insights get successfully',
+            data: aiInsights
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at get Ai insights: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at get Ai insights',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
    // get ai insight by category
 

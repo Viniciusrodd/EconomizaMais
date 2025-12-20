@@ -27,6 +27,10 @@ aiInsightsRoutes.post(
 
 
 // get ai insights - GET
+aiInsightsRoutes.get(
+   '/insights',
+   aiInsightsController.getAiInsights
+);
 
 
 // get ai insight by category - GET
