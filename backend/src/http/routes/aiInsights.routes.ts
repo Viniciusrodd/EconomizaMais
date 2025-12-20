@@ -34,6 +34,12 @@ aiInsightsRoutes.get(
 
 
 // get ai insight by category - GET
+aiInsightsRoutes.get(
+   '/insights/category',
+   aiInsightsValidations.getAiInsightsValidation(),
+   validate,
+   aiInsightsController.getAiInsightsByCategory
+);
 
 
 // delete ai insight - DELETE

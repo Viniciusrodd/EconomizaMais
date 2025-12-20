@@ -74,7 +74,32 @@ class AIinsightsController {
    };
 
    // get ai insight by category
+   public async getAiInsightsByCategory(
+      req: Request<{}, {}, {}, {q: string}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // query data
+         const category = req.query.q;
 
+         // get aiInsights by category - service
+         const aiInsights: AIInsightResponseDTO[] = await aiInsightsService.getAiInsightsByCategoryService(category);
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Ai insights by category get successfully',
+            data: aiInsights
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at get Ai insights by category: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at get Ai insights by category',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
    // delete ai insight
 

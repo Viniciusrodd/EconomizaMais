@@ -108,6 +108,12 @@ class AIinsightsService {
    public async getAiInsightsByCategoryService(
       insight_category: string
    ): Promise<AIInsightResponseDTO[]> {
+      // validation
+      if (!insight_category) {
+         throw new Error('Insight category not provided');
+      }
+
+      // get ai insights
       const aiInsights = await models.AiInsightModel.findAll({
          where: { insight_category }
       });

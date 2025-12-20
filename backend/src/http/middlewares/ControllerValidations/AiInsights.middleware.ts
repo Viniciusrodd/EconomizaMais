@@ -1,6 +1,6 @@
 
 // imports
-import { body, param, ValidationChain } from 'express-validator';
+import { body, param, query, ValidationChain } from 'express-validator';
 
 
 // ai insights creation
@@ -25,6 +25,20 @@ const createAiInsightsValidation = (): ValidationChain[] => {
 };
 
 
+// get ai insights by category
+const getAiInsightsValidation = (): ValidationChain[] => {
+   return [
+      // invalid category
+      query('q')
+         .exists().withMessage('Categoria de insight é obrigatório')
+         .isString().withMessage('Categoria de insight apenas em characteres')
+         .isIn([
+            'tips', 'patterns', 'anomalies' 
+         ]).withMessage('Categoria de insight deve ser apenas: tips, patterns, anomalies')
+   ];
+};
+
+
 // ai insights delete
 const deleteAiInsightsValidation = (): ValidationChain[] => {
    return [
@@ -39,5 +53,6 @@ const deleteAiInsightsValidation = (): ValidationChain[] => {
 // export validations
 export const aiInsightsValidations = {
    createAiInsightsValidation,
+   getAiInsightsValidation,
    deleteAiInsightsValidation
 };
