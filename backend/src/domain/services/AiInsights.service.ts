@@ -124,11 +124,11 @@ class AIinsightsService {
 
 
    // delete ai insight - public
-   public async deleteAiInsightsService(
+   public async deleteAiInsightService(
       id: string
    ): Promise<void> {
       // get ai insights
-      const aiInsight = await models.SimulationModel.findByPk(id);
+      const aiInsight = await models.AiInsightModel.findByPk(id);
       if(!aiInsight) throw new Error('AI insight not found');
 
       await aiInsight.destroy();

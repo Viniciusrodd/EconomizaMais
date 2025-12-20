@@ -43,3 +43,9 @@ aiInsightsRoutes.get(
 
 
 // delete ai insight - DELETE
+aiInsightsRoutes.delete(
+   '/insight/:id',
+   aiInsightsValidations.deleteAiInsightsValidation(),
+   validate,
+   aiInsightsController.deleteAiInsight
+);

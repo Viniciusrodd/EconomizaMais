@@ -102,7 +102,31 @@ class AIinsightsController {
    };
 
    // delete ai insight
+   public async deleteAiInsight(
+      req: Request<{id: string}, {}, {}>,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // params data
+         const { id } = req.params;
 
+         // delete aiInsight - service
+         await aiInsightsService.deleteAiInsightService(id);
+
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Delete AI insight successfully',
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Delete AI insight: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Delete AI insight',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 };
 export const aiInsightsController: AIinsightsController = new AIinsightsController(); 
