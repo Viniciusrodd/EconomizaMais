@@ -95,6 +95,13 @@ class AIinsightsService {
 
 
    // get ai insights - public
+   public async getAiInsightsService(): Promise<AIInsightResponseDTO[]> {
+      // get aiInsights - DB
+      const aiInsights = await models.AiInsightModel.findAll();
+      if(aiInsights.length <= 0) throw new Error('AI insights not found');
+
+      return aiInsights;
+   };   
 
 
    // get ai insight by category - public
