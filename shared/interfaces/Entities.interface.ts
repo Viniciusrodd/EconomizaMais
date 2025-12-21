@@ -80,8 +80,9 @@ export interface AIInsight {
 
 // Export History
 export interface ExportHistory {
-   id: string; // UUID
+   id?: string; // UUID
    user_id: string;
    file_path: string;
-   exported_at?: Date;
+   created_at?: Date;
+   updated_at?: Date;
 };

@@ -1,15 +1,15 @@
 
 // user data
 export interface UserDataToExportDTO {
-   user_name: string;
+   name: string;
    residence_name: string;
    number_of_residents: number;
 };
 
 // user tariffs
 export interface TariffsToExportDTO {
-   energy_tariff: string;
-   water_tariff: string;
+   energy_tariff: number;
+   water_tariff: number;
    gas_tariff: number;
 };
 
@@ -17,20 +17,20 @@ export interface TariffsToExportDTO {
 export interface MonthConsumptionsToExportDTO {
    year: number;
    month: number;
-   energy_kwh: string;
-   water_m3: string;
-   gas_m3: string;
+   energy_kwh: number;
+   water_m3: number;
+   gas_m3: number;
 };
 
 
 // Export Response DTO
 export interface PDFResponseDTO {
-   id: string;
+   id?: string;
    user_data: UserDataToExportDTO;
    user_tariffs: TariffsToExportDTO;
-   user_month_consumptions: MonthConsumptionsToExportDTO;
+   user_month_consumptions: MonthConsumptionsToExportDTO[];
    file_path: string;
-   created_at: Date;
+   created_at?: Date;
 };
 
 
