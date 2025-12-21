@@ -34,6 +34,14 @@ export interface PDFResponseDTO {
 };
 
 
+// PDF generation DTO
+export interface PDFGenerationDTO {
+   user_data: UserDataToExportDTO;
+   user_tariffs: TariffsToExportDTO;
+   user_month_consumptions: MonthConsumptionsToExportDTO[];   
+};
+
+
 // Export Histories Response DTO
 export interface HistoriesResponseDTO {
    id: string;
