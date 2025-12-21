@@ -36,10 +36,10 @@ ExportHistoryModel.init({
    }
 }, {
    sequelize: ConnectionDatabase,
-   modelName: 'ExportHistory',
+   modelName: 'Export_history',
    timestamps: true,
    underscored: true, // Convert camelCase to snake_case automaticaly   
-   tableName: 'ExportHistorys'
+   tableName: 'Export_history'
 });
 
 
