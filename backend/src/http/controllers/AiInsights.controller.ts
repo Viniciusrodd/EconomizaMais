@@ -14,7 +14,6 @@ import { getErrorMessage } from "@utils/ErrorHandler.util";
 // import DTOs
 import { 
    CreateAIInsightDTO,
-   AIInsightInputDTO,
    AIInsightResponseDTO
 } from '@DTOs/aiInsights.dtos';
 
