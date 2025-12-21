@@ -1,8 +1,6 @@
 
 // imports
 import { Request, Response } from "express";
-import path from 'path';
-import fs from 'fs';
 
 // import interfaces
 import { iApiResponse } from "@interfaces/ApiResponse.interface";
@@ -79,7 +77,24 @@ class ExportHistoryController {
       req: Request<{ id: string }>,
       res: Response<iApiResponse>
    ): Promise<Response | void> {
-      
+      try{
+         // params data
+         const { id } = req.params;
+
+         // history download - service
+         const { filePath, fileName } = await exportHistoryService.downloadPdfService(id);
+
+         // download
+         return res.download(filePath, fileName);
+      }
+      catch(error){
+         console.error('❌ Internal server error at downloading PDF:', error);
+         return res.status(404).json({
+            success: false,
+            message: 'Internal server error at downloading PDF',
+            data: getErrorMessage(error)
+         });
+      }
    };
 
 };

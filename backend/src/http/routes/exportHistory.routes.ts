@@ -6,6 +6,7 @@ import { Router } from "express";
 import { exportHistoryController } from "@controllers/ExportHistory.controller";
 
 // import middlewares
+import { historyValidations } from "@middlewares/ControllerValidations/ExportHistory.middleware";
 import { validate } from "@middlewares/HandleValidation.middleware";
 
 
@@ -31,3 +32,9 @@ exportHistoryRoutes.get(
 
 
 // get export history for download - GET
+exportHistoryRoutes.get(
+   '/history/:id',
+   historyValidations.downloadHistoryValidation(),
+   validate,
+   exportHistoryController.downloadPdf
+);
