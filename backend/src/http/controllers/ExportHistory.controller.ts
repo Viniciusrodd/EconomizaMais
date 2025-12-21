@@ -47,8 +47,31 @@ class ExportHistoryController {
 
 
    // get export histories
+   public async getHistories(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // get histories - service
+         const histories: HistoriesResponseDTO[] = await exportHistoryService.getHistoriesService();
 
+         return res.status(200).json({
+            success: true,
+            message: '✔️ Histories get successfully',
+            data: histories
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at get Histories: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at get Histories',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
+   
    // get export history for download
 
 };

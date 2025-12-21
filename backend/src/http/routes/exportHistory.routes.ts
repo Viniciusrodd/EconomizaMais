@@ -24,6 +24,10 @@ exportHistoryRoutes.post(
 
 
 // get export histories - GET
+exportHistoryRoutes.get(
+   '/histories',
+   exportHistoryController.getHistories
+);
 
 
 // get export history for download - GET
