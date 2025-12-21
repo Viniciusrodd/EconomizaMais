@@ -1,6 +1,7 @@
 
 // user data
 export interface UserDataToExportDTO {
+   id?: string;
    name: string;
    residence_name: string;
    number_of_residents: number;

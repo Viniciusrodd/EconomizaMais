@@ -21,6 +21,29 @@ import {
 class ExportHistoryController {
 
    // create pdf history
+   public async createHistory(
+      req: Request,
+      res: Response<iApiResponse>
+   ): Promise<Response> {
+      try{
+         // create export history - service
+         const pdfHistory: PDFResponseDTO = await exportHistoryService.createHistoryService();
+
+         return res.status(201).json({
+            success: true,
+            message: '✔️ Export history successfully created',
+            data: pdfHistory
+         });
+      }
+      catch(error){
+         console.error('❌ Internal server error at Export history creation: ', error);
+         return res.status(500).json({
+            success: false,
+            message: '❌ Internal server error at Export history creation',
+            data: getErrorMessage(error)
+         });
+      }
+   };
 
 
    // get export histories

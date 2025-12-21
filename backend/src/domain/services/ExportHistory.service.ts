@@ -21,7 +21,7 @@ class ExportHistoryService {
    public async createHistoryService(): Promise<PDFResponseDTO> {
       // get user data
       const user = await models.UserModel.findOne({
-         attributes: ['name', 'residence_name', 'number_of_residents']
+         attributes: ['id', 'name', 'residence_name', 'number_of_residents']
       });
       if(!user) throw new Error('User not found');
 
@@ -45,18 +45,18 @@ class ExportHistoryService {
       };
 
       // pdf service
-      const file_path = pdfService.pdfGeneration(PDFGeneration);
+      const file_path = await pdfService.pdfGeneration(PDFGeneration);
 
       // build PDF response data
       const PDFResponse: PDFResponseDTO = {
          user_data: user,
          user_tariffs: tariff,
          user_month_consumptions: monthConsumptions,
-         file_path: '',
+         file_path
       };
 
       // create export history
-      const exportHistory = await models.ExportHistoryModel.create({
+      await models.ExportHistoryModel.create({
          user_id: user.id,
          file_path: PDFResponse.file_path
       });

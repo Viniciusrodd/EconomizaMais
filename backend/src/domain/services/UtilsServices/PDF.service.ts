@@ -96,9 +96,9 @@ class PDFService {
       doc
          .fontSize(11)
          .fillColor(pdfConfig.styles.blackColor)
-         .text(`Energia: R$ ${data.user_tariffs.energy_tariff.toFixed(2)} / kWh`)
-         .text(`Água: R$ ${data.user_tariffs.water_tariff.toFixed(2)} / m³`)
-         .text(`Gás: R$ ${data.user_tariffs.gas_tariff.toFixed(2)} / m³`);
+         .text(`Energia: R$ ${Number(data.user_tariffs.energy_tariff).toFixed(2)} / kWh`)
+         .text(`Água: R$ ${Number(data.user_tariffs.water_tariff).toFixed(2)} / m³`)
+         .text(`Gás: R$ ${Number(data.user_tariffs.gas_tariff).toFixed(2)} / m³`);
 
       doc.moveDown(2);
 

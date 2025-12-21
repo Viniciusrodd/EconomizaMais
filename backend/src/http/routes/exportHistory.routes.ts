@@ -17,6 +17,10 @@ export const exportHistoryRoutes: Router = Router();
 
 
 // create pdf history - POST
+exportHistoryRoutes.post(
+   '/pdf',
+   exportHistoryController.createHistory
+);
 
 
 // get export histories - GET
