@@ -2,16 +2,15 @@
 // import DTOs
 import {
    HistoriesResponseDTO,
-   PDFResponseDTO
+   PDFResponseDTO,
+   PDFGenerationDTO
 } from '@DTOs/ExportHistory.dtos';
 
 // import models
 import { models } from "@root/infra/sequelize/Relations";
 
 // import services 
-import { userService } from '@services/User.service';
-import { tariffService } from '@services/Tariffs.service';
-import { monthlyConsumptionService } from '@services/MonthlyConsumption.service';
+import { pdfService } from '@services/UtilsServices/PDF.service';
 
 
 
@@ -38,7 +37,17 @@ class ExportHistoryService {
       });
       if(monthConsumptions.length <= 0) throw new Error('Monthly consumptions not found');
 
-      // build PDF response
+      // build PDF generation data
+      const PDFGeneration: PDFGenerationDTO = {
+         user_data: user,
+         user_tariffs: tariff,
+         user_month_consumptions: monthConsumptions
+      };
+
+      // pdf service
+      const file_path = pdfService.pdfGeneration(PDFGeneration);
+
+      // build PDF response data
       const PDFResponse: PDFResponseDTO = {
          user_data: user,
          user_tariffs: tariff,
