@@ -49,3 +49,10 @@ export interface HistoriesResponseDTO {
    file_path: string;
    created_at: Date;
 };
+
+
+// pdf file data response DTO
+export interface FileDataResponseDTO {
+   filePath: string;
+   fileName: string;
+};

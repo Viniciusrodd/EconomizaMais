@@ -1,6 +1,8 @@
 
 // imports
 import { Request, Response } from "express";
+import path from 'path';
+import fs from 'fs';
 
 // import interfaces
 import { iApiResponse } from "@interfaces/ApiResponse.interface";
@@ -73,6 +75,12 @@ class ExportHistoryController {
 
    
    // get export history for download
+   public async downloadPdf(
+      req: Request<{ id: string }>,
+      res: Response<iApiResponse>
+   ): Promise<Response | void> {
+      
+   };
 
 };
 export const exportHistoryController: ExportHistoryController = new ExportHistoryController();

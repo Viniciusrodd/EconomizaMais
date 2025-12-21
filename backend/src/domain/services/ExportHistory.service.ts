@@ -1,9 +1,14 @@
 
+// imports
+import path from 'path';
+import fs from 'fs';
+
 // import DTOs
 import {
    HistoriesResponseDTO,
    PDFResponseDTO,
-   PDFGenerationDTO
+   PDFGenerationDTO,
+   FileDataResponseDTO
 } from '@DTOs/ExportHistory.dtos';
 
 // import models
@@ -68,7 +73,7 @@ class ExportHistoryService {
    // get export histories
    public async getHistoriesService(): Promise<HistoriesResponseDTO[]> {
       // get histories 
-      const histories: HistoriesResponseDTO[] = await models.ExportHistoryModel.findAll({
+      const histories = await models.ExportHistoryModel.findAll({
          attributes: ['id', 'file_path', 'created_at']
       });
       if(histories.length <= 0) throw new Error('Histories not found');
@@ -78,6 +83,29 @@ class ExportHistoryService {
 
 
    // get export history for download
+   public async downloadPdfService(
+      id: string
+   ): Promise<FileDataResponseDTO> {
+      // get history
+      const history = await models.ExportHistoryModel.findByPk(id, {
+         attributes: ['id', 'file_path', 'created_at']
+      });
+      if(!history) throw new Error('History not found');
+
+      // file path
+      const filePath = history.file_path;
+
+      // safety check
+      if(!fs.existsSync(filePath)) throw new Error('PDF file not found on disk');
+
+      // file name
+      const fileName = path.basename(filePath);
+
+      return {
+         filePath,
+         fileName
+      };
+   };
 
 };
 export const exportHistoryService: ExportHistoryService = new ExportHistoryService();
