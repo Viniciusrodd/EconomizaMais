@@ -66,6 +66,15 @@ class ExportHistoryService {
 
 
    // get export histories
+   public async getHistoriesService(): Promise<HistoriesResponseDTO[]> {
+      // get histories 
+      const histories: HistoriesResponseDTO[] = await models.ExportHistoryModel.findAll({
+         attributes: ['id', 'file_path', 'created_at']
+      });
+      if(histories.length <= 0) throw new Error('Histories not found');
+
+      return histories;
+   };
 
 
    // get export history for download

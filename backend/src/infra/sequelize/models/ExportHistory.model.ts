@@ -14,7 +14,8 @@ class ExportHistoryModel extends Model<ExportHistory> {
    public id!: string;
    public user_id!: string;
    public file_path!: string;
-   public exported_at!: Date;
+   public created_at!: Date;
+   public udpated_at!: Date;
 };
 
 
