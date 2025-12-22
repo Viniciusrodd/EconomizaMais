@@ -33,7 +33,9 @@ class AIinsightsService {
       if(!consume_type || !insight_category) throw new Error('All AiInsights fields are required');
 
       // get user id
-      const user = await models.UserModel.findOne();
+      const user = await models.UserModel.findOne({
+         attributes: ['id']
+      });
       if(!user){
          throw new Error('User not found');
       }

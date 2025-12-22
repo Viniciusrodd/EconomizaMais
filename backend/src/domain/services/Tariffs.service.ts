@@ -31,7 +31,9 @@ class TariffService {
       }
 
       // get user id
-      const user = await models.UserModel.findOne();
+      const user = await models.UserModel.findOne({
+         attributes: ['id']
+      });
       if(!user){
          throw new Error('User not found');
       }
