@@ -22,6 +22,7 @@
          "@errors/*": ["src/shared/errors/*"],
          "@utils/*": ["src/shared/utils/*"],
          "@interfaces/*": ["../shared/interfaces/*"],
+         "@mocks/*": ["src/mocks/*"],
          
          "@root/*": ["src/*"], // src files
       }

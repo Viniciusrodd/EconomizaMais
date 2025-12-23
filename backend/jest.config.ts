@@ -52,6 +52,7 @@ const config: Config.InitialOptions = {
       "@errors/(.*)": ["<rootDir>/src/shared/errors/$1"],
       "@utils/(.*)": ["<rootDir>/src/shared/utils/$1"],
       "@interfaces/(.*)": ["../shared/interfaces/$1"],
+      "@mocks/(.*)": ["<rootDir>/src/mocks/$1"],
       
       "@root/(.*)": ["<rootDir>/src/$1"], // src files
    },
