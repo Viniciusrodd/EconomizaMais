@@ -171,4 +171,50 @@ describe('UserController', () => {
 
    });
 
+
+   // delete user
+   describe('deleteUser', () => {
+
+      // 200
+      it('Should return 200 and delete user', async () => {
+         // request / response
+         const req = userMockRequest({ }) as any;
+         const res = userMockResponse();
+
+         // spy functions
+         jest.spyOn(userService, 'deleteUserService').mockResolvedValue();
+      
+         // controller method
+         await userController.deleteUser(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Delete user successfully'
+         });
+      });
+
+      // 500
+      it('Should return 500 if delete user service throws error', async () => {
+         // request / response
+         const req = userMockRequest({ }) as any;
+         const res = userMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(userService, 'deleteUserService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await userController.deleteUser(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
 });
