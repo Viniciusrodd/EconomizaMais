@@ -77,4 +77,50 @@ describe('AiInsightController', () => {
    });
 
 
+   // get ai insights
+   describe('getAiInsights', () => {
+
+      // 200
+      it('Should return 201 and get ai insights', async () => {
+         // request / response
+         const req = aiInsightsMockRequest({ }) as any;
+         const res = aiInsightsMockResponse();
+
+         // spy functions
+         jest.spyOn(aiInsightsService, 'getAiInsightsService').mockResolvedValue([fakeAiInsight]);
+      
+         // controller method
+         await aiInsightsController.getAiInsights(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Ai insights get successfully',
+            data: [fakeAiInsight]
+         });
+      });
+
+      // 500
+      it('Should return 500 if get ai insights service throws error', async () => {
+         // request / response
+         const req = aiInsightsMockRequest({ }) as any;
+         const res = aiInsightsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(aiInsightsService, 'getAiInsightsService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await aiInsightsController.getAiInsights(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });   
+
 });
