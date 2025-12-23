@@ -10,7 +10,7 @@ import {
 
 
 // request mock
-export const userMockRequest = (body: CreateUserDTO | UpdateUserDTO) => ({ // immediately returns a literal object
+export const userMockRequest = (body: CreateUserDTO | UpdateUserDTO | {}) => ({ // immediately returns a literal object
    body
 });
 
