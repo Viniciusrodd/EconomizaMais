@@ -78,4 +78,51 @@ describe('SimulationsController', () => {
 
    });
 
+
+   // get simulations
+   describe('getSimulations', () => {
+
+      // 200
+      it('Should return 200 and get simulations', async () => {
+         // request / response
+         const req = simulationsMockRequest({}) as any;
+         const res = simulationsMockResponse();
+
+         // spy functions
+         jest.spyOn(simulationsService, 'getSimulationsService').mockResolvedValue([fakeSimulation]);
+      
+         // controller method
+         await simulationsController.getSimulations(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Simulations get successfully',
+            data: [fakeSimulation]
+         });
+      });
+
+      // 500
+      it('Should return 500 if get simulations service throws error', async () => {
+         // request / response
+         const req = simulationsMockRequest({ }) as any;
+         const res = simulationsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(simulationsService, 'getSimulationsService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await simulationsController.getSimulations(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
 });
