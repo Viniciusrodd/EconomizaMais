@@ -89,7 +89,7 @@ class ExportHistoryController {
       }
       catch(error){
          console.error('❌ Internal server error at downloading PDF:', error);
-         return res.status(404).json({
+         return res.status(500).json({
             success: false,
             message: 'Internal server error at downloading PDF',
             data: getErrorMessage(error)

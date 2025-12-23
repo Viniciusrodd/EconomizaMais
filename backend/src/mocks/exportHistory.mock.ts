@@ -19,6 +19,7 @@ export const historyMockResponse = (): Response => {
 
    res.status = jest.fn().mockReturnValue(res); // "fn()" its a "simulate function"
    res.json = jest.fn().mockReturnValue(res);
-   
+   res.download = jest.fn().mockReturnThis();
+
    return res;
 };

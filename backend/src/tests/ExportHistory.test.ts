@@ -28,6 +28,7 @@ const user_month_consumptions: MonthConsumptionsToExportDTO[] = [{
    year: 2025, month: 12, energy_kwh: 1.05, water_m3: 1.05, gas_m3: 1.05
 }];
 const file_path: string = 'path1.pdf';
+const file_name: string = 'test';
 const created_at: Date = new Date(Date.now());
 const fakePDF = { id, user_data, user_tariffs, user_month_consumptions, file_path, created_at };
 const fakeHistory = { id, file_path, created_at };
@@ -137,5 +138,50 @@ describe('ExportHistoryController', () => {
       });
 
    });
+
+
+   // download history
+   describe('downloadHistory', () => {
+
+      // download
+      it('Should download history', async () => {
+         // request / response
+         const req = historyMockRequest({}, { id }) as any;
+         const res = historyMockResponse();
+
+         // spy functions
+         jest.spyOn(exportHistoryService, 'downloadPdfService').mockResolvedValue({ 
+            filePath: file_path, 
+            fileName: file_name 
+         });
+      
+         // controller method
+         await exportHistoryController.downloadPdf(req, res);
+
+         // expects
+         expect(res.download).toHaveBeenCalledWith(file_path, file_name);
+      });
+
+      // 500
+      it('Should return 500 if download history service throws error', async () => {
+         // request / response
+         const req = historyMockRequest({}, { id }) as any;
+         const res = historyMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(exportHistoryService, 'downloadPdfService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await exportHistoryController.downloadPdf(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });   
 
 });
