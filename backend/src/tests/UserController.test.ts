@@ -79,7 +79,7 @@ describe('UserController', () => {
 
 
    // get user
-   describe('createUser', () => {
+   describe('getUser', () => {
 
       // 200
       it('Should return 200 and get user', async () => {
@@ -114,6 +114,53 @@ describe('UserController', () => {
 
          // controller method
          await userController.getUser(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
+
+   // update user
+   describe('updateUser', () => {
+
+      // 200
+      it('Should return 200 and update user', async () => {
+         // request / response
+         const req = userMockRequest({ name }) as any;
+         const res = userMockResponse();
+
+         // spy functions
+         jest.spyOn(userService, 'updateUserService').mockResolvedValue(fakeUser);
+      
+         // controller method
+         await userController.updateUser(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Update user successfully',
+            data: fakeUser
+         });
+      });
+
+      // 500
+      it('Should return 500 if update user service throws error', async () => {
+         // request / response
+         const req = userMockRequest({ }) as any;
+         const res = userMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(userService, 'updateUserService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await userController.updateUser(req, res);
 
          // expects
          expect(res.status).toHaveBeenCalledWith(500);
