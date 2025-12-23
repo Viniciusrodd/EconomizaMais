@@ -33,7 +33,7 @@ describe('MonthlyConsumptionController', () => {
    });
 
 
-   // create tariff
+   // create Monthly Consumption
    describe('createMonthCons', () => {
 
       // 201
@@ -77,6 +77,53 @@ describe('MonthlyConsumptionController', () => {
          consoleSpy.mockRestore();
       });
 
-   });   
+   });
+
+
+   // get Monthly Consumptions
+   describe('getMonthCons', () => {
+
+      // 201
+      it('Should return 200 and get month cons', async () => {
+         // request / response
+         const req = monthConsMockRequest({ }) as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         jest.spyOn(monthlyConsumptionService, 'getMonthConsService').mockResolvedValue([fakeMonthCons]);
+      
+         // controller method
+         await monthlyConsumptionController.getMonthCons(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Monthly Consumption get successfully',
+            data: [fakeMonthCons]
+         });
+      });
+
+      // 500
+      it('Should return 500 if month cons get service throws error', async () => {
+         // request / response
+         const req = monthConsMockRequest({ }) as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(monthlyConsumptionService, 'getMonthConsService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await monthlyConsumptionController.getMonthCons(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
 
 });
