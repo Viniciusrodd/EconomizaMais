@@ -134,15 +134,15 @@ class MonthlyConsumptionController {
 
    // get summary monthlyConsumption
    public async getMonthConsSummary(
-      req: Request<{consume: Consume}, {}, {}>,
+      req: Request<{}, {}, {}, {q: Consume}>,
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
          // consume params
-         const { consume } = req.params;
+         const { q } = req.query;
 
          // get monthlyConsumption summary - service
-         const summary = await monthlyConsumptionService.getMonthConsSummaryService(consume);
+         const summary = await monthlyConsumptionService.getMonthConsSummaryService(q);
 
          return res.status(200).json({
             success: true,

@@ -1,6 +1,6 @@
 
 // imports
-import { body, param, ValidationChain } from 'express-validator';
+import { body, param, query, ValidationChain } from 'express-validator';
 
 
 // monthlyConsumption creation
@@ -89,11 +89,11 @@ const deleteMonthlyConsValidation = (): ValidationChain[] => {
 const getMonthlyConsSummaryValidation = (): ValidationChain[] => {
    return [
       // invalid consume
-      param('consume')
-         .isString().withMessage('Parâmetro de consumo deve ser em characteres')
+      query('q')
+         .isString().withMessage('Consumo deve ser em characteres')
          .isIn([
             'energy_kwh', 'water_m3', 'gas_m3'
-         ]).withMessage('Parâmetro de consumo deve ser apenas energia, água ou gás')
+         ]).withMessage('Consumo deve ser apenas energia, água ou gás')
    ];
 };
 

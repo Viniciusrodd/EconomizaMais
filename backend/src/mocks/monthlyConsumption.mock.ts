@@ -8,14 +8,19 @@ import {
    UpdateMonthlyConsumptionDTO
 } from "@DTOs/MonthlyConsumption.dtos";
 
+// utils
+type Consume = 'energy_kwh' | 'water_m3' | 'gas_m3';
+
 
 // request mock
 export const monthConsMockRequest = (
    body: CreateMonthlyConsumptionDTO | UpdateMonthlyConsumptionDTO | {},
-   params?: string 
+   params?: string | {},
+   q?: Consume
 ) => ({ // immediately returns a literal object
    body,
-   params
+   params,
+   query: { q }
 });
 
 

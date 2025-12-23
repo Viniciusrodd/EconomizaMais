@@ -18,7 +18,11 @@ const water_m3: number = 1.05;
 const gas_m3: number = 1.05;
 const created_at: Date = new Date(Date.now());
 const updated_at: Date = new Date(Date.now());
+const average_consume: number = 200.5;
+const highest_consume_month: string = "2025 - 12";
+const variation_last_month: number = 149.25;
 const fakeMonthCons = { id, year, month, energy_kwh, water_m3, gas_m3, created_at, updated_at };
+const fakeMonthConsSummary = { average_consume, highest_consume_month, variation_last_month };
 
 
 // mocks
@@ -209,6 +213,53 @@ describe('MonthlyConsumptionController', () => {
 
          // controller method
          await monthlyConsumptionController.deleteMonthCons(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
+
+   // get summary Monthly Consumptions
+   describe('getSummaryMonthCons', () => {
+
+      // 200
+      it('Should return 200 and get summary month cons', async () => {
+         // request / response
+         const req = monthConsMockRequest({ }, { }, 'energy_kwh') as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         jest.spyOn(monthlyConsumptionService, 'getMonthConsSummaryService').mockResolvedValue(fakeMonthConsSummary);
+      
+         // controller method
+         await monthlyConsumptionController.getMonthConsSummary(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Get Monthly Consumption Summary successfully',
+            data: fakeMonthConsSummary
+         });
+      });
+
+      // 500
+      it('Should return 500 if month cons get summary service throws error', async () => {
+         // request / response
+         const req = monthConsMockRequest({ }, { }, 'energy_kwh') as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(monthlyConsumptionService, 'getMonthConsSummaryService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await monthlyConsumptionController.getMonthConsSummary(req, res);
 
          // expects
          expect(res.status).toHaveBeenCalledWith(500);

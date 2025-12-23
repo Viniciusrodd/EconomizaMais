@@ -26,14 +26,17 @@ export class MonthlyConsumptionHistoryEntity {
    };
 
    // total consume
-   private totalConsume(type: Consume): number {
-      return this.consumptions.reduce((sum, c) => sum + Number(c[type]), 0);
+   private totalConsume(
+      list: MonthlyConsumption[],
+      type: Consume
+   ): number {
+      return list.reduce((sum, c) => sum + Number(c[type]), 0);
    };
 
    // max consume
    private maxConsume(type: Consume): MonthlyConsumption {
       return this.consumptions.reduce((prev, curr) => 
-         curr[type] > prev[type] ? curr : prev
+         Number(curr[type] > prev[type]) ? curr : prev
       );
    };
 
@@ -44,11 +47,11 @@ export class MonthlyConsumptionHistoryEntity {
    // avarage consume
    private getAvarageConsume(consume: Consume): number {
       // get / validate consume type
-      const consumeFiltered: MonthlyConsumption[] = this.filterByConsume(consume);
+      const consumeFiltered = this.filterByConsume(consume);
       if (!consumeFiltered.length) return 0;
 
       // get total consume
-      const total: number = this.totalConsume(consume);
+      const total: number = this.totalConsume(consumeFiltered, consume);
       return Number((total / consumeFiltered.length).toFixed(2)); 
    };
 
@@ -83,11 +86,13 @@ export class MonthlyConsumptionHistoryEntity {
       const last = sorted[sorted.length - 1];
       const prev = sorted[sorted.length - 2];
 
-      // 0% if not prev consume
-      if (prev[consume] === 0) return 0;
+      // convert + validation
+      const lastValue = Number(last[consume]);
+      const prevValue = Number(prev[consume]);
+      if (!prevValue || prevValue === 0) return 0;
 
       return Number(
-         (((last[consume] - prev[consume]) / prev[consume]) * 100).toFixed(2)
+         (((lastValue - prevValue) / prevValue) * 100).toFixed(2)
       );
    };
 
