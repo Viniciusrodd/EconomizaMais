@@ -124,4 +124,51 @@ describe('TariffsController', () => {
 
    });
 
+
+   // update tariff
+   describe('updateTariff', () => {
+
+      // 201
+      it('Should return 200 and update tariff', async () => {
+         // request / response
+         const req = tariffsMockRequest({ energy_tariff }) as any;
+         const res = tariffsMockResponse();
+
+         // spy functions
+         jest.spyOn(tariffService, 'updateTariffService').mockResolvedValue(fakeTariff);
+      
+         // controller method
+         await tariffController.updateTariff(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Update Tariff successfully',
+            data: fakeTariff
+         });
+      });
+
+      // 500
+      it('Should return 500 if update tariff service throws error', async () => {
+         // request / response
+         const req = tariffsMockRequest({ energy_tariff }) as any;
+         const res = tariffsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(tariffService, 'updateTariffService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await tariffController.updateTariff(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
 });

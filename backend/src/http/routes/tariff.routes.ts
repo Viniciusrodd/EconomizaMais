@@ -36,5 +36,5 @@ tariffsRoutes.put(
    '/tariff',
    tariffsValidations.tariffsUpdateValidations(),
    validate,
-   tariffController.updateUser
+   tariffController.updateTariff
 );

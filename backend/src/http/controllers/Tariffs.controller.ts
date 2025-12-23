@@ -75,7 +75,7 @@ class TariffController {
    };
 
    // update tariff
-   public async updateUser(
+   public async updateTariff(
       req: Request<{}, {}, UpdateTariffDTO>,
       res: Response<iApiResponse>
    ): Promise<Response> {
@@ -85,15 +85,15 @@ class TariffController {
 
          return res.status(200).json({
             success: true,
-            message: '✔️ Update tariffs successfully',
+            message: '✔️ Update Tariff successfully',
             data: tariffs
          });
       }
       catch(error){
-         console.error('❌ Internal server error at Update tariffs: ', error);
+         console.error('❌ Internal server error at Update Tariff: ', error);
          return res.status(500).json({
             success: false,
-            message: '❌ Internal server error at Update tariffs',
+            message: '❌ Internal server error at Update Tariff',
             data: getErrorMessage(error)
          });
       }
