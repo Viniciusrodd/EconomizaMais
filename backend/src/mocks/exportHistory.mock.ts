@@ -4,7 +4,7 @@ import { Response } from "express";
 
 
 // request mock
-export const aiInsightsMockRequest = (
+export const historyMockRequest = (
    body: {},
    params?: string | {}
 ) => ({ // immediately returns a literal object
@@ -14,7 +14,7 @@ export const aiInsightsMockRequest = (
 
 
 // response mock
-export const aiInsightsMockResponse = (): Response => {
+export const historyMockResponse = (): Response => {
    const res: Response = {} as Response; // empty object "pretending" being a Response
 
    res.status = jest.fn().mockReturnValue(res); // "fn()" its a "simulate function"
