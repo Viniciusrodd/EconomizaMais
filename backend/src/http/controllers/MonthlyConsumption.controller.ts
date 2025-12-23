@@ -15,8 +15,6 @@ import { getErrorMessage } from "@utils/ErrorHandler.util";
 import { 
    CreateMonthlyConsumptionDTO,
    UpdateMonthlyConsumptionDTO,
-   MonthlyConsumptionResponseDTO,
-   MonthlyConsumptionSummaryDTO
 } from '@DTOs/MonthlyConsumption.dtos';
 
 // utils
