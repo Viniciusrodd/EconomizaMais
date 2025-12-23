@@ -10,8 +10,12 @@ import {
 
 
 // request mock
-export const monthConsMockRequest = (body: CreateMonthlyConsumptionDTO | UpdateMonthlyConsumptionDTO | {}) => ({ // immediately returns a literal object
-   body
+export const monthConsMockRequest = (
+   body: CreateMonthlyConsumptionDTO | UpdateMonthlyConsumptionDTO | {},
+   params?: string 
+) => ({ // immediately returns a literal object
+   body,
+   params
 });
 
 

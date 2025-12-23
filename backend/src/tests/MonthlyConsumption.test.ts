@@ -83,7 +83,7 @@ describe('MonthlyConsumptionController', () => {
    // get Monthly Consumptions
    describe('getMonthCons', () => {
 
-      // 201
+      // 200
       it('Should return 200 and get month cons', async () => {
          // request / response
          const req = monthConsMockRequest({ }) as any;
@@ -116,6 +116,53 @@ describe('MonthlyConsumptionController', () => {
 
          // controller method
          await monthlyConsumptionController.getMonthCons(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
+
+   // update Monthly Consumptions
+   describe('updateMonthCons', () => {
+
+      // 200
+      it('Should return 200 and update month cons', async () => {
+         // request / response
+         const req = monthConsMockRequest({ energy_kwh }, id) as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         jest.spyOn(monthlyConsumptionService, 'updateMonthConsService').mockResolvedValue(fakeMonthCons);
+      
+         // controller method
+         await monthlyConsumptionController.updateMonthCons(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Update Monthly Consumption successfully',
+            data: fakeMonthCons
+         });
+      });
+
+      // 500
+      it('Should return 500 if month cons update service throws error', async () => {
+         // request / response
+         const req = monthConsMockRequest({ energy_kwh }, id) as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(monthlyConsumptionService, 'updateMonthConsService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await monthlyConsumptionController.updateMonthCons(req, res);
 
          // expects
          expect(res.status).toHaveBeenCalledWith(500);

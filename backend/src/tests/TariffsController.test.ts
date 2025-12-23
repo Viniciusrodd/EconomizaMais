@@ -81,7 +81,7 @@ describe('TariffsController', () => {
    // get tariff
    describe('getTariff', () => {
 
-      // 201
+      // 200
       it('Should return 200 and get tariff', async () => {
          // request / response
          const req = tariffsMockRequest({ }) as any;
@@ -128,7 +128,7 @@ describe('TariffsController', () => {
    // update tariff
    describe('updateTariff', () => {
 
-      // 201
+      // 200
       it('Should return 200 and update tariff', async () => {
          // request / response
          const req = tariffsMockRequest({ energy_tariff }) as any;
