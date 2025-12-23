@@ -173,4 +173,50 @@ describe('MonthlyConsumptionController', () => {
 
    });
 
+
+   // delete Monthly Consumptions
+   describe('deleteMonthCons', () => {
+
+      // 200
+      it('Should return 200 and delete month cons', async () => {
+         // request / response
+         const req = monthConsMockRequest({ }, id) as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         jest.spyOn(monthlyConsumptionService, 'deleteMonthConsService').mockResolvedValue();
+      
+         // controller method
+         await monthlyConsumptionController.deleteMonthCons(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Delete Monthly Consumption successfully'
+         });
+      });
+
+      // 500
+      it('Should return 500 if month cons delete service throws error', async () => {
+         // request / response
+         const req = monthConsMockRequest({ }, id) as any;
+         const res = monthConsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(monthlyConsumptionService, 'deleteMonthConsService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await monthlyConsumptionController.deleteMonthCons(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
 });
