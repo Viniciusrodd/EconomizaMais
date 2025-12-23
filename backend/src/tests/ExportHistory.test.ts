@@ -91,4 +91,51 @@ describe('ExportHistoryController', () => {
 
    });
 
+
+   // get history
+   describe('getHistory', () => {
+
+      // 200
+      it('Should return 200 and get history', async () => {
+         // request / response
+         const req = historyMockRequest({}) as any;
+         const res = historyMockResponse();
+
+         // spy functions
+         jest.spyOn(exportHistoryService, 'getHistoriesService').mockResolvedValue([fakeHistory]);
+      
+         // controller method
+         await exportHistoryController.getHistories(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Histories get successfully',
+            data: [fakeHistory]
+         });
+      });
+
+      // 500
+      it('Should return 500 if get history service throws error', async () => {
+         // request / response
+         const req = historyMockRequest({}) as any;
+         const res = historyMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(exportHistoryService, 'getHistoriesService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await exportHistoryController.getHistories(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });
+
 });
