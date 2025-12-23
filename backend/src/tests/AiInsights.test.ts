@@ -168,5 +168,51 @@ describe('AiInsightController', () => {
          consoleSpy.mockRestore();
       });
 
+   });
+
+
+   // delete ai insight
+   describe('deleteAiInsight', () => {
+
+      // 200
+      it('Should return 200 and delete ai insights', async () => {
+         // request / response
+         const req = aiInsightsMockRequest({}, { id }) as any;
+         const res = aiInsightsMockResponse();
+
+         // spy functions
+         jest.spyOn(aiInsightsService, 'deleteAiInsightService').mockResolvedValue();
+      
+         // controller method
+         await aiInsightsController.deleteAiInsight(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Delete AI insight successfully'
+         });
+      });
+
+      // 500
+      it('Should return 500 if delete ai insights service throws error', async () => {
+         // request / response
+         const req = aiInsightsMockRequest({}, { id }) as any;
+         const res = aiInsightsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(aiInsightsService, 'deleteAiInsightService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await aiInsightsController.deleteAiInsight(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
    });   
 });
