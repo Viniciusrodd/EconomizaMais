@@ -125,4 +125,49 @@ describe('SimulationsController', () => {
 
    });
 
+
+   // delete simulations
+   describe('deleteSimulations', () => {
+
+      // 200
+      it('Should return 200 and delete simulations', async () => {
+         // request / response
+         const req = simulationsMockRequest({}, { id }) as any;
+         const res = simulationsMockResponse();
+
+         // spy functions
+         jest.spyOn(simulationsService, 'deleteSimulationService').mockResolvedValue();
+      
+         // controller method
+         await simulationsController.deleteSimulation(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(200);
+         expect(res.json).toHaveBeenCalledWith({
+            success: true,
+            message: '✔️ Delete simulation successfully'
+         });
+      });
+
+      // 500
+      it('Should return 500 if delete simulations service throws error', async () => {
+         // request / response
+         const req = simulationsMockRequest({ }, { id }) as any;
+         const res = simulationsMockResponse();
+
+         // spy functions
+         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+         jest.spyOn(simulationsService, 'deleteSimulationService').mockRejectedValue(new Error('Service error (test)'));
+
+         // controller method
+         await simulationsController.deleteSimulation(req, res);
+
+         // expects
+         expect(res.status).toHaveBeenCalledWith(500);
+
+         // restore mock
+         consoleSpy.mockRestore();
+      });
+
+   });   
 });
