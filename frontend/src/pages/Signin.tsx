@@ -7,7 +7,8 @@ import desc_img from '@images/signin/desc_img.jpg';
 import welcome_img from '@images/signin/signin.png';
 
 // import hooks
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/Modal.interface';
@@ -20,11 +21,16 @@ import Modal from '@components/Modal';
 // sign in
 const SignIn = () => {
    //// variables
+   const navigate = useNavigate();
    const [ modal_display, setModal_display ] = useState<boolean>(false);
    const [ modal_title, setModal_title ] = useState<string>('');
    const [ modal_msg, setModal_msg ] = useState<string>('');
    const [ modal_btt, setmodal_btt ] = useState<boolean | string>(false);
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
+   const [ name, setName ] = useState<string>('');
+   const [ residence_name, setResidence_name ] = useState<string>('');
+   const [ number_of_residents, setNumber_of_residents ] = useState<string>('');
+   const [ redirect, setRedirect ] = useState<boolean>(false);
 
 
    //// functions
@@ -45,6 +51,52 @@ const SignIn = () => {
          title: '', msg: '', btt1: false, 
          btt2: false, display: false
       });
+   };
+
+   // redirect
+   useEffect(() =>{
+      if(redirect){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt1: false, 
+               btt2: false, display: false
+            });
+
+            navigate('/');            
+         }, 6000);
+
+         return () =>{
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [redirect, navigate]);
+
+   // sign in request
+   const handleForm = async () => {
+      try{
+         /*
+         const response = await userService.signIn(name, residence_name, number_of_residents);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+         }
+         */
+
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Registro feito com sucesso \n você será redirecionado...`, 
+            btt1: false, btt2: false, display: true
+         });
+
+         setRedirect(true);
+      }
+      catch(error){
+         console.error('❌ Error at sign in', error);
+         modal_config({
+            title: 'Erro ❗️', 
+            msg: `${error} ❌`, 
+            btt1: false, btt2: 'Voltar', display: true
+         });
+      }
    };
 
 
@@ -74,12 +126,8 @@ const SignIn = () => {
                   simples e visual. 
                </p>
                <p>
-                  Você terá tudo o que precisa para entender seus hábitos e descobrir onde é possível economizar.
                   Nosso objetivo é ajudar você a <strong>transformar pequenas mudanças em grandes resultados</strong>: menos desperdício,
                   mais economia e um impacto positivo no meio ambiente.
-               </p>
-               <p>
-                  Vamos juntos construir um <strong>futuro mais sustentável</strong>, começando pela nossa própria casa.
                </p>
                <p>
                   <strong>Registre-se agora e comece sua jornada rumo a um consumo mais consciente!</strong>
@@ -87,7 +135,7 @@ const SignIn = () => {
             </div>
          </div>
       
-         <div className={ styles.data }>
+         <form onSubmit={ handleForm } className={ styles.data }>
             <img src={ welcome_img } alt="welcome_img" />
 
             <h1>Bem vindo/a</h1>
@@ -95,20 +143,29 @@ const SignIn = () => {
             <input 
                type="text" name="name" 
                className={ styles.input_text } placeholder='Nome'
-               autoComplete='off' />
+               autoComplete='off' value={ name } 
+               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value) }
+               required 
+            />
             <input 
                type="text" name="residence_name" 
                className={ styles.input_text } placeholder='Nome de residência'
-               autoComplete='off' />
+               autoComplete='off' value={ residence_name } 
+               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setResidence_name(e.target.value) } 
+               required
+            />
             <input 
                type="number" name="number_of_residents" 
                className={ styles.input_text } placeholder='Número de residentes'
-               autoComplete='off' />
+               autoComplete='off' value={number_of_residents} 
+               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setNumber_of_residents(e.target.value) } 
+               required
+            />
 
             <button type='submit'>
                CADASTRAR
             </button>
-         </div>
+         </form>
       </div>
    );
 };
