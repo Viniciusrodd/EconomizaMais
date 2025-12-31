@@ -15,7 +15,7 @@ import { getErrorMessage } from "@utils/ErrorHandler.util";
 import { 
    CreateMonthlyConsumptionDTO,
    UpdateMonthlyConsumptionDTO,
-} from '@DTOs/MonthlyConsumption.dtos';
+} from '@DTOs/monthlyConsumption.dtos';
 
 // utils
 type Consume = 'energy_kwh' | 'water_m3' | 'gas_m3';
