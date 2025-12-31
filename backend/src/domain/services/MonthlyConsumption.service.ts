@@ -5,7 +5,7 @@ import {
    UpdateMonthlyConsumptionDTO,
    MonthlyConsumptionResponseDTO,
    MonthlyConsumptionSummaryDTO
-} from '@DTOs/MonthlyConsumption.dtos';
+} from '@DTOs/monthlyConsumption.dtos';
 
 // import interfaces
 import { MonthlyConsumption } from '@interfaces/Entities.interface';
@@ -31,7 +31,7 @@ class MonthlyConsumptionService {
       // validations
       const { year, month, energy_kwh, water_m3, gas_m3 } = monthCons;
       if(!year || !month || !energy_kwh || !water_m3 || !gas_m3){
-         throw new Error('All monthly consumption fields are required');
+         throw new Error('Todos os campos são necessários');
       }
 
       // get user id
@@ -39,7 +39,7 @@ class MonthlyConsumptionService {
          attributes: ['id']
       });
       if(!user){
-         throw new Error('User not found');
+         throw new Error('Usuário não encontrado');
       }
 
       // monthly consumption DB creation
@@ -55,7 +55,7 @@ class MonthlyConsumptionService {
    public async getMonthConsService(): Promise<MonthlyConsumptionResponseDTO[]> {
       // get monthlyConsumption
       const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll();
-      if(monthlyConsumptions.length <= 0) throw new Error('Monthly consumption fot found');
+      if(monthlyConsumptions.length <= 0) throw new Error('Meses de consumo não encontrados');
 
       return monthlyConsumptions;
    };
@@ -68,7 +68,7 @@ class MonthlyConsumptionService {
    ): Promise<MonthlyConsumptionResponseDTO> {
       // get monthly consumption
       const monthlyConsumption = await models.MonthlyConsumptionModel.findByPk(id);
-      if(!monthlyConsumption) throw new Error('Monthly consumption fot found');
+      if(!monthlyConsumption) throw new Error('Mês de consumo não encontrado');
 
       await monthlyConsumption.update(monthCons);
       return monthlyConsumption;
@@ -79,7 +79,7 @@ class MonthlyConsumptionService {
    public async deleteMonthConsService(id: string): Promise<void> {
       // get monthly consumption
       const monthlyConsumption = await models.MonthlyConsumptionModel.findByPk(id);
-      if(!monthlyConsumption) throw new Error('Monthly consumption fot found');
+      if(!monthlyConsumption) throw new Error('Mês de consumo não encontrado');
 
       await monthlyConsumption.destroy();
    };
@@ -91,7 +91,7 @@ class MonthlyConsumptionService {
    ): Promise<MonthlyConsumptionSummaryDTO> {
       // get all monthlyConsumptions
       const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll();
-      if(monthlyConsumptions.length <= 0) throw new Error('Monthly consumptions fot found');
+      if(monthlyConsumptions.length <= 0) throw new Error('Meses de consumo não encontrados');
 
       // MonthlyConsumptionHistoryEntity initialize
       const monthlyConsumptionHistoryEntity = new MonthlyConsumptionHistoryEntity(monthlyConsumptions);
@@ -107,7 +107,7 @@ class MonthlyConsumptionService {
    public async getAllMonthConsService(): Promise<MonthlyConsumption[]> {
       // get all monthlyConsumptions
       const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll();
-      if(monthlyConsumptions.length <= 0) throw new Error('Monthly consumptions fot found');
+      if(monthlyConsumptions.length <= 0) throw new Error('Meses de consumo não encontrados');
 
       return monthlyConsumptions;
    };

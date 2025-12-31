@@ -32,7 +32,7 @@ class SimulationsService {
       // validations
       const { target_type, reduction_percent } = simulationsData;
       if(!target_type || !reduction_percent){ 
-         throw new Error('All simulations fields are required');
+         throw new Error('Todos os campos são necessários');
       }
 
       // get user id
@@ -40,7 +40,7 @@ class SimulationsService {
          attributes: ['id']
       });
       if(!user){
-         throw new Error('User not found');
+         throw new Error('Usuário não encontrado');
       }
 
       // get monthly consumptions
@@ -105,7 +105,7 @@ class SimulationsService {
    public async getSimulationsService(): Promise<SimulationResponseDTO[]> {
       // get simulations - DB
       const simulations = await models.SimulationModel.findAll();
-      if(simulations.length <= 0) throw new Error('Simulations not found');
+      if(simulations.length <= 0) throw new Error('Simulação não encontrada');
 
       return simulations;
    };
@@ -117,7 +117,7 @@ class SimulationsService {
    ): Promise<void> {
       // get simulation
       const simulation = await models.SimulationModel.findByPk(id);
-      if(!simulation) throw new Error('Simulation not found');
+      if(!simulation) throw new Error('Simulação não encontrada');
 
       await simulation.destroy();
    };

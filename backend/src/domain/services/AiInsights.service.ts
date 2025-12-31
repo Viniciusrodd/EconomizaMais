@@ -30,14 +30,14 @@ class AIinsightsService {
    ): Promise<AIInsightResponseDTO> {
       // validations
       const { consume_type, insight_category } = aiInsightsData;
-      if(!consume_type || !insight_category) throw new Error('All AiInsights fields are required');
+      if(!consume_type || !insight_category) throw new Error('Todos os campos são necessários');
 
       // get user id
       const user = await models.UserModel.findOne({
          attributes: ['id']
       });
       if(!user){
-         throw new Error('User not found');
+         throw new Error('Usuário não encontrado');
       }
 
       // get monthly consumptions
@@ -100,7 +100,7 @@ class AIinsightsService {
    public async getAiInsightsService(): Promise<AIInsightResponseDTO[]> {
       // get aiInsights - DB
       const aiInsights = await models.AiInsightModel.findAll();
-      if(aiInsights.length <= 0) throw new Error('AI insights not found');
+      if(aiInsights.length <= 0) throw new Error('Insight não encontrado');
 
       return aiInsights;
    };   
@@ -112,14 +112,14 @@ class AIinsightsService {
    ): Promise<AIInsightResponseDTO[]> {
       // validation
       if (!insight_category) {
-         throw new Error('Insight category not provided');
+         throw new Error('Categoria de insight não enviado');
       }
 
       // get ai insights
       const aiInsights = await models.AiInsightModel.findAll({
          where: { insight_category }
       });
-      if(aiInsights.length <= 0) throw new Error('AI insights not found');
+      if(aiInsights.length <= 0) throw new Error('Insights não encontrados');
       
       return aiInsights;
    };
@@ -131,7 +131,7 @@ class AIinsightsService {
    ): Promise<void> {
       // get ai insights
       const aiInsight = await models.AiInsightModel.findByPk(id);
-      if(!aiInsight) throw new Error('AI insight not found');
+      if(!aiInsight) throw new Error('Insight não encontrado');
 
       await aiInsight.destroy();
    };

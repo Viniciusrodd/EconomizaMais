@@ -28,19 +28,19 @@ class ExportHistoryService {
       const user = await models.UserModel.findOne({
          attributes: ['id', 'name', 'residence_name', 'number_of_residents']
       });
-      if(!user) throw new Error('User not found');
+      if(!user) throw new Error('Usuário não encontrado');
 
       // get tariff data
       const tariff = await models.TariffModel.findOne({
          attributes: ['energy_tariff', 'water_tariff', 'gas_tariff']
       });
-      if(!tariff) throw new Error('Tariff not found');
+      if(!tariff) throw new Error('Tarifa não encontrada');
 
       // get monthly consumptions
       const monthConsumptions = await models.MonthlyConsumptionModel.findAll({
          attributes: ['year', 'month', 'energy_kwh', 'water_m3', 'gas_m3']
       });
-      if(monthConsumptions.length <= 0) throw new Error('Monthly consumptions not found');
+      if(monthConsumptions.length <= 0) throw new Error('Meses de consumo não encontrados');
 
       // build PDF generation data
       const PDFGeneration: PDFGenerationDTO = {
@@ -76,7 +76,7 @@ class ExportHistoryService {
       const histories = await models.ExportHistoryModel.findAll({
          attributes: ['id', 'file_path', 'created_at']
       });
-      if(histories.length <= 0) throw new Error('Histories not found');
+      if(histories.length <= 0) throw new Error('Históricos não encontrados');
 
       return histories;
    };
@@ -90,13 +90,13 @@ class ExportHistoryService {
       const history = await models.ExportHistoryModel.findByPk(id, {
          attributes: ['id', 'file_path', 'created_at']
       });
-      if(!history) throw new Error('History not found');
+      if(!history) throw new Error('Históricos não encontrados');
 
       // file path
       const filePath = history.file_path;
 
       // safety check
-      if(!fs.existsSync(filePath)) throw new Error('PDF file not found on disk');
+      if(!fs.existsSync(filePath)) throw new Error('Arquivo de PDF não encontrado no disco');
 
       // file name
       const fileName = path.basename(filePath);

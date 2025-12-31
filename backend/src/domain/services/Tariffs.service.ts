@@ -21,13 +21,13 @@ class TariffService {
       // validations
       const { energy_tariff, water_tariff, gas_tariff } = tariffData;
       if(!energy_tariff || !water_tariff || !gas_tariff){
-         throw new Error('All tariff fields are required');
+         throw new Error('Todos os campos são necessário');
       }
 
       // check existing tariffs
       const existingTariffCount = await models.TariffModel.count();
       if(existingTariffCount > 0){
-         throw new Error('Only one tariffs is allowed per installation');
+         throw new Error('Apenas 1 tarifa é permitido por instalação');
       }
 
       // get user id
@@ -35,7 +35,7 @@ class TariffService {
          attributes: ['id']
       });
       if(!user){
-         throw new Error('User not found');
+         throw new Error('Usuário não encontrado');
       }
 
       // tariff DB creation
@@ -54,7 +54,7 @@ class TariffService {
    public async getTariffService(): Promise<TariffResponseDTO> {
       // get tariff - DB
       const tariffs = await models.TariffModel.findOne(); // because must have only 1 tariffs per user, always
-      if(!tariffs) throw new Error('Tariffs fot found');
+      if(!tariffs) throw new Error('Tarifa não encontrada');
 
       return tariffs;
    };
@@ -66,7 +66,7 @@ class TariffService {
    ): Promise<TariffResponseDTO> {
       // get tariff - DB
       const tariffs = await models.TariffModel.findOne();
-      if (!tariffs) throw new Error('Tariffs not found');
+      if (!tariffs) throw new Error('Tarifa não encontrada');
 
       await tariffs.update(tariffData);
       return tariffs;
