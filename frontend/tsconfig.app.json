@@ -28,6 +28,7 @@
 
       /* Paths */
       "paths": {
+         "@images/*": ["public/images/*"],
          "@assets/*": ["src/assets/*"],
          "@components/*": ["src/components/*"],
          "@contexts/*": ["src/contexts/*"],

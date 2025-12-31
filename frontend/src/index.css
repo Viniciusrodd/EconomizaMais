@@ -5,6 +5,7 @@
    --color2: #A7B0CA;
    --color3: #D5DCF9;
    --color3b: #d6dcf5;
+   --color3c: #d6dcf525;
    --color4: #DA4167;
    --color5: #61E294;
 }
@@ -21,4 +22,23 @@ html, body{
    margin: 0;
    padding: 0;
    height: 100%;
+}
+
+input:focus{
+   outline: none;
+}
+
+button{
+   cursor: pointer;
+   transition: ease-in-out transform 0.2s;
+}
+
+button:hover{
+   transform: scale(1.02);
+}
+
+strong{
+   padding: 1px 5px;
+   background-color: var(--color3c);
+   color: white;
 }

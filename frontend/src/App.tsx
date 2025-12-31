@@ -3,7 +3,10 @@
 import '@root/App.css';
 
 // import hooks
-import { BrowserRouter, Routes, /*Route*/ } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// import pages
+import SignIn from '@pages/Signin';
 
 
 // app
@@ -12,7 +15,11 @@ function App() {
       <div className='app'>
          <BrowserRouter>
             <Routes>
+               {/* signIn page */}
+               <Route path='/registro' element={ <SignIn /> } />
 
+               {/* not found page */}
+               <Route path='*' element={ <SignIn /> } />
             </Routes>
          </BrowserRouter>
       </div>
