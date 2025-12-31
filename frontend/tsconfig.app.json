@@ -28,6 +28,12 @@
 
       /* Paths */
       "paths": {
+         "@assets/*": ["src/assets/*"],
+         "@components/*": ["src/components/*"],
+         "@contexts/*": ["src/contexts/*"],
+         "@pages/*": ["src/pages/*"],
+         "@routes/*": ["src/routes/*"],
+         "@services/*": ["src/services/*"],
          "@styles/*": ["src/styles/*"],
          "@interfeces/*": ["../shared/interfaces/frontend/*"],
 
