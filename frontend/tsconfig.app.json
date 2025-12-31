@@ -36,7 +36,8 @@
          "@routes/*": ["src/routes/*"],
          "@services/*": ["src/services/*"],
          "@styles/*": ["src/styles/*"],
-         "@interfeces/*": ["../shared/interfaces/frontend/*"],
+         "@interfeces/*": ["../shared/interfaces/*"],
+         "@DTOs/*": ["../backend/src/shared/dtos/*"],
 
          "@root/*": ["src/*"],         
       }

@@ -11,10 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 // import interfaces
-import type { iModalConfig } from '@interfeces/Modal.interface';
+import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
 
 // import components
 import Modal from '@components/Modal';
+
+// import services
+import { userService } from '@services/User.service';
 
 
 
@@ -72,14 +75,23 @@ const SignIn = () => {
    }, [redirect, navigate]);
 
    // sign in request
-   const handleForm = async () => {
+   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      // user data setup
+      const data = {
+         name,
+         residence_name,
+         number_of_residents: Number(number_of_residents)
+      };
+
       try{
-         /*
-         const response = await userService.signIn(name, residence_name, number_of_residents);
+         const response = await userService.signIn(data);
          if(!response){
             console.error('⚠️ Unexpected return from API:', response);
          }
-         */
+
+         console.log('✔️ response: ', response);
 
          modal_config({
             title: 'Sucesso ✔️', 
@@ -91,10 +103,11 @@ const SignIn = () => {
       }
       catch(error){
          console.error('❌ Error at sign in', error);
+
          modal_config({
-            title: 'Erro ❗️', 
-            msg: `${error} ❌`, 
-            btt1: false, btt2: 'Voltar', display: true
+            title: 'Erro ❌', 
+            msg: `${error}`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
          });
       }
    };
@@ -135,7 +148,11 @@ const SignIn = () => {
             </div>
          </div>
       
-         <form onSubmit={ handleForm } className={ styles.data }>
+         <form 
+            onSubmit={ handleForm }
+            method='post' 
+            className={ styles.data }
+         >
             <img src={ welcome_img } alt="welcome_img" />
 
             <h1>Bem vindo/a</h1>

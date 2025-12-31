@@ -18,7 +18,8 @@ export default defineConfig({
          '@routes': path.resolve(__dirname, 'src/routes'),
          '@services': path.resolve(__dirname, 'src/services'),
          '@styles': path.resolve(__dirname, 'src/styles'),
-         '@interfaces': path.resolve(__dirname, '../shared/interfaces/frontend'),         
+         '@interfaces': path.resolve(__dirname, '../shared/interfaces'),
+         '@DTOs': path.resolve(__dirname, '../backend/src/shared/dtos'),
 
          '@root': path.resolve(__dirname, 'src')
       }
