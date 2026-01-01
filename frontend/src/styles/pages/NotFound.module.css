@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+:root{
+   --color1: #0e1116;
+   --color2: #A7B0CA;
+   --color3: #D5DCF9;
+   --color3b: #d6dcf5;
+   --color4: #DA4167;
+   --color4b: #c10e3bc7;
+   --color5: #61E294;
+}
+
+
+.container{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   height: 70vh;
+   width: 70vw;
+   border-radius: 10px;
+
+   & h1{
+      font-size: 200px;
+      font-weight: 1000;
+      background-image: url(../../../images/notFound/universe.jpg);
+      background-size: cover;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 5px;
+   }
+
+   & h2{
+      font-size: 20px;
+      margin-bottom: 50px;
+   }
+
+   & button{
+      height: 45px;
+      width: 12vw;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--color4);
+      color: white;
+      font-weight: bold;
+      margin-bottom: 10%;
+   }
+
+   & p{
+      font-size: 20px;
+      font-weight: bold;
+      font-style: italic;
+      color: var(--color1);
+      text-shadow: -2px 1px 2px rgb(255, 255, 255);
+   }
+}
