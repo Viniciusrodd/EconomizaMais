@@ -17,7 +17,7 @@ const NotFound = () => {
 
    // redirect
    const handleRedirect = () => {
-      navigate('/registro');
+      navigate('/');
    };
 
 
