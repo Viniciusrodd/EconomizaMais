@@ -5,10 +5,11 @@ import styles from '@styles/pages/Signin.module.css';
 // import images
 import desc_img from '@images/signin/desc_img.jpg';
 import welcome_img from '@images/signin/signin.png';
+import loading_img from '@images/utils/loading.png';
 
 // import hooks
 import { useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
@@ -19,6 +20,8 @@ import Modal from '@components/Modal';
 // import services
 import { userService } from '@services/User.service';
 
+// import contexts
+import { LoadingContext } from '@contexts/Loading/Loading.context';
 
 
 // sign in
@@ -34,6 +37,10 @@ const SignIn = () => {
    const [ residence_name, setResidence_name ] = useState<string>('');
    const [ number_of_residents, setNumber_of_residents ] = useState<string>('');
    const [ redirect, setRedirect ] = useState<boolean>(false);
+
+
+   //// context
+   const { loading, setLoading } = useContext(LoadingContext);
 
 
    //// functions
@@ -54,6 +61,7 @@ const SignIn = () => {
          title: '', msg: '', btt1: false, 
          btt2: false, display: false
       });
+      setLoading(false);
    };
 
    // redirect
@@ -66,7 +74,7 @@ const SignIn = () => {
             });
 
             navigate('/');            
-         }, 6000);
+         }, 4000);
 
          return () =>{
             clearTimeout(clearMessage);
@@ -77,6 +85,7 @@ const SignIn = () => {
    // sign in request
    const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setLoading(true);
 
       // user data setup
       const data = {
@@ -91,14 +100,13 @@ const SignIn = () => {
             console.error('⚠️ Unexpected return from API:', response);
          }
 
-         console.log('✔️ response: ', response);
-
          modal_config({
             title: 'Sucesso ✔️', 
             msg: `Registro feito com sucesso \n você será redirecionado...`, 
             btt1: false, btt2: false, display: true
          });
 
+         setLoading(false);
          setRedirect(true);
       }
       catch(error){
@@ -106,7 +114,7 @@ const SignIn = () => {
 
          modal_config({
             title: 'Erro ❌', 
-            msg: `${error}`, 
+            msg: `${ error }`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
       }
@@ -179,9 +187,22 @@ const SignIn = () => {
                required
             />
 
-            <button type='submit'>
-               CADASTRAR
-            </button>
+            { loading ? (
+               <>
+                  <img 
+                     src={ loading_img } 
+                     alt="loading_png"
+                     className='loading_img' 
+                  />
+                  <p className='loading_msg'>
+                     Carregando...
+                  </p>
+               </>
+            ) : (
+               <button type='submit'>
+                  CADASTRAR
+               </button>
+            ) }
          </form>
       </div>
    );
