@@ -10,3 +10,9 @@
    --color4c: #c10e3b55;
    --color5: #61E294;
 }
+
+
+.container{
+   height: 100vh;
+   width: 100%;
+}

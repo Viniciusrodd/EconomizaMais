@@ -5,11 +5,11 @@
    --color2: #A7B0CA;
    --color3: #D5DCF9;
    --color3b: #d6dcf5;
-   --color3c: #d6dcf525;
    --color4: #DA4167;
+   --color4b: #c10e3bc7;
+   --color4c: #c10e3b55;
    --color5: #61E294;
 }
-
 *{
    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
    margin: 0;
