@@ -3,7 +3,7 @@
 import styles from '@styles/components/Modal.module.css';
 
 // import interfaces
-import type { iModal } from '@interfeces/Modal.interface';
+import type { iModal } from '@interfeces/frontend/Modal.interface';
 
 // import hooks
 import type React from 'react';

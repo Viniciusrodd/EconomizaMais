@@ -8,18 +8,19 @@ import type {
 } from '@DTOs/User.dtos';
 
 // import routes
-import { createUserRoute } from "@routes/user.routes";
+import { userRoute } from "@routes/routes";
 
 
 
 // user service - frontend
 class UserService {
 
+   // register user
    public async signIn(
       data: CreateUserDTO
    ): Promise<UserResponseDTO> {
       try{
-         const res = await axios.post(createUserRoute, data);
+         const res = await axios.post(userRoute, data);
          return res.data.data;
       }
       catch(error){
@@ -29,6 +30,21 @@ class UserService {
          throw error;
       }
    };
+
+
+   // get user
+   public async getUser(): Promise<UserResponseDTO> {
+      try{
+         const res = await axios.get(userRoute);
+         return res.data.data;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw error.response?.data?.data || error.response?.data?.message;
+         }
+         throw error;
+      }
+   }; 
 
 };
 export const userService: UserService = new UserService();
