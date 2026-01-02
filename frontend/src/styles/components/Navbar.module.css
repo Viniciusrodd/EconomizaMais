@@ -16,12 +16,11 @@
    display: flex;
    justify-content: space-between;
    align-items: center;
-   height: 15vh;
+   height: 14.8%;
    width: 100%;
-   border-bottom: 1px solid black;   
 
    & h1{
-      font-size: 32px;
+      font-size: 35px;
       margin-left: 5%;
       font-style: italic;      
       text-shadow: -3px 2px 2px rgba(0, 0, 0, 0.286);
