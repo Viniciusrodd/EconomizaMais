@@ -1,10 +1,21 @@
 
+// import components
+import Navbar from '@components/Navbar';
+import Sidebar from '@components/Sidebar';
+
 
 // tariffs
 const Tariffs = () => {
    return (
-      <div>
-         <h1>Tarifas</h1>
+      <div className='container'>
+         {/* navbar */}
+         <Navbar />
+
+         <div className='homepage'>
+            {/* sidebar */}
+            <Sidebar />
+            
+         </div>
       </div>
    );
 };

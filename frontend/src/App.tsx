@@ -26,10 +26,10 @@ function App() {
                <Route path='/registro' element={ <SignIn /> } />
                <Route path='/' element={ <Homepage /> } />
                <Route path='/tarifas' element={ <Tariffs /> } />
-               <Route path='/simulacoes' element={ <Simulations /> } />
                <Route path='/consumosMensais' element={ <MonthlyConsumption /> } />
-               <Route path='/historico' element={ <ExportHistory /> } />
+               <Route path='/simulacoes' element={ <Simulations /> } />
                <Route path='/insights' element={ <AiInsight /> } />
+               <Route path='/historico' element={ <ExportHistory /> } />
 
                {/* not found page */}
                <Route path='*' element={ <NotFound /> } />

@@ -27,17 +27,21 @@
    margin-top: 40%;
    list-style-type: none;
    border-right: 3px solid var(--color4);
+}
 
-   & li{
-      font-style: italic;
-      font-size: 19px;
-      font-weight: 500;
-      text-align: left;
-      margin-bottom: 20px;
-      cursor: pointer;
-      transition: ease-in-out transform 0.2s;
-   }
-   & li:hover{
-      transform: scale(1.02);
-   }
+li{
+   font-style: italic;
+   font-size: 19px;
+   font-weight: 500;
+   text-align: left;
+   margin-bottom: 20px;
+   cursor: pointer;
+   transition: ease-in-out transform 0.2s;
+}
+li:hover{
+   transform: scale(1.02);
+}
+
+.li_selected{
+   color: var(--color4);
 }

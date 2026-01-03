@@ -1,6 +1,6 @@
 
 // import css
-import styles from '@styles/pages/Homepage.module.css';
+//import styles from '@styles/pages/Homepage.module.css';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -92,7 +92,7 @@ const Homepage = () => {
 
 
    return (
-      <div className={ styles.container }>
+      <div className='container'>
          { /* modal */ }
          <Modal 
             title={ modal_title }
@@ -107,7 +107,7 @@ const Homepage = () => {
          {/* navbar */}
          <Navbar />
 
-         <div className={ styles.homepage }>
+         <div className='homepage'>
             {/* sidebar */}
             <Sidebar />
             
