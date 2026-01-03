@@ -73,7 +73,7 @@ const SignIn = () => {
                btt2: false, display: false
             });
 
-            navigate('/');            
+            navigate('/');       
          }, 4000);
 
          return () =>{
@@ -115,7 +115,7 @@ const SignIn = () => {
          modal_config({
             title: 'Erro ❌', 
             msg: `${ error }`, 
-            btt1: false, btt2: 'TENTAR NOVAMENTE', display: true
+            btt1: false, btt2: 'Tentar novamente', display: true
          });
       }
    };
@@ -167,21 +167,21 @@ const SignIn = () => {
 
             <input 
                type="text" name="name" 
-               className={ styles.input_text } placeholder='Nome'
+               placeholder='Nome'
                autoComplete='off' value={ name } 
                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value) }
                required 
             />
             <input 
                type="text" name="residence_name" 
-               className={ styles.input_text } placeholder='Nome de residência'
+               placeholder='Nome de residência'
                autoComplete='off' value={ residence_name } 
                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setResidence_name(e.target.value) } 
                required
             />
             <input 
                type="number" name="number_of_residents" 
-               className={ styles.input_text } placeholder='Número de residentes'
+               placeholder='Número de residentes'
                autoComplete='off' value={number_of_residents} 
                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setNumber_of_residents(e.target.value) } 
                required
