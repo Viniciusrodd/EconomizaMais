@@ -110,12 +110,12 @@ const SignIn = () => {
          setRedirect(true);
       }
       catch(error){
-         console.error('❌ Error at sign in', error);
+         console.error('❌ Error at sign in: ', error);
 
          modal_config({
             title: 'Erro ❌', 
             msg: `${ error }`, 
-            btt1: false, btt2: 'Tentar novamente', display: true
+            btt1: false, btt2: 'TENTAR NOVAMENTE', display: true
          });
       }
    };

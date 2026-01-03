@@ -54,7 +54,7 @@ class TariffService {
    public async getTariffService(): Promise<TariffResponseDTO> {
       // get tariff - DB
       const tariffs = await models.TariffModel.findOne(); // because must have only 1 tariffs per user, always
-      if(!tariffs) throw new Error('Tarifa não encontrada');
+      if(!tariffs) throw new Error('Tarifas não encontradas');
 
       return tariffs;
    };
