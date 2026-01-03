@@ -43,6 +43,8 @@
 
    & h2{
       font-size: 17px;
+      font-weight: 500;
+      font-style: italic;
       margin: 0px 0px 0px 5px;
    }
 }
