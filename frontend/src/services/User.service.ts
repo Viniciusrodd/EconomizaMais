@@ -4,7 +4,9 @@ import axios from "axios";
 
 // import DTOs
 import type { 
-   CreateUserDTO, UserResponseDTO
+   CreateUserDTO, 
+   UserResponseDTO,
+   UpdateUserDTO
 } from '@DTOs/User.dtos';
 
 // import routes
@@ -44,7 +46,39 @@ class UserService {
          }
          throw error;
       }
+   };
+   
+   
+   // update user
+   public async updateUser(
+      data: UpdateUserDTO
+   ): Promise<UserResponseDTO> {
+      try{
+         const res = await axios.put(userRoute, data);
+         return res.data.data;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw error.response?.data?.data || error.response?.data?.message;
+         }
+         throw error;
+      }
    }; 
+
+
+   // delete user
+   public async deleteUser(): Promise<UserResponseDTO> {
+      try{
+         const res = await axios.delete(userRoute);
+         return res.data.data;
+      }
+      catch(error){
+         if(axios.isAxiosError(error)){
+            throw error.response?.data?.data || error.response?.data?.message;
+         }
+         throw error;
+      }
+   };
 
 };
 export const userService: UserService = new UserService();
