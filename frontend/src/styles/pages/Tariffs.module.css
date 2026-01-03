@@ -9,4 +9,124 @@
    --color4b: #c10e3bc7;
    --color4c: #c10e3b55;
    --color5: #61E294;
+   --color6: #ffd200;
+   --color7: #0b74db;
+}
+
+
+.data_container{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   height: 100%;
+   width: 70%;
+
+   & button{
+      height: 45px;
+      width: 12vw;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: var(--color4);
+      color: white;
+      margin: 2% 0px 20px 0px;
+   }
+}
+
+
+.data{
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   min-height: 60%;
+   max-height: 85%;
+   width: 85%;
+   background-color: white;
+   border-radius: 10px;
+
+   & h1{
+      font-size: 23px;
+      margin: 40px 0px 20px 0px;
+   }
+}
+
+.tariffs{
+   display: flex;
+   justify-content: space-between;
+   height: 55%;
+   width: 80%;
+
+   & .cards{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 30%;
+      border-radius: 10px;
+      background-color: var(--color3b);
+      transition: ease-in-out transform 0.2s;
+
+      & h1{
+         font-size: 20px;
+         margin: 0px 0px 10px 0px;
+      }
+
+      & h2{
+         font-size: 30px;
+         width: 50%;
+         text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.537);
+      }
+   }
+   & .cards:hover{
+      transform: scale(1.02);
+   }
+
+   & .energy{
+      border: 3px solid var(--color6);
+      
+      & h2{
+         color: var(--color6);
+      }
+   }
+
+   & .water{
+      border: 3px solid var(--color7);
+
+      & h2{
+         color: var(--color7);
+      }
+   }
+
+   & .gas{
+      border: 3px solid var(--color4);
+   
+      & h2{
+         color: var(--color4);
+      }   
+   }
+}
+
+.info{
+   display: flex;
+   margin-top: 20px;
+   transition: ease-in-out transform 0.2s;
+   cursor: pointer;
+
+   & h2{
+      font-size: 17px;
+      margin-right: 5px;
+   }
+
+   & img{
+      height: 23px;
+      width: 23px;
+   }
+}
+.info:hover{
+   transform: scale(1.02);
+   text-decoration: underline;
 }

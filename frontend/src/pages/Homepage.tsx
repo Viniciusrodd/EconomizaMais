@@ -1,6 +1,6 @@
 
 // import css
-//import styles from '@styles/pages/Homepage.module.css';
+import styles from '@styles/pages/Homepage.module.css';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -76,7 +76,7 @@ const Homepage = () => {
             
             // call btt1 event
             setModal_event('not_found');
-
+            
             modal_config({
                title: 'Espere ❕', 
                msg: `${ error }! \n Registre agora suas Tarifas de consumo`, 
@@ -111,6 +111,11 @@ const Homepage = () => {
             {/* sidebar */}
             <Sidebar />
             
+            <div className={ styles.data_container }>
+               <div className={ styles.data }>
+
+               </div>
+            </div>
          </div>
       </div>
    );
