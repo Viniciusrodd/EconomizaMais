@@ -1,7 +1,7 @@
 
 
-// historic
-const Historic = () => {
+// export history
+const ExportHistory = () => {
    return (
       <div>
          <h1>Histórico</h1>
@@ -9,4 +9,4 @@ const Historic = () => {
    );
 };
 
-export default Historic;
+export default ExportHistory;
