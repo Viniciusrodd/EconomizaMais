@@ -10,12 +10,15 @@ import { userService } from '@services/User.service';
 
 // import hooks
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 
 
 // navbar
 const Navbar = () => {
    //// variables
    const [ userName, setUserName ] = useState<string>('');
+   const location = useLocation();
 
 
    //// functions
@@ -40,11 +43,27 @@ const Navbar = () => {
 
    return (
       <div className={ styles.nav_container }>
-         <h1>Economiza+</h1>
+         <h1>
+            <Link to='/'>
+               Economiza+
+            </Link>
+         </h1>
 
-         <div className={ styles.nav_account }>
+         <div className={ styles.nav_account }>            
             <img src={ user_img } alt="user_img" />
-            <h2>Olá, { userName }</h2>
+            <Link to='/usuario'>
+               {
+                  location.pathname === '/usuario' ? (
+                     <h2 className={ styles.selected }>
+                        Olá, { userName }
+                     </h2>
+                  ) : (
+                     <h2>
+                        Olá, { userName }
+                     </h2>
+                  )
+               }
+            </Link>
          </div>
       </div>
    );

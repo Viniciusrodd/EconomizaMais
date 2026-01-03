@@ -4,8 +4,8 @@ import Navbar from '@components/Navbar';
 import Sidebar from '@components/Sidebar';
 
 
-// monthly consumption
-const MonthlyConsumption = () => {
+// user data
+const UserData = () => {
    return (
       <div className='container'>
          {/* navbar */}
@@ -20,4 +20,4 @@ const MonthlyConsumption = () => {
    );
 };
 
-export default MonthlyConsumption;
+export default UserData;

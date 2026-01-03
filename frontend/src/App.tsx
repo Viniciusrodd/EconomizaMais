@@ -14,6 +14,7 @@ import Simulations from '@pages/Simulations';
 import MonthlyConsumption from '@pages/MonthlyConsumption';
 import AiInsight from '@pages/AiInsight';
 import ExportHistory from '@pages/ExportHistory';
+import UserData from '@pages/UserData';
 
 
 // app
@@ -30,6 +31,7 @@ function App() {
                <Route path='/simulacoes' element={ <Simulations /> } />
                <Route path='/insights' element={ <AiInsight /> } />
                <Route path='/historico' element={ <ExportHistory /> } />
+               <Route path='/usuario' element={ <UserData /> } />
 
                {/* not found page */}
                <Route path='*' element={ <NotFound /> } />

@@ -7,7 +7,7 @@
    --color3b: #d6dcf5;
    --color4: #DA4167;
    --color4b: #c10e3bc7;
-   --color4c: #c10e3b55;
+   --color4c: #c10e3b15;
    --color5: #61E294;
 }
 
@@ -24,15 +24,18 @@
       margin-left: 5%;
       font-style: italic;      
       text-shadow: -3px 2px 2px rgba(0, 0, 0, 0.286);
+      transition: ease-in-out transform 0.2s;
+   }
+   & h1:hover{
+      transform: scale(1.02);
    }
 }
-
 
 .nav_account{
    display: flex;
    align-items: center;
-   justify-content: space-between;
    margin-right: 5%;
+   justify-content: space-between;
    cursor: pointer;
    transition: ease-in-out transform 0.2s;
 
@@ -50,4 +53,8 @@
 }
 .nav_account:hover{
    transform: scale(1.02);
+}
+
+.selected{
+   color: var(--color4);
 }

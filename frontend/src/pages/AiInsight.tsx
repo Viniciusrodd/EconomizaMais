@@ -1,10 +1,21 @@
 
+// import components
+import Navbar from '@components/Navbar';
+import Sidebar from '@components/Sidebar';
+
 
 // ai insight
 const AiInsight = () => {
    return (
-      <div>
-         <h1>Ai insights</h1>
+      <div className='container'>
+         {/* navbar */}
+         <Navbar />
+
+         <div className='homepage'>
+            {/* sidebar */}
+            <Sidebar />
+            
+         </div>
       </div>
    );
 };

@@ -1,11 +1,22 @@
 
+// import components
+import Navbar from '@components/Navbar';
+import Sidebar from '@components/Sidebar';
+
 
 // simulations
 const Simulations = () => {
    return (
-      <div>
-         <h1>Simulações</h1>
-      </div>
+      <div className='container'>
+         {/* navbar */}
+         <Navbar />
+
+         <div className='homepage'>
+            {/* sidebar */}
+            <Sidebar />
+            
+         </div>
+      </div>   
    );
 };
 
