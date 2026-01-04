@@ -4,6 +4,8 @@ import styles from '@styles/pages/BaseDatas.module.css';
 
 // import images
 import navigation_img from '@images/utils/navigator.png';
+import leftArrow_img from '@images/utils/left_arrow.png';
+import rightArrow_img from '@images/utils/right_arrow.png';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -12,6 +14,7 @@ import Modal from '@components/Modal';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
+import type { MonthlyConsumptionResponseDTO } from '@DTOs/monthlyConsumption.dtos';
 
 // import hooks
 import { useState, useEffect } from 'react';
@@ -31,11 +34,9 @@ const MonthlyConsumption = () => {
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
    const [ isMonthCons, setIsMonthCons ] = useState<boolean>(false);
    const [ changeMonthCons, setChangeMonthCons ] = useState<boolean>(false);
-   /*
-   const [ energy_monthCons, setEnergy_monthCons ] = useState<number>(0);
-   const [ water_monthCons, setWater_monthCons ] = useState<number>(0);
-   const [ gas_monthCons, setGas_monthCons ] = useState<number>(0);
-   */
+   const [ monthConsList, setMonthConsList ] = useState<MonthlyConsumptionResponseDTO[]>([]);
+   const [ currentIndex, setCurrentIndex ] = useState<number>(0);
+   const currentMonthCons = monthConsList[currentIndex] ?? null;
 
 
    //// functions
@@ -63,15 +64,18 @@ const MonthlyConsumption = () => {
       const getMonthCons = async () => {
          try{
             const response = await monthlyConsumptionService.getMonthConsService();
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
+            if(!response) console.error('⚠️ Unexpected return from API:', response);
+            if(response.length === 0){
+               setIsMonthCons(false);
+               return;
             }
 
+            // set month cons
+            setMonthConsList(response);
+            setCurrentIndex(response.length - 1); // begins in most recently month  
+         
             // is month cons
             setIsMonthCons(true);
-
-            // set month cons
-                        
          }
          catch(error){
             console.error('❌ Error at check month cons: ', error);
@@ -82,6 +86,20 @@ const MonthlyConsumption = () => {
       };
       getMonthCons();
    }, []);
+
+   // prev month
+   const goPrev = () => {
+      if (currentIndex > 0) {
+         setCurrentIndex(prev => prev - 1);
+      }
+   };
+
+   // next month
+   const goNext = () => {
+      if (currentIndex < monthConsList.length - 1) {
+         setCurrentIndex(prev => prev + 1);
+      }
+   };
    
    // create monthCons
    const createMonthCons = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -241,23 +259,37 @@ const MonthlyConsumption = () => {
                      </button>
 
                      <div className={ styles.data }>
-                        <h1>Mês de consumo - (data)</h1>
+                        <div className={ styles.data_navigate }>
+                           <img 
+                              src={ leftArrow_img } 
+                              alt="left_arrow"
+                              onClick={ goPrev } 
+                           />
+                           <h1>
+                              Mês de consumo - { currentMonthCons?.month }/{ currentMonthCons?.year }
+                           </h1>
+                           <img 
+                              src={ rightArrow_img } 
+                              alt="right_arrow" 
+                              onClick={ goNext }
+                           />
+                        </div>
 
                         <div className={ styles.data_registers }>
                            <div className={ `${styles.cards} ${styles.energy}` }>
                               <h1>Consumo de Energia</h1>
 
-                              <h2>(conta) Kwh</h2>
+                              <h2>{ currentMonthCons?.energy_kwh } Kwh</h2>
                            </div>
                            <div className={ `${styles.cards} ${styles.water}` }>
                               <h1>Consumo de Água</h1>
 
-                              <h2>(conta) m3</h2>                     
+                              <h2>{ currentMonthCons?.water_m3 } m3</h2>                     
                            </div>
                            <div className={ `${styles.cards} ${styles.gas}` }>
                               <h1>Consumo de Gás</h1>
 
-                              <h2>(conta) m3</h2>
+                              <h2>{ currentMonthCons?.gas_m3 } m3</h2>
                            </div>
                         </div>
                      </div>
