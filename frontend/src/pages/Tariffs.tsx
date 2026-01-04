@@ -4,6 +4,7 @@ import styles from '@styles/pages/BaseDatas.module.css';
 
 // import images
 import navigation_img from '@images/utils/navigator.png';
+import goback_img from '@images/utils/back.png';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -103,13 +104,14 @@ const Tariffs = () => {
 
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Tarifa registrada com sucesso \n você será redirecionado...`, 
+            msg: `Tarifas registradas com sucesso \n você será redirecionado...`, 
             btt1: false, btt2: false, display: true
          });
 
          setTimeout(() => {
             closeModal();
             setChangeTariffs(false);
+            setIsTariffs(true);
          }, 4000);
       }
       catch(error){
@@ -203,7 +205,6 @@ const Tariffs = () => {
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setEnergy_tariff(Number(e.target.value)) }
-                              required
                            />
                            <input
                               type="number" name="water_tariff"
@@ -211,7 +212,6 @@ const Tariffs = () => {
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setWater_tariff(Number(e.target.value)) }
-                              required
                            />
                            <input
                               type="number" name="gas_tariff"
@@ -219,7 +219,6 @@ const Tariffs = () => {
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setGas_tariff(Number(e.target.value)) }
-                              required
                            />
                            <button type='submit'>
                               ENVIAR
@@ -237,6 +236,18 @@ const Tariffs = () => {
                            </ul>
                         </div>
                      </div>
+
+                     { isTariffs && (
+                        <div 
+                           className={ styles.goBack }
+                           onClick={ () => {
+                              setChangeTariffs(false);
+                           } }
+                        >
+                           <img src={ goback_img } alt="goback_img" />
+                           <h2>Voltar</h2>                        
+                        </div>
+                     ) }
                   </div>
                ) : (
                   <div className={ styles.data_container }>
