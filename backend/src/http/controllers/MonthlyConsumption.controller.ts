@@ -14,6 +14,7 @@ import { getErrorMessage } from "@utils/ErrorHandler.util";
 // import DTOs
 import { 
    CreateMonthlyConsumptionDTO,
+   MonthlyConsumptionResponseDTO,
    UpdateMonthlyConsumptionDTO,
 } from '@DTOs/monthlyConsumption.dtos';
 
@@ -57,7 +58,7 @@ class MonthlyConsumptionController {
    ): Promise<Response> {
       try{
          // get monthlyConsumption - service
-         const monthlyConsumptions = await monthlyConsumptionService.getMonthConsService();
+         const monthlyConsumptions: MonthlyConsumptionResponseDTO[] = await monthlyConsumptionService.getMonthConsService();
 
          return res.status(200).json({
             success: true,

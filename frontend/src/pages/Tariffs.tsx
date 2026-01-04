@@ -1,6 +1,6 @@
 
 // import css
-import styles from '@styles/pages/Tariffs.module.css';
+import styles from '@styles/pages/BaseDatas.module.css';
 
 // import images
 import navigation_img from '@images/utils/navigator.png';
@@ -247,7 +247,7 @@ const Tariffs = () => {
                      <div className={ styles.data }>
                         <h1>Tarifas atuais</h1>
 
-                        <div className={ styles.tariffs }>
+                        <div className={ styles.data_registers }>
                            <div className={ `${styles.cards} ${styles.energy}` }>
                               <h1>Tarifa de Energia</h1>
 
