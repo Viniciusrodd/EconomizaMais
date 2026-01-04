@@ -35,15 +35,27 @@ TariffModel.init({
    },
    energy_tariff: {
       type: DataTypes.DECIMAL(10, 4),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('energy_tariff');
+         return value !== null ? Number(value) : null;
+      }
    },
    water_tariff: {
       type: DataTypes.DECIMAL(10, 4),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('water_tariff');
+         return value !== null ? Number(value) : null;
+      }
    },
    gas_tariff: {
       type: DataTypes.DECIMAL(10, 4),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('gas_tariff');
+         return value !== null ? Number(value) : null;
+      }
    }
 }, {
    sequelize: ConnectionDatabase,

@@ -38,7 +38,11 @@ SimulationModel.init({
    },
    reduction_percent: {
       type: DataTypes.DECIMAL(5, 2),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('reduction_percent');
+         return value !== null ? Number(value) : null;
+      }
    },
    target_type: {
       type: DataTypes.ENUM('energy', 'water', 'gas', 'all'),
@@ -46,15 +50,27 @@ SimulationModel.init({
    },
    monthly_saving: {
       type: DataTypes.DECIMAL(5, 2),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('monthly_saving');
+         return value !== null ? Number(value) : null;
+      }      
    },
    annual_saving: {
       type: DataTypes.DECIMAL(5, 2),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('annual_saving');
+         return value !== null ? Number(value) : null;
+      }      
    },
    environmental_impact: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('environmental_impact');
+         return value !== null ? Number(value) : null;
+      }      
    },
    feedback: {
       type: DataTypes.TEXT,

@@ -45,15 +45,27 @@ MonthlyConsumptionModel.init({
    },
    energy_kwh: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('energy_kwh');
+         return value !== null ? Number(value) : null;
+      }      
    },
    water_m3: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('water_m3');
+         return value !== null ? Number(value) : null;
+      }
    },
    gas_m3: {
       type: DataTypes.DECIMAL(10, 2),
-      allowNull: false
+      allowNull: false,
+      get() {
+         const value = this.getDataValue('gas_m3');
+         return value !== null ? Number(value) : null;
+      }
    }
 }, {
    sequelize: ConnectionDatabase,
