@@ -7,6 +7,7 @@ import navigation_img from '@images/utils/navigator.png';
 import leftArrow_img from '@images/utils/left_arrow.png';
 import rightArrow_img from '@images/utils/right_arrow.png';
 import goback_img from '@images/utils/back.png';
+import delete_img from '@images/utils/delete.png';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -76,6 +77,7 @@ const MonthlyConsumption = () => {
       if(!response) console.error('⚠️ Unexpected return from API:', response);
       if(response.length === 0){
          setIsMonthCons(false);
+         setChangeMonthCons(true);
          return;
       }
 
@@ -208,6 +210,48 @@ const MonthlyConsumption = () => {
       }
    };
 
+   // delete month cons confirmation
+   const deleteConfirm = (id: string) => {
+      setMonthConsID(id);
+
+      modal_config({
+         title: 'Espere ❕', 
+         msg: `Tem certeza que deseja \n deletar o mês de consumo ?`, 
+         btt1: 'Tenho certeza', btt2: 'Voltar', display: true
+      });
+   };
+
+   // delete month cons
+   const deleteMonthCons = async () => {
+      try{
+         await monthlyConsumptionService.deleteMonthConsService(monthConsID);
+
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Mês de consumo deletado com sucesso`, 
+            btt1: false, btt2: false, display: true
+         });
+
+         setTimeout(async () => {
+            closeModal();
+
+            // get month cons
+            await fetchMonthCons();
+            goPrev();         
+         }, 4000);
+
+      }
+      catch(error){
+         console.error('❌ Error at delete monthly consumption: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+      }
+   };
+
    
    //// jsx
 
@@ -223,6 +267,7 @@ const MonthlyConsumption = () => {
             btt2={ modal_btt_2 }
             display={ modal_display }
             onClose={ closeModal }
+            modalEvent={ deleteMonthCons }
          />   
 
          {/* navbar */}
@@ -368,6 +413,13 @@ const MonthlyConsumption = () => {
 
                               <h2>{ currentMonthCons?.gas_m3 } m3</h2>
                            </div>
+                        </div>
+
+                        <div 
+                           className={ styles.data_delete } 
+                           onClick={ () => deleteConfirm(currentMonthCons?.id) }
+                        >
+                           <img src={ delete_img } alt="delete_img" />
                         </div>
                      </div>
 

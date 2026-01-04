@@ -55,7 +55,6 @@ class MonthlyConsumptionService {
    public async getMonthConsService(): Promise<MonthlyConsumptionResponseDTO[]> {
       // get monthlyConsumption
       const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll();
-      if(monthlyConsumptions.length <= 0) throw new Error('Meses de consumo não encontrados');
 
       return monthlyConsumptions;
    };

@@ -139,7 +139,7 @@ button{
    flex-direction: column;
    justify-content: flex-start;
    align-items: center;
-   min-height: 60%;
+   min-height: 63%;
    max-height: 85%;
    width: 85%;
    background-color: white;
@@ -177,7 +177,7 @@ button{
 .data_registers{
    display: flex;
    justify-content: space-between;
-   height: 55%;
+   height: 50%;
    width: 80%;
 
    & .cards{
@@ -228,6 +228,20 @@ button{
          color: var(--color4);
       }   
    }
+}
+
+.data_delete{
+   margin: 5% 0px 3% 0px;
+   transition: ease-in-out transform 0.2s; 
+   cursor: pointer;
+
+   & img{
+      height: 40px;
+      width: 40px;
+   }
+}
+.data_delete:hover{
+   transform: scale(1.05);
 }
 
 .info{
