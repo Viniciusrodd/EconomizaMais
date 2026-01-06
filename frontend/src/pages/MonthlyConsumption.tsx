@@ -71,7 +71,7 @@ const MonthlyConsumption = () => {
       });
    };
 
-   // fetch month cons
+   // fetch month cons - get
    const fetchMonthCons = async () => {
       const response = await monthlyConsumptionService.getMonthConsService();
       if(!response) console.error('⚠️ Unexpected return from API:', response);
@@ -95,7 +95,7 @@ const MonthlyConsumption = () => {
       setIsMonthCons(true);
    };
 
-   // check month cons
+   // check month cons - get
    useEffect(() => {
       const getMonthCons = async () => {
          try{
@@ -254,7 +254,6 @@ const MonthlyConsumption = () => {
 
    
    //// jsx
-
 
 
    return (

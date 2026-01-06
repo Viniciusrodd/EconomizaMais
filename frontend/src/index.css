@@ -74,6 +74,71 @@ a{
 }
 
 
+/* donut graphic */
+
+
+.chart-wrapper {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 60%;
+}
+
+.donut {
+   width: 180px;
+   height: 180px;
+   border-radius: 50%;
+   position: relative;
+   transition: background 0.6s ease;
+}
+
+.donut-hole {
+   position: absolute;
+   inset: 28px;
+   background: #fff;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-weight: bold;
+   font-size: 30px;
+}
+
+.legend {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   font-size: 14px;
+}
+
+.legend div {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-size: 16px;
+   font-weight: bold;
+}
+
+.color {
+   width: 14px;
+   height: 14px;
+   border-radius: 3px;
+}
+
+.color.red {
+   background: var(--color4);
+}
+
+.color.black {
+   border: 2px solid black;
+   background: transparent;
+}
+
+.color.green {
+   background: var(--color5);
+}
+
+
 /* animations */
 
 

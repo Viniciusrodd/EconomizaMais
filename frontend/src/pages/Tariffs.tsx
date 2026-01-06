@@ -58,7 +58,7 @@ const Tariffs = () => {
       });
    };
 
-   // check tariffs
+   // check tariffs - get
    useEffect(() => {
       const getTariffs = async () => {
          try{

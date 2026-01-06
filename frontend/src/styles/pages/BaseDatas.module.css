@@ -32,6 +32,46 @@
       }
    }
 
+   & .btts_container_2{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 30vw;
+      margin-bottom: 10px;
+
+      & button{
+         margin: 0px;
+      }
+
+      & .buttons{
+         height: 6.5vh;
+         width: 100%;
+         margin-top: 10px;
+         border-radius: 10px;
+         background-color: white;
+
+         & button{
+            height: 100%;
+            width: 10vw;
+            background-color: transparent;
+            transition: ease-in-out all 0.2s;
+            color: black;
+         }
+         & button:hover{
+            background-color: var(--color3b);
+         }
+
+         .btt_clicked{
+            color: white;
+            background-color: var(--color7);
+         }
+         & .btt_clicked:hover{
+            background-color: var(--color7);
+         }
+      }
+   }
+
    & .goBack{
       display: flex;
       justify-content: space-between;
@@ -74,7 +114,7 @@
          margin-bottom: 5%;
       }
    
-      & input{
+      & input, & select{
          border-top: 0px;
          border-left: 0px;
          border-right: 0px;
@@ -228,6 +268,15 @@ button{
          color: var(--color4);
       }   
    }
+}
+
+.data_registers_2{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 50%;
+   width: 80%;
 }
 
 .data_delete{
