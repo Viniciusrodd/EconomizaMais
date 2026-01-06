@@ -28,6 +28,10 @@ input:focus{
    outline: none;
 }
 
+select:focus{
+   outline: none;
+}
+
 button{
    cursor: pointer;
    transition: ease-in-out transform 0.2s;
@@ -85,8 +89,8 @@ a{
 }
 
 .donut {
-   width: 180px;
-   height: 180px;
+   width: 150px;
+   height: 150px;
    border-radius: 50%;
    position: relative;
    transition: background 0.6s ease;
@@ -94,14 +98,14 @@ a{
 
 .donut-hole {
    position: absolute;
-   inset: 28px;
+   inset: 25px;
    background: #fff;
    border-radius: 50%;
    display: flex;
    align-items: center;
    justify-content: center;
    font-weight: bold;
-   font-size: 30px;
+   font-size: 27px;
 }
 
 .legend {

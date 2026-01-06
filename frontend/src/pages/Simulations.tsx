@@ -7,6 +7,7 @@ import leftArrow_img from '@images/utils/left_arrow.png';
 import rightArrow_img from '@images/utils/right_arrow.png';
 import goback_img from '@images/utils/back.png';
 import delete_img from '@images/utils/delete.png';
+import loading_img from '@images/utils/loading.png';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -17,14 +18,18 @@ import DonutChart from '@components/DonutChart';
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
 import type { 
-   SimulationResponseDTO
+   SimulationResponseDTO,
+   targetType
 } from '@DTOs/Simulations.dtos';
 
 // import hooks
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 // import services
 import { simulationsService } from '@services/Simulations.service';
+
+// import context
+import { LoadingContext } from '@contexts/Loading/Loading.context';
 
 // utils
 type ButtonType = 'energy' | 'water' | 'gas' | null;
@@ -44,9 +49,13 @@ const Simulations = () => {
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const currentSimulation = simulationsList[currentIndex] ?? null;
    const [ /*simulationID*/, setSimulationID ] = useState<string>('');
-   const [ /*reductionPercent*/, setReductionPercent ] = useState<number>(0);
-   const [ /*targetType*/, setTargetType ] = useState<string>('');
+   const [ target_type, setTargetType ] = useState<targetType>('all');
+   const [ reduction_percent, setReductionPercent ] = useState<number>(0);
    const [selectedButton, setSelectedButton] = useState<ButtonType>(null);
+
+
+   //// context
+   const { loading, setLoading } = useContext(LoadingContext);
 
 
    //// functions
@@ -69,23 +78,28 @@ const Simulations = () => {
       });
    };
 
+   // fetch simulations - get
+   const fetchSimulations = async () => {
+      const response = await simulationsService.getSimulationService();
+      if(!response) console.error('⚠️ Unexpected return from API:', response);
+      if(response.length === 0){
+         setIsSimulation(false);
+         setChangeSimulation(true);
+         return;
+      }
+      
+      // set simulations
+      setSimulationsList(response);
+
+      // is simulations
+      setIsSimulation(true);
+   };
+
    // check simulations - get
    useEffect(() => {
       const getSimulations = async () => {
          try{
-            const response = await simulationsService.getSimulationService();
-            if(!response) console.error('⚠️ Unexpected return from API:', response);
-            if(response.length === 0){
-               setIsSimulation(false);
-               setChangeSimulation(true);
-               return;
-            }
-            
-            // set simulations
-            setSimulationsList(response);
-
-            // is simulations
-            setIsSimulation(true);
+            await fetchSimulations();
          }
          catch(error){
             console.error('❌ Error at check simulations: ', error);
@@ -95,12 +109,49 @@ const Simulations = () => {
          }
       };
       getSimulations();
-   });
-
+   }, []);
 
    // create simulation
-   const createSimulation = () => {
+   const createSimulation = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setLoading(true);
 
+      // simulations data setup
+      const data = {
+         target_type,
+         reduction_percent
+      };
+
+      try{
+         const response = await simulationsService.createSimulationService(data);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+         }
+         
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Simulação registrada com sucesso \n você será redirecionado...`, 
+            btt1: false, btt2: false, display: true
+         });
+
+         // refresh simulations
+         await fetchSimulations();
+
+         setTimeout(() => {
+            closeModal();
+            setChangeSimulation(false);
+            setLoading(false);
+         }, 4000);
+      }
+      catch(error){
+         console.error('❌ Error at create simulation: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+      }
    };
 
    // prev month
@@ -158,12 +209,13 @@ const Simulations = () => {
             <Sidebar />
             
             {
-               changeSimulation ? (
+               changeSimulation || !isSimulation ? (
                   <div className={ styles.data_container }>
                      <div className={ styles.data_register_container }>
                         <form
                            method="post"
                            onSubmit={ createSimulation }
+                           className={ styles.form_without_instructions }
                         >
                            <h1>Registre a simulação</h1>
                         
@@ -174,10 +226,11 @@ const Simulations = () => {
                               min="1" max="100"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setReductionPercent(Number(e.target.value)) }
                            />
+
                            <select 
                               title='target_type'
                               name='target_type'
-                              onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setTargetType(e.target.value) }
+                              onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setTargetType(e.target.value as targetType) }
                            >
                               <option value="">Selecione um tipo de conta</option>
                               <option value="energy">Energia</option>
@@ -185,21 +238,24 @@ const Simulations = () => {
                               <option value="gas">Gás</option>
                               <option value="all">Todos</option>
                            </select>
-                           <button type='submit'>
-                              ENVIAR
-                           </button>
-                        </form>
 
-                        <div className={ styles.instructions }>
-                           <h1>Formas de encontrar consumo elétrico(exemplo): </h1>
-                           
-                           <ul>
-                              <li>. Conta de Luz (Fatura)</li>
-                              <li>. Consumo de um Aparelho Específico</li>
-                              <li>. Usando Ferramentas e Dispositivos</li>
-                              <li>. Identificando Fugas de Energia</li>
-                           </ul>
-                        </div>
+                           { loading ? (
+                              <>
+                                 <img 
+                                    src={ loading_img } 
+                                    alt="loading_png"
+                                    className='loading_img' 
+                                 />
+                                 <p className='loading_msg'>
+                                    Carregando...
+                                 </p>
+                              </>
+                           ) : (
+                              <button type='submit'>
+                                 ENVIAR
+                              </button>
+                           )}
+                        </form>
                      </div>
 
                      { isSimulation && (
@@ -288,6 +344,10 @@ const Simulations = () => {
                                  </div>
                               </div>
                            </div>
+                        </div>
+
+                        <div className={ styles.desc }>
+                           <p>{ (currentSimulation?.feedback ?? '') }</p>
                         </div>
 
                         <div 
