@@ -21,7 +21,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ percent }) => {
    const style: React.CSSProperties = {
       background: `conic-gradient(
          var(--color4) 0% ${safePercent}%,
-         var(--color5) ${safePercent}% 100%
+         var(--color1) ${safePercent}% 100%
       )`
    };
 
@@ -31,7 +31,9 @@ const DonutChart: React.FC<DonutChartProps> = ({ percent }) => {
 
    return (
       <div className="donut" style={ style }>
-         <div className="donut-hole">{safePercent}%</div>
+         <div className="donut-hole">
+            {safePercent}%
+         </div>
       </div>
    );
 };

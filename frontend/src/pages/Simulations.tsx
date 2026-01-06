@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/pages/BaseDatas.module.css';
@@ -48,10 +49,11 @@ const Simulations = () => {
    const [ simulationsList, setSimulationsList ] = useState<SimulationResponseDTO[]>([]);
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const currentSimulation = simulationsList[currentIndex] ?? null;
-   const [ /*simulationID*/, setSimulationID ] = useState<string>('');
+   const [ simulationID, setSimulationID ] = useState<string>('');
    const [ target_type, setTargetType ] = useState<targetType>('all');
    const [ reduction_percent, setReductionPercent ] = useState<number>(0);
-   const [selectedButton, setSelectedButton] = useState<ButtonType>(null);
+   const [ selectedButton, setSelectedButton ] = useState<ButtonType>('energy');
+   const [ hasAnySimulation, setHasAnySimulation ] = useState<boolean>(false);
 
 
    //// context
@@ -81,19 +83,46 @@ const Simulations = () => {
    // fetch simulations - get
    const fetchSimulations = async () => {
       const response = await simulationsService.getSimulationService();
-      if(!response) console.error('⚠️ Unexpected return from API:', response);
-      if(response.length === 0){
+
+      // if exist any simulation - global
+      const hasAny = !!response && response.length > 0;
+      setHasAnySimulation(hasAny);
+
+      // if there's no simulations
+      if(!hasAny){
+         setSimulationsList([]);
+         setCurrentIndex(0);
          setIsSimulation(false);
          setChangeSimulation(true);
          return;
       }
-      
-      // set simulations
-      setSimulationsList(response);
 
-      // is simulations
+      // if exist some simulation
       setIsSimulation(true);
+      setChangeSimulation(false);
+
+      // filter simulation
+      const filtered = selectedButton ? response.filter(s => s.target_type === selectedButton) : response;
+      if(!filtered || filtered.length === 0){
+         setSimulationsList([]);
+         setCurrentIndex(0);
+         return;
+      }
+      
+      setSimulationsList(filtered);
+      setCurrentIndex(0);
+      setIsSimulation(true);
+      setChangeSimulation(false);
    };
+
+   // filter simulations
+   useEffect(() => {
+      const filterSimulations = async () => {
+         await fetchSimulations();
+      };
+      filterSimulations();
+      setCurrentIndex(0);
+   }, [selectedButton]);
 
    // check simulations - get
    useEffect(() => {
@@ -130,7 +159,7 @@ const Simulations = () => {
          
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Simulação registrada com sucesso \n você será redirecionado...`, 
+            msg: `Simulação registrada com sucesso`, 
             btt1: false, btt2: false, display: true
          });
 
@@ -181,7 +210,31 @@ const Simulations = () => {
 
    // delete simulation
    const deleteSimulation = async () => {
+      try{
+         await simulationsService.deleteSimulationService(simulationID);
 
+         // refresh data
+         await fetchSimulations();
+
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Simulação deletada com sucesso`, 
+            btt1: false, btt2: false, display: true
+         });
+
+         setTimeout(async () => {
+            closeModal();
+         }, 4000);
+      }
+      catch(error){
+         console.error('❌ Error at delete simulations: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+      }
    };
 
 
@@ -209,7 +262,7 @@ const Simulations = () => {
             <Sidebar />
             
             {
-               changeSimulation || !isSimulation ? (
+               changeSimulation || !hasAnySimulation ? (
                   <div className={ styles.data_container }>
                      <div className={ styles.data_register_container }>
                         <form
@@ -313,7 +366,8 @@ const Simulations = () => {
                            />
                            
                            <h1>
-                              Simulação sobre { currentSimulation?.reduction_percent }% de redução no consumo de { currentSimulation?.target_type }
+                              Simulação sobre { (currentSimulation?.reduction_percent ?? 0) }% 
+                              de redução no consumo de { selectedButton == 'energy' ? 'energia' : selectedButton == 'water' ? 'água' : selectedButton == 'gas' ? 'gás' : 'sem conta' }
                            </h1>
                            
                            <img 
@@ -326,20 +380,21 @@ const Simulations = () => {
                         <div className={ styles.data_registers_2 }>
                            <div className="chart-wrapper">
                               <DonutChart 
-                                 percent={ currentSimulation?.reduction_percent }
+                                 key={ currentSimulation?.id ?? 'no-simulation' }
+                                 percent={ (currentSimulation?.reduction_percent ?? 0) }
                               />
 
                               <div className="legend">
                                  <div>
                                     <span className="color red" /> 
-                                    Redução de: { currentSimulation?.reduction_percent }%
+                                    Redução de: { (currentSimulation?.reduction_percent ?? 0) }%
                                  </div>
                                  <div>
-                                    <span className="color green" /> 
+                                    <span className="color black" /> 
                                     Economia anual: R${ (currentSimulation?.annual_saving ?? 0).toFixed(2) }
                                  </div>
                                  <div>
-                                    <span className="color black" />
+                                    <span className="color border" />
                                     Economia mensal: R${ (currentSimulation?.monthly_saving ?? 0).toFixed(2) }
                                  </div>
                               </div>
@@ -350,12 +405,14 @@ const Simulations = () => {
                            <p>{ (currentSimulation?.feedback ?? '') }</p>
                         </div>
 
-                        <div 
-                           className={ styles.data_delete } 
-                           onClick={ () => deleteConfirm(currentSimulation?.id) }
-                        >
-                           <img src={ delete_img } alt="delete_img" />
-                        </div>
+                        { simulationsList.length > 0 && (
+                           <div 
+                              className={ styles.data_delete } 
+                              onClick={ () => deleteConfirm(currentSimulation?.id) }
+                           >
+                              <img src={ delete_img } alt="delete_img" />
+                           </div>
+                        ) }
                      </div>
                   </div>
                )

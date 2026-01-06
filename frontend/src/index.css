@@ -134,12 +134,12 @@ a{
 }
 
 .color.black {
-   border: 2px solid black;
-   background: transparent;
+   background: var(--color1);
 }
 
-.color.green {
-   background: var(--color5);
+.color.border {
+   border: 2px solid black;
+   background: transparent;
 }
 
 
