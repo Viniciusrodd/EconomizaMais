@@ -12,6 +12,7 @@ import delete_img from '@images/utils/delete.png';
 import Navbar from '@components/Navbar';
 import Sidebar from '@components/Sidebar';
 import Modal from '@components/Modal';
+import DonutChart from '@components/DonutChart';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
@@ -268,19 +269,9 @@ const Simulations = () => {
 
                         <div className={ styles.data_registers_2 }>
                            <div className="chart-wrapper">
-                              <div
-                                 className="donut"
-                                 style={{
-                                    background: `conic-gradient(
-                                    #f04c6c 0% ${ currentSimulation?.reduction_percent }%,
-                                    #6ee7a8 ${ currentSimulation?.reduction_percent }% 100%
-                                    )`
-                                 }}
-                              >
-                                 <div className="donut-hole">
-                                    <span>{ currentSimulation?.reduction_percent }%</span>
-                                 </div>
-                              </div>
+                              <DonutChart 
+                                 percent={ currentSimulation?.reduction_percent }
+                              />
 
                               <div className="legend">
                                  <div>
@@ -289,11 +280,11 @@ const Simulations = () => {
                                  </div>
                                  <div>
                                     <span className="color green" /> 
-                                    Economia anual: R${ currentSimulation?.annual_saving.toFixed(2) }
+                                    Economia anual: R${ (currentSimulation?.annual_saving ?? 0).toFixed(2) }
                                  </div>
                                  <div>
                                     <span className="color black" />
-                                    Economia mensal: R${ currentSimulation?.monthly_saving.toFixed(2) }
+                                    Economia mensal: R${ (currentSimulation?.monthly_saving ?? 0).toFixed(2) }
                                  </div>
                               </div>
                            </div>
