@@ -108,25 +108,6 @@ class AIinsightsService {
       const aiInsights = await models.AiInsightModel.findAll();
 
       return aiInsights;
-   };   
-
-
-   // get ai insight by category - public
-   public async getAiInsightsByCategoryService(
-      insight_category: string
-   ): Promise<AIInsightResponseDTO[]> {
-      // validation
-      if (!insight_category) {
-         throw new Error('Categoria de insight não enviado');
-      }
-
-      // get ai insights
-      const aiInsights = await models.AiInsightModel.findAll({
-         where: { insight_category }
-      });
-      if(aiInsights.length <= 0) throw new Error('Insights não encontrados');
-      
-      return aiInsights;
    };
 
 

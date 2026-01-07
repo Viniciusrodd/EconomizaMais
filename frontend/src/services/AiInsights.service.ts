@@ -51,25 +51,6 @@ class AIinsightsService {
    };
 
 
-   // get ai insights by category
-   public async getAiInsightsByCategoryService(
-      category: string 
-   ): Promise<AIInsightResponseDTO[]> {
-      try{
-         const res = await axios.get(`${aiInsightsRoutesGet}/category`, {
-            params: { q: category }
-         });
-         return res.data.data;
-      }
-      catch(error){
-         if(axios.isAxiosError(error)){
-            throw error.response?.data?.data || error.response?.data?.message;
-         }
-         throw error;
-      }
-   };
-
-
    // delete ai insights
    public async deleteAiInsightService(
       id: string
