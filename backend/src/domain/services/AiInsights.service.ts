@@ -32,6 +32,12 @@ class AIinsightsService {
       const { consume_type, insight_category } = aiInsightsData;
       if(!consume_type || !insight_category) throw new Error('Todos os campos são necessários');
 
+      // check insight existence
+      const isInsight = await models.AiInsightModel.findAll({
+         where: { consume_type, insight_category }
+      });
+      if(isInsight.length > 0) throw new Error('Este insight já existe, crie outro para evitar redundâncias');
+
       // get user id
       const user = await models.UserModel.findOne({
          attributes: ['id']
@@ -100,7 +106,6 @@ class AIinsightsService {
    public async getAiInsightsService(): Promise<AIInsightResponseDTO[]> {
       // get aiInsights - DB
       const aiInsights = await models.AiInsightModel.findAll();
-      if(aiInsights.length <= 0) throw new Error('Insight não encontrado');
 
       return aiInsights;
    };   
