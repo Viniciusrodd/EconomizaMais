@@ -143,6 +143,48 @@ a{
 }
 
 
+/* tooltip */
+
+
+.tooltip_btt{
+   background-color: transparent;
+   border: none;
+   transition: ease-in-out transform 0.2s;
+}
+.tooltip_btt:hover{
+   transform: scale(1.05);
+}
+
+.tooltip {
+   position: relative;
+   display: inline-block;
+   cursor: pointer;
+}
+
+.tooltip::after {
+   content: attr(data-tooltip);
+   position: absolute;
+   bottom: 120%; /* acima do elemento */
+   left: 50%;
+   transform: translateX(-50%);
+   background: var(--color1);
+   border: 2px solid var(--color3);
+   color: #fff;
+   padding: 6px 15px;
+   border-radius: 6px;
+   font-size: 13px;
+   white-space: nowrap;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 0.3s ease;
+   z-index: 1000;
+}
+
+.tooltip:hover::after {
+   opacity: 1;
+}
+
+
 /* animations */
 
 

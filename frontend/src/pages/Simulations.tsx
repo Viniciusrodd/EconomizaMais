@@ -366,22 +366,24 @@ const Simulations = () => {
 
                      <div className={ styles.data }>
                         <div className={ styles.data_navigate }>
-                           <img 
-                              src={ leftArrow_img } 
-                              alt="left_arrow"
-                              onClick={ goPrev } 
-                           />
+                           <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={goPrev}>
+                              <img
+                                 src={ leftArrow_img }
+                                 alt="left_arrow"
+                              />
+                           </span>
                            
                            <h1>
                               Simulação sobre { (currentSimulation?.reduction_percent ?? 0) }% 
                               de redução no consumo de { selectedButton == 'energy' ? 'energia' : selectedButton == 'water' ? 'água' : selectedButton == 'gas' ? 'gás' : selectedButton == 'all' ? 'todas as contas' : 'sem conta' }
                            </h1>
                            
-                           <img 
-                              src={ rightArrow_img } 
-                              alt="right_arrow" 
-                              onClick={ goNext }
-                           />
+                           <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
+                              <img
+                                 src={ rightArrow_img }
+                                 alt="right_arrow"
+                              />
+                           </span>
                         </div>
 
                         <div className={ styles.data_registers_2 }>
@@ -414,7 +416,8 @@ const Simulations = () => {
 
                         { simulationsList.length > 0 && (
                            <div 
-                              className={ styles.data_delete } 
+                              className={ `${styles.data_delete} tooltip tooltip_btt` }
+                              data-tooltip="Deletar"
                               onClick={ () => deleteConfirm(currentSimulation?.id) }
                            >
                               <img src={ delete_img } alt="delete_img" />

@@ -375,11 +375,13 @@ const MonthlyConsumption = () => {
 
                      <div className={ styles.data }>
                         <div className={ styles.data_navigate }>
-                           <img 
-                              src={ leftArrow_img } 
-                              alt="left_arrow"
-                              onClick={ goPrev } 
-                           />
+                           <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={goPrev}>
+                              <img
+                                 src={ leftArrow_img }
+                                 alt="left_arrow"
+                              />
+                           </span>
+
                            { currentMonthCons?.month < 10 ? (
                               <h1>
                                  Mês de consumo - 0{ currentMonthCons?.month }/{ currentMonthCons?.year }
@@ -389,11 +391,13 @@ const MonthlyConsumption = () => {
                                  Mês de consumo - { currentMonthCons?.month }/{ currentMonthCons?.year }
                               </h1>
                            ) }
-                           <img 
-                              src={ rightArrow_img } 
-                              alt="right_arrow" 
-                              onClick={ goNext }
-                           />
+                           
+                           <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
+                              <img
+                                 src={ rightArrow_img }
+                                 alt="right_arrow"
+                              />
+                           </span>
                         </div>
 
                         <div className={ styles.data_registers }>
@@ -415,7 +419,8 @@ const MonthlyConsumption = () => {
                         </div>
 
                         <div 
-                           className={ styles.data_delete } 
+                           className={ `${styles.data_delete} tooltip tooltip_btt` } 
+                           data-tooltip="Deletar"
                            onClick={ () => deleteConfirm(currentMonthCons?.id) }
                         >
                            <img src={ delete_img } alt="delete_img" />
