@@ -51,15 +51,15 @@ const AiInsight = () => {
    const [ insightList, setInsightList ] = useState<AIInsightResponseDTO[]>([]);
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const currentInsight = insightList[currentIndex] ?? null;
-   const [ /*insightID*/, setInsightID ] = useState<string>('');
+   const [ insightID, setInsightID ] = useState<string>('');
    const [ selectedButton, setSelectedButton ] = useState<ButtonType>('anomalies');
    const [ hasAnyInsight, setHasAnyInsight ] = useState<boolean>(false);
-   const [ /*consume_type*/, setConsume_type ] = useState<Consume_type>('energy');
-   const [ /*insight_category*/, setInsight_category ] = useState<Insight_category>('anomalies');
+   const [ consume_type, setConsume_type ] = useState<Consume_type>('energy');
+   const [ insight_category, setInsight_category ] = useState<Insight_category>('anomalies');
 
 
    //// context
-   const { loading, /*setLoading*/ } = useContext(LoadingContext);
+   const { loading, setLoading } = useContext(LoadingContext);
 
 
    //// functions
@@ -143,8 +143,48 @@ const AiInsight = () => {
    }, []);
 
    // create insight
-   const createInsight = async () => {
+   const createInsight = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setLoading(true);
 
+      // insight data setup
+      const data = {
+         consume_type,
+         insight_category
+      };
+
+      try{
+         const response = await aiInsightsService.createAiInsightsService(data);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+         }
+         
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Insight registrado com sucesso`, 
+            btt1: false, btt2: false, display: true
+         });
+
+         // refresh insights
+         await fetchInsights();
+
+         setTimeout(() => {
+            closeModal();
+            setChangeInsight(false);
+            setLoading(false);
+         }, 4000);
+      }
+      catch(error){
+         console.error('❌ Error at create insight: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+
+         setLoading(false);
+      }
    };
 
    // prev insight
@@ -174,9 +214,32 @@ const AiInsight = () => {
 
    // delete insight
    const deleteInsight = async () => {
+      try{
+         await aiInsightsService.deleteAiInsightService(insightID);
 
+         // refresh data
+         await fetchInsights();
+
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Insight deletado com sucesso`, 
+            btt1: false, btt2: false, display: true
+         });
+
+         setTimeout(async () => {
+            closeModal();
+         }, 4000);
+      }
+      catch(error){
+         console.error('❌ Error at delete insights: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+      }
    };
-
 
 
    //// jsx
