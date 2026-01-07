@@ -33,7 +33,7 @@ import { simulationsService } from '@services/Simulations.service';
 import { LoadingContext } from '@contexts/Loading/Loading.context';
 
 // utils
-type ButtonType = 'energy' | 'water' | 'gas' | null;
+type ButtonType = 'energy' | 'water' | 'gas' | 'all' | null;
 
 
 // simulations
@@ -52,7 +52,7 @@ const Simulations = () => {
    const [ simulationID, setSimulationID ] = useState<string>('');
    const [ target_type, setTargetType ] = useState<targetType>('all');
    const [ reduction_percent, setReductionPercent ] = useState<number>(0);
-   const [ selectedButton, setSelectedButton ] = useState<ButtonType>('energy');
+   const [ selectedButton, setSelectedButton ] = useState<ButtonType>('all');
    const [ hasAnySimulation, setHasAnySimulation ] = useState<boolean>(false);
 
 
@@ -270,7 +270,7 @@ const Simulations = () => {
                            onSubmit={ createSimulation }
                            className={ styles.form_without_instructions }
                         >
-                           <h1>Registre a simulação</h1>
+                           <h1>Crie uma simulação</h1>
                         
                            <input
                               type="number" name="reduction_percent"
@@ -335,6 +335,13 @@ const Simulations = () => {
                         <div className={ styles.buttons }>
                            <button 
                               type='button'
+                              onClick={() => setSelectedButton(selectedButton === 'all' ? null : 'all')} 
+                              className={selectedButton === 'all' ? styles.btt_clicked : ''}
+                           >
+                              TODOS
+                           </button>
+                           <button 
+                              type='button'
                               onClick={() => setSelectedButton(selectedButton === 'energy' ? null : 'energy')} 
                               className={selectedButton === 'energy' ? styles.btt_clicked : ''}
                            >
@@ -367,7 +374,7 @@ const Simulations = () => {
                            
                            <h1>
                               Simulação sobre { (currentSimulation?.reduction_percent ?? 0) }% 
-                              de redução no consumo de { selectedButton == 'energy' ? 'energia' : selectedButton == 'water' ? 'água' : selectedButton == 'gas' ? 'gás' : 'sem conta' }
+                              de redução no consumo de { selectedButton == 'energy' ? 'energia' : selectedButton == 'water' ? 'água' : selectedButton == 'gas' ? 'gás' : selectedButton == 'all' ? 'todas as contas' : 'sem conta' }
                            </h1>
                            
                            <img 
