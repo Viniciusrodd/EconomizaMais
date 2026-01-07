@@ -72,6 +72,10 @@
       }
    }
 
+   .btts_container_3{
+      width: 30vw;
+   }
+
    & .goBack{
       display: flex;
       justify-content: space-between;
@@ -297,10 +301,19 @@ button{
    & p{
       font-size: 14px;
    }
-}   
+}
+
+.desc_2{
+   margin: 0px 0px 10px;
+   width: 70%;
+
+   & p{
+      font-size: 17px;
+   }
+}
 
 .data_delete{
-   margin: 10px 0px 20px 0px;
+   margin: 10px 0px 30px 0px;
    transition: ease-in-out transform 0.2s; 
    cursor: pointer;
 

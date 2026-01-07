@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/pages/BaseDatas.module.css';
@@ -24,10 +25,10 @@ import type {
 } from '@DTOs/aiInsights.dtos';
 
 // import hooks
-import { useState, /*useEffect,*/ useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 // import services
-//import { aiInsightsService } from '@services/AiInsights.service';
+import { aiInsightsService } from '@services/AiInsights.service';
 
 // import context
 import { LoadingContext } from '@contexts/Loading/Loading.context';
@@ -46,13 +47,13 @@ const AiInsight = () => {
    const [ modal_btt, setmodal_btt ] = useState<boolean | string>(false);
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
    const [ changeInsight, setChangeInsight ] = useState<boolean>(false);
-   const [ isInsight, /*setIsInsight*/ ] = useState<boolean>(false);
-   const [ insightList, /*setInsightList*/ ] = useState<AIInsightResponseDTO[]>([]);
+   const [ isInsight, setIsInsight ] = useState<boolean>(false);
+   const [ insightList, setInsightList ] = useState<AIInsightResponseDTO[]>([]);
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const currentInsight = insightList[currentIndex] ?? null;
    const [ /*insightID*/, setInsightID ] = useState<string>('');
    const [ selectedButton, setSelectedButton ] = useState<ButtonType>('anomalies');
-   const [ hasAnyInsight, /*setHasAnyInsight*/ ] = useState<boolean>(false);
+   const [ hasAnyInsight, setHasAnyInsight ] = useState<boolean>(false);
    const [ /*consume_type*/, setConsume_type ] = useState<Consume_type>('energy');
    const [ /*insight_category*/, setInsight_category ] = useState<Insight_category>('anomalies');
 
@@ -80,6 +81,66 @@ const AiInsight = () => {
          btt2: false, display: false
       });
    };
+
+   // fetch insights - get
+   const fetchInsights = async () => {
+      const response = await aiInsightsService.getAiInsightsService();
+
+      // if exist any insight - global
+      const hasAny = !!response && response.length > 0;
+      setHasAnyInsight(hasAny);
+
+      // if there's no insights
+      if(!hasAny){
+         setInsightList([]);
+         setCurrentIndex(0);
+         setIsInsight(false);
+         setChangeInsight(true);
+         return;
+      }
+
+      // if exist some insight
+      setIsInsight(true);
+      setChangeInsight(false);
+
+      // filter insight
+      const filtered = selectedButton ? response.filter(s => s.insight_category === selectedButton) : response;
+      if(!filtered || filtered.length === 0){
+         setInsightList([]);
+         setCurrentIndex(0);
+         return;
+      }
+      
+      setInsightList(filtered);
+      setCurrentIndex(0);
+      setIsInsight(true);
+      setChangeInsight(false);
+   };
+
+   // filter insights
+   useEffect(() => {
+      const filterInsights = async () => {
+         await fetchInsights();
+      };
+      filterInsights();
+      setCurrentIndex(0);
+   }, [selectedButton]);
+
+   // check insights - get
+   useEffect(() => {
+      const getInsights = async () => {
+         try{
+            await fetchInsights();
+         }
+         catch(error){
+            console.error('❌ Error at check insights: ', error);
+            
+            setIsInsight(false);
+            setChangeInsight(true);
+         }
+      };
+      getInsights();
+   }, []);
 
    // create insight
    const createInsight = async () => {
@@ -204,7 +265,7 @@ const AiInsight = () => {
                </div>
             ) : (
                <div className={ styles.data_container }>
-                  <div className={ styles.btts_container_2 }>
+                  <div className={ `${styles.btts_container_3} ${styles.btts_container_2}` }>
                      <button
                         type='button'
                         onClick={ () => setChangeInsight(true) }
@@ -250,8 +311,7 @@ const AiInsight = () => {
                         ) }
                         
                         <h1>
-                           { selectedButton == 'anomalies' ? 'Anomalias' : selectedButton == 'patterns' ? 'Padrões' : selectedButton == 'tips' ? 'Dicas' : '' } 
-                           no consumo de { currentInsight?.consume_type == 'energy' ? 'Energia' : currentInsight?.consume_type == 'water' ? 'Água' : currentInsight?.consume_type == 'gas' ? 'Gás' : ''}
+                           { selectedButton == 'anomalies' ? 'Anomalias' : selectedButton == 'patterns' ? 'Padrões' : selectedButton == 'tips' ? 'Dicas' : '' } no consumo de { currentInsight?.consume_type == 'energy' ? 'Energia' : currentInsight?.consume_type == 'water' ? 'Água' : currentInsight?.consume_type == 'gas' ? 'Gás' : '(sem registro)' }
                         </h1>
                         
                         { insightList.length > 1 && (
@@ -264,8 +324,8 @@ const AiInsight = () => {
                         ) }
                      </div>
 
-                     <div className={ styles.desc }>
-                        <p>{ (currentInsight?.ai_response ?? '') }</p>
+                     <div className={ `${styles.desc_2} ${styles.desc}` }>
+                        <p>{ (currentInsight?.ai_response ?? 'Sem insight') }</p>
                      </div>
 
                      { insightList.length > 0 && (
