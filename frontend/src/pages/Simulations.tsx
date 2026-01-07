@@ -366,24 +366,28 @@ const Simulations = () => {
 
                      <div className={ styles.data }>
                         <div className={ styles.data_navigate }>
-                           <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={goPrev}>
-                              <img
-                                 src={ leftArrow_img }
-                                 alt="left_arrow"
-                              />
-                           </span>
+                           { simulationsList.length > 1 && (
+                              <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={goPrev}>
+                                 <img
+                                    src={ leftArrow_img }
+                                    alt="left_arrow"
+                                 />
+                              </span>
+                           ) }
                            
                            <h1>
                               Simulação sobre { (currentSimulation?.reduction_percent ?? 0) }% 
                               de redução no consumo de { selectedButton == 'energy' ? 'energia' : selectedButton == 'water' ? 'água' : selectedButton == 'gas' ? 'gás' : selectedButton == 'all' ? 'todas as contas' : 'sem conta' }
                            </h1>
                            
-                           <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
-                              <img
-                                 src={ rightArrow_img }
-                                 alt="right_arrow"
-                              />
-                           </span>
+                           { simulationsList.length > 1 && (
+                              <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
+                                 <img
+                                    src={ rightArrow_img }
+                                    alt="right_arrow"
+                                 />
+                              </span>
+                           ) }
                         </div>
 
                         <div className={ styles.data_registers_2 }>

@@ -375,12 +375,14 @@ const MonthlyConsumption = () => {
 
                      <div className={ styles.data }>
                         <div className={ styles.data_navigate }>
-                           <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={goPrev}>
-                              <img
-                                 src={ leftArrow_img }
-                                 alt="left_arrow"
-                              />
-                           </span>
+                           { monthConsList.length > 1 && (
+                              <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={goPrev}>
+                                 <img
+                                    src={ leftArrow_img }
+                                    alt="left_arrow"
+                                 />
+                              </span>
+                           ) }
 
                            { currentMonthCons?.month < 10 ? (
                               <h1>
@@ -392,12 +394,14 @@ const MonthlyConsumption = () => {
                               </h1>
                            ) }
                            
-                           <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
-                              <img
-                                 src={ rightArrow_img }
-                                 alt="right_arrow"
-                              />
-                           </span>
+                           { monthConsList.length > 1 && (
+                              <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
+                                 <img
+                                    src={ rightArrow_img }
+                                    alt="right_arrow"
+                                 />
+                              </span>
+                           ) }
                         </div>
 
                         <div className={ styles.data_registers }>
