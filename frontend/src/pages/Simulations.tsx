@@ -50,10 +50,10 @@ const Simulations = () => {
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const currentSimulation = simulationsList[currentIndex] ?? null;
    const [ simulationID, setSimulationID ] = useState<string>('');
-   const [ target_type, setTargetType ] = useState<targetType>('all');
-   const [ reduction_percent, setReductionPercent ] = useState<number>(0);
    const [ selectedButton, setSelectedButton ] = useState<ButtonType>('all');
    const [ hasAnySimulation, setHasAnySimulation ] = useState<boolean>(false);
+   const [ target_type, setTargetType ] = useState<targetType>('all');
+   const [ reduction_percent, setReductionPercent ] = useState<number>(0);
 
 
    //// context
@@ -183,14 +183,14 @@ const Simulations = () => {
       }
    };
 
-   // prev month
+   // prev simulation
    const goPrev = () => {
       if (currentIndex > 0) {
          setCurrentIndex(prev => prev - 1);
       }
    };
 
-   // next month
+   // next simulation
    const goNext = () => {
       if (currentIndex < simulationsList.length - 1) {
          setCurrentIndex(prev => prev + 1);
