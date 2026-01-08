@@ -184,7 +184,7 @@ const MonthlyConsumption = () => {
 
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Mês de consumo atualizado com sucesso \n você será redirecionado...`, 
+            msg: `Mês de consumo atualizado com sucesso`, 
             btt1: false, btt2: false, display: true
          });
 
