@@ -37,7 +37,7 @@ class ExportHistoryService {
 
 
    // get export histories
-   public async getHistoriesService(): Promise<HistoriesResponseDTO[]> {
+   public async getHistoriesService(): Promise<HistoriesResponseDTO> {
       try{
          const res = await axios.get(historyRoutesGet);
          return res.data.data;

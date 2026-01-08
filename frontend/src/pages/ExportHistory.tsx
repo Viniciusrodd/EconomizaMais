@@ -15,14 +15,14 @@ import Modal from '@components/Modal';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
-//import type { HistoriesResponseDTO } from '@DTOs/ExportHistory.dtos';
+import type { HistoriesResponseDTO } from '@DTOs/ExportHistory.dtos';
 
 // import hooks
 import { useState, /*useEffect*/ } from 'react';
 import { Link } from 'react-router-dom';
 
 // import services
-//import { exportHistoryService } from '@services/ExportHistory.service';
+import { exportHistoryService } from '@services/ExportHistory.service';
 
 
 
@@ -56,6 +56,79 @@ const ExportHistory = () => {
       });
    };
 
+   // pdf creation
+   const pdfCreation = async () => {
+      try{
+         const response = await exportHistoryService.createHistoryService();
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            return;
+         }
+         console.log('✔️ PDF creation');
+      }
+      catch(error){
+         console.error('❌ Error at create PDF: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+      }
+   };
+
+   // get history
+   const getHistory = async () => {
+      try{
+         const response: HistoriesResponseDTO = await exportHistoryService.getHistoriesService();
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            return;
+         }
+         console.log('✔️ History get');
+         return response;
+      }
+      catch(error){
+         console.error('❌ Error at get history: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+      }
+   };
+
+   // history download
+   const historyDownload = async (id: string) => {
+      if(!id) return;
+
+      try{
+         const response = await exportHistoryService.downloadPdfService(id);
+         if(!response){
+            console.error('⚠️ Unexpected return from API:', response);
+            return;
+         }
+         console.log('✔️ History download');
+      }
+      catch(error){
+         console.error('❌ Error at download history: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: `${ error }`, 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+      }
+   };
+
+   // download handler
+   const downloadHandler = async () => {
+      await pdfCreation;
+      const history = await getHistory();
+      await historyDownload(history!.id);
+   };
+
 
    //// jsx
 
@@ -80,7 +153,7 @@ const ExportHistory = () => {
             <Sidebar />
 
                <div className={ styles.data_container }>
-                  <div className={ styles.download_container }>
+                  <div className={ styles.download_container } onClick={ downloadHandler }>
                      <h1>Baixar histórico</h1>
                      <img src={ download_img } alt="download_img" />
                   </div>
