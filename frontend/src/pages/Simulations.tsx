@@ -401,15 +401,15 @@ const Simulations = () => {
 
                               <div className="legend">
                                  <div>
-                                    <span className="color red" /> 
+                                    <span className="color reduction" /> 
                                     Redução de: { (currentSimulation?.reduction_percent ?? 0) }%
                                  </div>
                                  <div>
-                                    <span className="color black" /> 
+                                    <span className="color annual" /> 
                                     Economia anual: R${ (currentSimulation?.annual_saving ?? 0).toFixed(2) }
                                  </div>
                                  <div>
-                                    <span className="color border" />
+                                    <span className="color month" /> 
                                     Economia mensal: R${ (currentSimulation?.monthly_saving ?? 0).toFixed(2) }
                                  </div>
                               </div>
