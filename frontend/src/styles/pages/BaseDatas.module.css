@@ -22,6 +22,44 @@
    height: 100%;
    width: 70%;
 
+   & button{
+      height: 45px;
+      width: 12vw;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: var(--color4);
+      color: white;
+      margin: 2% 0px 15px 0px;
+   }
+
+   & .download_container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+      width: 11.5vw;
+      margin-bottom: 10px;
+      transition: ease-in-out transform 0.2s;
+      cursor: pointer;
+
+      & h1{
+         font-style: italic;
+         font-size: 20px;
+         margin: 0;
+      }
+
+      & img{
+         height: 23px;
+         width: 23px;
+      }
+   }
+   & .download_container:hover{
+      text-decoration: underline;
+      transform: scale(1.02);
+   }
+
    & .btts_container{
       display: flex;
       justify-content: space-between;
@@ -170,24 +208,12 @@
    }
 }
 
-button{
-   height: 45px;
-   width: 12vw;
-   border: none;
-   border-radius: 10px;
-   font-size: 14px;
-   font-weight: bold;
-   background-color: var(--color4);
-   color: white;
-   margin: 2% 0px 20px 0px;
-}
-
 .data{
    display: flex;
    flex-direction: column;
    justify-content: flex-start;
    align-items: center;
-   min-height: 63%;
+   min-height: 65%;
    max-height: 85%;
    width: 85%;
    background-color: white;
@@ -221,7 +247,7 @@ button{
    }
 
    & h1{
-      font-size: 23px;
+      font-size: 30px;
       margin: 40px 0px 20px 0px;
    }
 }
@@ -253,9 +279,32 @@ button{
          font-size: 30px;
          text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.537);
       }
+
+      & p{
+         font-size: 22px;
+         font-weight: 400;
+         width: 70%;
+         margin: 0px 0px 10px 0px;
+      }
+
+      & a{
+         width: 70%;
+      }
+
+      & button{
+         width: 100%;
+      }
+
+      & img{
+         height: 30px;
+         width: 30px;
+      }
    }
    & .cards:hover{
       transform: scale(1.02);
+   }
+   & .cards_2:hover{
+      transform: none;
    }
 
    & .energy{
@@ -299,7 +348,8 @@ button{
    margin: 5px 0px;
 
    & p{
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 400;
    }
 }
 
