@@ -167,6 +167,10 @@
          font-size: 16px;
          padding: 5px 5px;
       }
+
+      & .btt_edit{
+         background-color: var(--color7);
+      }
    }
 
    & .form_without_instructions{
