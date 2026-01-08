@@ -7,6 +7,7 @@ import user_img from '@images/homepage/user.png';
 import download_img from '@images/historic/download.png';
 import tariff_img from '@images/historic/tariffs.png';
 import calendar_img from '@images/historic/calendar.png';
+import loading_img from '@images/utils/loading.png';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -15,15 +16,16 @@ import Modal from '@components/Modal';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
-import type { HistoriesResponseDTO } from '@DTOs/ExportHistory.dtos';
 
 // import hooks
-import { useState, /*useEffect*/ } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // import services
 import { exportHistoryService } from '@services/ExportHistory.service';
 
+// import contexts
+import { LoadingContext } from '@contexts/Loading/Loading.context';
 
 
 // export history
@@ -34,6 +36,10 @@ const ExportHistory = () => {
    const [ modal_msg, setModal_msg ] = useState<string>('');
    const [ modal_btt, setmodal_btt ] = useState<boolean | string>(false);
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
+
+
+   //// contexts
+   const { loading, setLoading } = useContext(LoadingContext);
 
 
    //// functions
@@ -58,75 +64,61 @@ const ExportHistory = () => {
 
    // pdf creation
    const pdfCreation = async () => {
-      try{
-         const response = await exportHistoryService.createHistoryService();
-         if(!response){
-            console.error('⚠️ Unexpected return from API:', response);
-            return;
-         }
-         console.log('✔️ PDF creation');
-      }
-      catch(error){
-         console.error('❌ Error at create PDF: ', error);
+      const response = await exportHistoryService.createHistoryService();
+      if(!response) throw new Error('❌ Erro ao criar o PDF');
 
-         modal_config({
-            title: 'Erro ❌', 
-            msg: `${ error }`, 
-            btt1: false, btt2: 'Tentar novamente', display: true
-         });
-      }
+      console.log('✔️ PDF creation');
    };
 
    // get history
    const getHistory = async () => {
-      try{
-         const response: HistoriesResponseDTO = await exportHistoryService.getHistoriesService();
-         if(!response){
-            console.error('⚠️ Unexpected return from API:', response);
-            return;
-         }
-         console.log('✔️ History get');
-         return response;
-      }
-      catch(error){
-         console.error('❌ Error at get history: ', error);
+      const response = await exportHistoryService.getHistoricService();
+      if(!response) throw new Error('❌ Erro ao buscar histórico');
 
-         modal_config({
-            title: 'Erro ❌', 
-            msg: `${ error }`, 
-            btt1: false, btt2: 'Tentar novamente', display: true
-         });
-      }
+      console.log('✔️ History get');
+      return response;
    };
 
    // history download
    const historyDownload = async (id: string) => {
-      if(!id) return;
+      if(!id) throw new Error('❌ ID do histórico inválido');;
 
-      try{
-         const response = await exportHistoryService.downloadPdfService(id);
-         if(!response){
-            console.error('⚠️ Unexpected return from API:', response);
-            return;
-         }
-         console.log('✔️ History download');
-      }
-      catch(error){
-         console.error('❌ Error at download history: ', error);
+      await exportHistoryService.downloadPdfService(id);
 
-         modal_config({
-            title: 'Erro ❌', 
-            msg: `${ error }`, 
-            btt1: false, btt2: 'Tentar novamente', display: true
-         });
-      }
+      console.log('✔️ History download');
    };
 
    // download handler
    const downloadHandler = async () => {
-      await pdfCreation;
-      const history = await getHistory();
-      await historyDownload(history!.id);
+      setLoading(true);
+
+      try{
+         await pdfCreation();
+         const history = await getHistory();
+         await historyDownload(history.id);
+
+         modal_config({
+            title: 'Sucesso ✔️', 
+            msg: `Download de histórico feito`, 
+            btt1: false, btt2: false, display: true
+         });
+
+         setTimeout(() => {
+            closeModal();
+            setLoading(false);
+         }, 4000);
+      }
+      catch(error){
+         console.error('❌ Error at download flow: ', error);
+
+         modal_config({
+            title: 'Erro ❌', 
+            msg: error instanceof Error ? error.message : 'Erro inesperado', 
+            btt1: false, btt2: 'Tentar novamente', display: true
+         });
+
+         setLoading(false);
+      }
    };
 
 
@@ -153,10 +145,23 @@ const ExportHistory = () => {
             <Sidebar />
 
                <div className={ styles.data_container }>
-                  <div className={ styles.download_container } onClick={ downloadHandler }>
-                     <h1>Baixar histórico</h1>
-                     <img src={ download_img } alt="download_img" />
-                  </div>
+                  { loading ? (
+                     <>
+                        <img 
+                           src={ loading_img } 
+                           alt="loading_png"
+                           className='loading_img' 
+                        />
+                        <p className='loading_msg'>
+                           Carregando...
+                        </p>
+                     </>
+                  ) : (
+                     <div className={ styles.download_container } onClick={ downloadHandler }>
+                        <h1>Baixar histórico</h1>
+                        <img src={ download_img } alt="download_img" />
+                     </div>
+                  ) }
 
                   <div className={ styles.data }>
                      <h1>Dados contidos no histórico</h1>

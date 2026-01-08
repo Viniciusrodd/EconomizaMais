@@ -24,6 +24,12 @@ class ExportHistoryService {
 
    // create pdf history
    public async createHistoryService(): Promise<PDFResponseDTO> {
+      // check historic existence
+      const historic = await models.ExportHistoryModel.findOne();
+      if(historic) await models.ExportHistoryModel.destroy({ 
+         where: { id: historic.id } 
+      });
+
       // get user data
       const user = await models.UserModel.findOne({
          attributes: ['id', 'name', 'residence_name', 'number_of_residents']
@@ -70,15 +76,15 @@ class ExportHistoryService {
    };
 
 
-   // get export histories
-   public async getHistoriesService(): Promise<HistoriesResponseDTO[]> {
+   // get export historic
+   public async getHistoricService(): Promise<HistoriesResponseDTO> {
       // get histories 
-      const histories = await models.ExportHistoryModel.findAll({
+      const historic = await models.ExportHistoryModel.findOne({
          attributes: ['id', 'file_path', 'created_at']
       });
-      if(histories.length <= 0) throw new Error('Históricos não encontrados');
+      if(!historic) throw new Error('Histórico não encontrados');
 
-      return histories;
+      return historic;
    };
 
 

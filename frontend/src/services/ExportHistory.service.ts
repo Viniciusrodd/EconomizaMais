@@ -5,8 +5,7 @@ import axios from "axios";
 // import DTOs
 import type { 
    HistoriesResponseDTO,
-   PDFResponseDTO,
-   FileDataResponseDTO
+   PDFResponseDTO
 } from '@DTOs/ExportHistory.dtos';
 
 // import routes
@@ -37,7 +36,7 @@ class ExportHistoryService {
 
 
    // get export histories
-   public async getHistoriesService(): Promise<HistoriesResponseDTO> {
+   public async getHistoricService(): Promise<HistoriesResponseDTO> {
       try{
          const res = await axios.get(historyRoutesGet);
          return res.data.data;
@@ -54,10 +53,26 @@ class ExportHistoryService {
    // get export history for download
    public async downloadPdfService(
       id: string
-   ): Promise<FileDataResponseDTO> {
+   ): Promise<void> {
       try{
-         const res = await axios.get(`${historyRoutesDownload}/${id}`);
-         return res.data.data;
+         const res = await axios.get(`${historyRoutesDownload}/${id}`, {
+            responseType: 'blob'
+         });
+         
+         // Create blob URL and trigger download
+         const blob = new Blob([res.data], { type: 'application/pdf' });
+         const url = window.URL.createObjectURL(blob);
+
+         // Create temporary link and trigger click
+         const link = document.createElement('a');
+         link.href = url;
+         link.download = 'evaluation.pdf'; // file name for download
+         document.body.appendChild(link);
+         link.click();
+
+         // Cleanup
+         document.body.removeChild(link);
+         window.URL.revokeObjectURL(url);
       }
       catch(error){
          if(axios.isAxiosError(error)){

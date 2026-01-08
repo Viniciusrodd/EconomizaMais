@@ -46,19 +46,19 @@ class ExportHistoryController {
    };
 
 
-   // get export histories
-   public async getHistories(
+   // get export historic
+   public async getHistoric(
       req: Request,
       res: Response<iApiResponse>
    ): Promise<Response> {
       try{
-         // get histories - service
-         const histories: HistoriesResponseDTO[] = await exportHistoryService.getHistoriesService();
+         // get historic - service
+         const historic: HistoriesResponseDTO = await exportHistoryService.getHistoricService();
 
          return res.status(200).json({
             success: true,
             message: '✔️ Histories get successfully',
-            data: histories
+            data: historic
          });
       }
       catch(error){

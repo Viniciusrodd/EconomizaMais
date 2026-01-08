@@ -18,5 +18,5 @@ export const aiInsightsRoutesGet: string = 'http://localhost:5115/api/aiInsights
 
 // simulations routes
 export const historyRoutesCreate: string = 'http://localhost:5115/api/export/pdf';
-export const historyRoutesGet: string = 'http://localhost:5115/api/export/histories';
+export const historyRoutesGet: string = 'http://localhost:5115/api/export/historic';
 export const historyRoutesDownload: string = 'http://localhost:5115/api/export/history';

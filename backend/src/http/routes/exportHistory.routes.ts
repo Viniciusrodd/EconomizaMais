@@ -26,8 +26,8 @@ exportHistoryRoutes.post(
 
 // get export histories - GET
 exportHistoryRoutes.get(
-   '/histories',
-   exportHistoryController.getHistories
+   '/historic',
+   exportHistoryController.getHistoric
 );
 
 
