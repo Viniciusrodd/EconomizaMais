@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/pages/BaseDatas.module.css';
@@ -8,6 +9,7 @@ import leftArrow_img from '@images/utils/left_arrow.png';
 import rightArrow_img from '@images/utils/right_arrow.png';
 import goback_img from '@images/utils/back.png';
 import delete_img from '@images/utils/delete.png';
+import loading_img from '@images/utils/loading.png';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -22,11 +24,15 @@ import type {
 } from '@DTOs/monthlyConsumption.dtos';
 
 // import hooks
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // import services
 import { monthlyConsumptionService } from '@services/MonthlyConsumption.service';
+
+// import context
+import { LoadingContext } from '@contexts/Loading/Loading.context';
+
 
 
 // monthly consumption
@@ -51,6 +57,10 @@ const MonthlyConsumption = () => {
    const [ monthConsID, setMonthConsID ] = useState<string>('');   
 
 
+   //// contexts
+   const { loading, setLoading } = useContext(LoadingContext);
+
+
    //// functions
    
    
@@ -73,9 +83,13 @@ const MonthlyConsumption = () => {
 
    // fetch month cons - get
    const fetchMonthCons = async () => {
+      setLoading(true);
+
       const response = await monthlyConsumptionService.getMonthConsService();
       if(!response) console.error('⚠️ Unexpected return from API:', response);
       if(response.length === 0){
+         setMonthConsList([]);
+         setCurrentIndex(0);
          setIsMonthCons(false);
          setChangeMonthCons(true);
          return;
@@ -90,9 +104,10 @@ const MonthlyConsumption = () => {
 
       // set month cons
       setMonthConsList(sortedResponse);
-
-      // is month cons
+      setCurrentIndex(0);
       setIsMonthCons(true);
+      setChangeMonthCons(false);
+      setLoading(false);
    };
 
    // check month cons - get
@@ -128,6 +143,7 @@ const MonthlyConsumption = () => {
    // create monthCons
    const createMonthCons = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setLoading(true);
       
       // monthCons data setup
       const data = {
@@ -143,7 +159,7 @@ const MonthlyConsumption = () => {
 
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Mês de consumo registrado com sucesso \n você será redirecionado...`, 
+            msg: `Mês de consumo registrado com sucesso`, 
             btt1: false, btt2: false, display: true
          });
 
@@ -153,6 +169,7 @@ const MonthlyConsumption = () => {
          setTimeout(() => {
             closeModal();
             setChangeMonthCons(false);
+            setLoading(false);
          }, 4000);
       }
       catch(error){
@@ -163,12 +180,15 @@ const MonthlyConsumption = () => {
             msg: `${ error }`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 
    // edit month cons
    const editMonthCons = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setLoading(true);
 
       // monthCons data setup
       const data: UpdateMonthlyConsumptionDTO = {};
@@ -194,6 +214,7 @@ const MonthlyConsumption = () => {
          setTimeout(() => {
             closeModal();
             setChangeMonthCons(false);
+            setLoading(false);
          }, 4000);
       }
       catch(error){
@@ -207,6 +228,8 @@ const MonthlyConsumption = () => {
                gas_m3 > 999 ? `Valor de mês de consumo muito alto` : `${error}`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 
@@ -223,6 +246,8 @@ const MonthlyConsumption = () => {
 
    // delete month cons
    const deleteMonthCons = async () => {
+      setLoading(true);
+
       try{
          await monthlyConsumptionService.deleteMonthConsService(monthConsID);
 
@@ -234,10 +259,9 @@ const MonthlyConsumption = () => {
 
          setTimeout(async () => {
             closeModal();
-
-            // get month cons
             await fetchMonthCons();
-            goPrev();         
+            goPrev();
+            setLoading(false);    
          }, 4000);
 
       }
@@ -249,6 +273,8 @@ const MonthlyConsumption = () => {
             msg: `${ error }`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 
@@ -284,46 +310,74 @@ const MonthlyConsumption = () => {
                            method="post"
                            onSubmit={ isMonthCons && isEditMonthCons ? editMonthCons : createMonthCons }
                         >
-                           <h1>Registre o mês de consumo</h1>
+                           { isEditMonthCons ? (
+                              <h1>Edite o mês de consumo</h1>
+                           ) : (
+                              <h1>Registre o mês de consumo</h1>
+                           ) }
                         
                            <input
                               type="number" name="month"
-                              placeholder='Mês de consumo (ex: 12)'
+                              placeholder={ 
+                                 isEditMonthCons ? `Mês de consumo: ${currentMonthCons?.month}` : 'Mês de consumo (ex: 12)' 
+                              }
                               autoComplete='off'
                               min="1" max="12"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setMonth(Number(e.target.value)) }
                            />
                            <input
                               type="number" name="year"
-                              placeholder='Ano de consumo (ex: 2026)'
+                              placeholder={ 
+                                 isEditMonthCons ? `Ano de consumo: ${currentMonthCons?.year}` : 'Ano de consumo (ex: 2026)' 
+                              }
                               autoComplete='off'
                               min="2026" max="2026"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setYear(Number(e.target.value)) }
                            />
                            <input
                               type="number" name="energy_kwh"
-                              placeholder='Consumo de energia (ex: 250.50)'
+                              placeholder={ 
+                                 isEditMonthCons ? `Consumo de energia: ${currentMonthCons?.energy_kwh}` : 'Consumo de energia (ex: 250.50)' 
+                              }
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setEnergy_kwh(Number(e.target.value)) }
                            />
                            <input
                               type="number" name="water_m3"
-                              placeholder='Consumo de água (ex: 14.25)'
+                              placeholder={ 
+                                 isEditMonthCons ? `Consumo de água: ${currentMonthCons?.water_m3}` : 'Consumo de água (ex: 14.25)' 
+                              }
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setWater_m3(Number(e.target.value)) }
                            />
                            <input
                               type="number" name="gas_m3"
-                              placeholder='Consumo de gás (ex: 8.75)'
+                              placeholder={ 
+                                 isEditMonthCons ? `Consumo de gás: ${currentMonthCons?.gas_m3}` : 'Consumo de gás (ex: 8.75)' 
+                              }
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setGas_m3(Number(e.target.value)) }
                            />
-                           <button type='submit'>
-                              ENVIAR
-                           </button>
+
+                           { loading ? (
+                              <>
+                                 <img 
+                                    src={ loading_img } 
+                                    alt="loading_png"
+                                    className='loading_img' 
+                                 />
+                                 <p className='loading_msg'>
+                                    Carregando...
+                                 </p>
+                              </>
+                           ) : (
+                              <button type='submit'>
+                                 ENVIAR
+                              </button>
+                           )}
                         </form>
 
                         <div className={ styles.instructions }>
@@ -353,25 +407,38 @@ const MonthlyConsumption = () => {
                   </div>
                ) : (
                   <div className={ styles.data_container }>
-                     <div className={ styles.btts_container }>
-                        <button 
-                           type='button' 
-                           onClick={ () => setChangeMonthCons(true) }
-                           className={ styles.create_btt }
-                        >
-                           CRIAR CONSUMO
-                        </button>
-                        <button 
-                           type='button' 
-                           onClick={ () => { 
-                              setChangeMonthCons(true);
-                              setIsEditMonthCons(true); 
-                              setMonthConsID(currentMonthCons?.id); 
-                           } }
-                        >
-                           EDITAR CONSUMO
-                        </button>
-                     </div>
+                     { loading ? (
+                        <>
+                           <img 
+                              src={ loading_img } 
+                              alt="loading_png"
+                              className='loading_img' 
+                           />
+                           <p className='loading_msg'>
+                              Carregando...
+                           </p>
+                        </>
+                     ) : (
+                        <div className={ styles.btts_container }>
+                           <button 
+                              type='button' 
+                              onClick={ () => setChangeMonthCons(true) }
+                              className={ styles.create_btt }
+                           >
+                              CRIAR CONSUMO
+                           </button>
+                           <button 
+                              type='button' 
+                              onClick={ () => { 
+                                 setChangeMonthCons(true);
+                                 setIsEditMonthCons(true); 
+                                 setMonthConsID(currentMonthCons?.id); 
+                              } }
+                           >
+                              EDITAR CONSUMO
+                           </button>
+                        </div>
+                     ) }           
 
                      <div className={ styles.data }>
                         <div className={ styles.data_navigate }>
