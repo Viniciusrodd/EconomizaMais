@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/pages/BaseDatas.module.css';
@@ -66,15 +67,19 @@ const UserData = () => {
 
    // fetch user - get
    const fetchUser = async () => {
+      setLoading(true);
+
       const response = await userService.getUser();
       if(!response){
          console.error('⚠️ Unexpected return from API:', response);
+         setLoading(false);
          return;
       }
 
       setName(response.name);
       setResidence_name(response.residence_name);
       setNumber_of_residents(response.number_of_residents);
+      setLoading(false);
    };
 
    // get user

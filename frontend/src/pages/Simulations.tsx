@@ -82,6 +82,8 @@ const Simulations = () => {
 
    // fetch simulations - get
    const fetchSimulations = async () => {
+      setLoading(true);
+
       const response = await simulationsService.getSimulationService();
 
       // if exist any simulation - global
@@ -94,12 +96,14 @@ const Simulations = () => {
          setCurrentIndex(0);
          setIsSimulation(false);
          setChangeSimulation(true);
+         setLoading(false);
          return;
       }
 
       // if exist some simulation
       setIsSimulation(true);
       setChangeSimulation(false);
+      setLoading(false);
 
       // filter simulation
       const filtered = selectedButton ? response.filter(s => s.target_type === selectedButton) : response;
@@ -212,6 +216,8 @@ const Simulations = () => {
 
    // delete simulation
    const deleteSimulation = async () => {
+      setLoading(true);
+
       try{
          await simulationsService.deleteSimulationService(simulationID);
 
@@ -226,6 +232,7 @@ const Simulations = () => {
 
          setTimeout(async () => {
             closeModal();
+            setLoading(false);
          }, 4000);
       }
       catch(error){
@@ -236,6 +243,8 @@ const Simulations = () => {
             msg: `${ error }`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 
@@ -333,7 +342,7 @@ const Simulations = () => {
                         >
                            CRIAR SIMULAÇÃO
                         </button>
-
+                      
                         <div className={ styles.buttons }>
                            <button 
                               type='button'

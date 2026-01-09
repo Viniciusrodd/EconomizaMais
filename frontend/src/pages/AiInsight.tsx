@@ -84,6 +84,8 @@ const AiInsight = () => {
 
    // fetch insights - get
    const fetchInsights = async () => {
+      setLoading(true);
+
       const response = await aiInsightsService.getAiInsightsService();
 
       // if exist any insight - global
@@ -96,12 +98,14 @@ const AiInsight = () => {
          setCurrentIndex(0);
          setIsInsight(false);
          setChangeInsight(true);
+         setLoading(false);
          return;
       }
 
       // if exist some insight
       setIsInsight(true);
       setChangeInsight(false);
+      setLoading(false);
 
       // filter insight
       const filtered = selectedButton ? response.filter(s => s.insight_category === selectedButton) : response;
@@ -214,6 +218,8 @@ const AiInsight = () => {
 
    // delete insight
    const deleteInsight = async () => {
+      setLoading(true);
+
       try{
          await aiInsightsService.deleteAiInsightService(insightID);
 
@@ -228,6 +234,7 @@ const AiInsight = () => {
 
          setTimeout(async () => {
             closeModal();
+            setLoading(false);
          }, 4000);
       }
       catch(error){
@@ -238,6 +245,8 @@ const AiInsight = () => {
             msg: `${ error }`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 

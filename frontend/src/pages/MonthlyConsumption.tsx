@@ -251,6 +251,9 @@ const MonthlyConsumption = () => {
       try{
          await monthlyConsumptionService.deleteMonthConsService(monthConsID);
 
+         // refresh data
+         await fetchMonthCons();
+
          modal_config({
             title: 'Sucesso ✔️', 
             msg: `Mês de consumo deletado com sucesso`, 
@@ -259,8 +262,6 @@ const MonthlyConsumption = () => {
 
          setTimeout(async () => {
             closeModal();
-            await fetchMonthCons();
-            goPrev();
             setLoading(false);    
          }, 4000);
 
