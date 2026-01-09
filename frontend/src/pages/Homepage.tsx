@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
-import styles from '@styles/pages/Homepage.module.css';
+import styles from '@styles/pages/BaseDatas.module.css';
 
 // import images
-//import leftArrow_img from '@images/utils/left_arrow.png';
-//import rightArrow_img from '@images/utils/right_arrow.png';
-//import loading_img from '@images/utils/loading.png';
+import leftArrow_img from '@images/utils/left_arrow.png';
+import rightArrow_img from '@images/utils/right_arrow.png';
+import loading_img from '@images/utils/loading.png';
 
 // import components
 import Navbar from '@components/Navbar';
 import Sidebar from '@components/Sidebar';
 import Modal from '@components/Modal';
+import DonutChart from '@components/DonutChart';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
@@ -46,13 +47,15 @@ const Homepage = () => {
    const [ modal_event, setModal_event ] = useState<string>('');   
    const [ tariffs, setTariffs ] = useState<TariffResponseDTO>();
    const [ monthConsList, setMonthConsList ] = useState<MonthlyConsumptionResponseDTO[]>([]);
+   const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const [ energySummary, setEnergySummary ] = useState<MonthlyConsumptionSummaryDTO>();
    const [ waterSummary, setWaterSummary ] = useState<MonthlyConsumptionSummaryDTO>();
    const [ gasSummary, setGasSummary ] = useState<MonthlyConsumptionSummaryDTO>();
+   const months = [ '', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ];
 
 
    //// contexts
-   const { /*loading,*/ setLoading } = useContext(LoadingContext);
+   const { loading, setLoading } = useContext(LoadingContext);
 
 
    //// functions
@@ -200,6 +203,16 @@ const Homepage = () => {
       getMonthConsSummary();
    }, []);
 
+   // prev month cons
+   const goPrev = () => {
+      setCurrentIndex(prev => prev - 1);
+   };
+
+   // next month cons
+   const goNext = () => {
+      setCurrentIndex(prev => prev + 1);
+   };
+
 
    //// jsx
 
@@ -225,18 +238,102 @@ const Homepage = () => {
             <Sidebar />
             
             <div className={ styles.data_container }>
-               <div className={ styles.data }>
-                  <p>{ tariffs?.energy_tariff }</p>
-                  <p>{ tariffs?.water_tariff }</p>
-                  <p>{ tariffs?.gas_tariff }</p>
+               <div className={ `${styles.homepage_data_container} ${styles.data}` }>
+                  <div className={ styles.data_navigate }>
+                     <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={ goPrev }>
+                        <img
+                           src={ leftArrow_img }
+                           alt="left_arrow"
+                        />
+                     </span>
+                     
+                     { loading ? (
+                        <>
+                           <img 
+                              src={ loading_img } 
+                              alt="loading_png"
+                              className='loading_img' 
+                           />
+                           <p className='loading_msg'>
+                              Carregando...
+                           </p>
+                        </>
+                     ) : (
+                        <h1>
+                           Resumos dos meses de consumo de { 
+                              currentIndex == 0 ? 'energia' : currentIndex == 1 ? 'água' : currentIndex == 2 ? 'gás' : '' 
+                           }
+                        </h1>
+                     ) }
+                     
+                     <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
+                        <img
+                           src={ rightArrow_img }
+                           alt="right_arrow"
+                        />
+                     </span>
+                  </div>
 
-                  { monthConsList && monthConsList.map(month => (
-                     <p>{ month.month } - { month.year }</p>
-                  )) }
+                  <div className={ styles.data_registers_2 }>
+                     <div className="chart-wrapper">
+                        <DonutChart 
+                           percent={ 0 }
+                        />
 
-                  <p>{ energySummary?.average_consume }</p>
-                  <p>{ waterSummary?.average_consume }</p>
-                  <p>{ gasSummary?.average_consume }</p>
+                        <div className="legend">
+                           <div>
+                              <span className="color reduction" /> 
+                              Média de consumo: { currentIndex == 0 ? energySummary?.average_consume : currentIndex == 1 ? waterSummary?.average_consume : currentIndex == 2 ? gasSummary?.average_consume : 0 }
+                           </div>
+                           <div>
+                              <span className="color annual" /> 
+                              Variação do mês passado: { currentIndex == 0 ? energySummary?.variation_last_month : currentIndex == 1 ? waterSummary?.variation_last_month : currentIndex == 2 ? gasSummary?.variation_last_month : 0 }
+                           </div>
+                           <div>
+                              <span className="color month" /> 
+                              Mês de consumo mais alto: { currentIndex == 0 ? energySummary?.highest_consume_month : currentIndex == 1 ? waterSummary?.highest_consume_month : currentIndex == 2 ? gasSummary?.highest_consume_month : 0 }
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div className={ styles.homepage_data }>
+                  <div className={ styles.registers_data }>
+                     <h1 className={ styles.tariffs_title }>
+                        Tarifas registradas
+                     </h1>
+
+                     <div className={ `${styles.tariffs_container} ${styles.datas_container}` }>
+                        <div>
+                           <p>
+                              <strong>. Tarifa de energia:</strong>...............{ tariffs?.energy_tariff }
+                           </p>
+                           <p>
+                              <strong>. Tarifa de água:</strong>.....................{ tariffs?.water_tariff }
+                           </p>
+                           <p>
+                              <strong>. Tarifa de gás:</strong>.........................{ tariffs?.gas_tariff }
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div className={ styles.registers_data }>
+                     <h1 className={ styles.monthCons_title }>
+                        Meses de consumo registrados
+                     </h1>
+
+                     <div className={ `${styles.months_container} ${styles.datas_container}` }>
+                        <div>
+                           { monthConsList && monthConsList.map(data => (
+                              <p key={ data.id }>
+                                 <strong>. { months[data.month] }/</strong>{ data.year }
+                              </p>
+                           )) }
+                        </div>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>

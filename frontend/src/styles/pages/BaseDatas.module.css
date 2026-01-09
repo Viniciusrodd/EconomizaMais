@@ -13,6 +13,9 @@
    --color7: #0b74db;
 }
 
+strong{
+   color: black;
+}
 
 .data_container{
    display: flex;
@@ -211,6 +214,71 @@
    }
 }
 
+.homepage_data_container{
+   height: 50% !important;
+   width: 80% !important;
+   margin: 50px 0px 20px 0px;
+}
+
+.homepage_data{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   height: 23vh;
+   width: 80%;
+
+   & .registers_data{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100%;
+      width: 48%;
+
+      & h1{
+         font-size: 22px;
+         margin-bottom: 5px;
+      }
+
+      & .tariffs_title{
+         color: var(--color7);
+      }
+
+      & .monthCons_title{
+         color: var(--color4);
+      }
+   }
+
+   & .datas_container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      background-color: white;
+      border-radius: 10px;
+      
+      & div{
+         height: 12vh;
+         width: 70%;
+         overflow-y: auto;
+      }
+      
+      & p{
+         font-size: 20px;
+         text-align: left;
+      }
+   }
+   & .tariffs_container{
+      border: 3px solid var(--color7);
+   }
+
+   & .months_container{
+      border: 3px solid var(--color4);
+   }
+}
+
 .data{
    display: flex;
    flex-direction: column;
@@ -340,7 +408,7 @@
    justify-content: center;
    align-items: center;
    height: 60%;
-   width: 80%;
+   padding: 0px 10px;
    margin: 10px 0px;
 }
 
