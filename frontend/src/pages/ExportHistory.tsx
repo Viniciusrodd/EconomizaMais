@@ -66,16 +66,12 @@ const ExportHistory = () => {
    const pdfCreation = async () => {
       const response = await exportHistoryService.createHistoryService();
       if(!response) throw new Error('❌ Erro ao criar o PDF');
-
-      console.log('✔️ PDF creation');
    };
 
    // get history
    const getHistory = async () => {
       const response = await exportHistoryService.getHistoricService();
       if(!response) throw new Error('❌ Erro ao buscar histórico');
-
-      console.log('✔️ History get');
       return response;
    };
 
@@ -84,8 +80,6 @@ const ExportHistory = () => {
       if(!id) throw new Error('❌ ID do histórico inválido');;
 
       await exportHistoryService.downloadPdfService(id);
-
-      console.log('✔️ History download');
    };
 
    // download handler

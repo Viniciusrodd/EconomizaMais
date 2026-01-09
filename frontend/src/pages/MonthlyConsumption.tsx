@@ -501,7 +501,7 @@ const MonthlyConsumption = () => {
 
                      <div className={ styles.info }>
                         <Link to='/'>                  
-                           <h2>Conferir estatísticas de meses de consumo</h2>
+                           <h2>Conferir estatísticas dos meses de consumo</h2>
                         </Link>
                         <img src={ navigation_img } alt="navigation_img" />
                      </div>
