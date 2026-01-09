@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/pages/BaseDatas.module.css';
@@ -5,6 +6,7 @@ import styles from '@styles/pages/BaseDatas.module.css';
 // import images
 import navigation_img from '@images/utils/navigator.png';
 import goback_img from '@images/utils/back.png';
+import loading_img from '@images/utils/loading.png';
 
 // import components
 import Navbar from '@components/Navbar';
@@ -16,11 +18,15 @@ import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
 import type { UpdateTariffDTO } from '@DTOs/Tariffs.dtos';
 
 // import hooks
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // import services
 import { tariffService } from '@services/Tariffs.service';
+
+// import context
+import { LoadingContext } from '@contexts/Loading/Loading.context';
+
 
 
 // tariffs
@@ -36,6 +42,11 @@ const Tariffs = () => {
    const [ energy_tariff, setEnergy_tariff ] = useState<number>(0);
    const [ water_tariff, setWater_tariff ] = useState<number>(0);
    const [ gas_tariff, setGas_tariff ] = useState<number>(0);
+   const [ isEditTariffs, setIsEditTariffs ] = useState<boolean>(false);
+
+
+   //// contexts
+   const { loading, setLoading } = useContext(LoadingContext);
 
 
    //// functions
@@ -58,22 +69,31 @@ const Tariffs = () => {
       });
    };
 
+   // fetch tariffs - get
+   const fetchTariffs = async () => {
+      setLoading(true);
+
+      const response = await tariffService.getTariffService();
+      if(!response){
+         console.error('⚠️ Unexpected return from API:', response);
+         
+         setIsTariffs(false);
+         setChangeTariffs(true);
+      }
+      
+      // set tariffs
+      setIsTariffs(true);
+      setEnergy_tariff(response.energy_tariff);
+      setWater_tariff(response.water_tariff);
+      setGas_tariff(response.gas_tariff);
+      setLoading(false);
+   };
+
    // check tariffs - get
    useEffect(() => {
       const getTariffs = async () => {
          try{
-            const response = await tariffService.getTariffService();
-            if(!response){
-               console.error('⚠️ Unexpected return from API:', response);
-            }
-
-            // is tariffs
-            setIsTariffs(true);
-
-            // set tariffs
-            setEnergy_tariff(response.energy_tariff);
-            setWater_tariff(response.water_tariff);
-            setGas_tariff(response.gas_tariff);
+            await fetchTariffs();
          }
          catch(error){
             console.error('❌ Error at check tariffs: ', error);
@@ -88,6 +108,7 @@ const Tariffs = () => {
    // create tariff
    const createTariff = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setLoading(true);
 
       // tariff data setup
       const data = {
@@ -112,6 +133,7 @@ const Tariffs = () => {
             closeModal();
             setChangeTariffs(false);
             setIsTariffs(true);
+            setLoading(false);
          }, 4000);
       }
       catch(error){
@@ -122,12 +144,15 @@ const Tariffs = () => {
             msg: `${ error }`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 
    // edit tariff
    const editTariff = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setLoading(true);
 
       // tariff data setup
       const data: UpdateTariffDTO = {};
@@ -150,6 +175,7 @@ const Tariffs = () => {
          setTimeout(() => {
             closeModal();
             setChangeTariffs(false);
+            setLoading(false);
          }, 4000);
       }
       catch(error){
@@ -163,6 +189,8 @@ const Tariffs = () => {
                gas_tariff > 999 ? `Valor de tarifa muito alto` : `${error}`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 
@@ -197,32 +225,56 @@ const Tariffs = () => {
                            method="post"
                            onSubmit={ isTariffs ? editTariff : createTariff }
                         >
-                           <h1>Registre as tarifas</h1>
+                           { isEditTariffs ? (
+                              <h1>Edite as tarifas</h1>
+                           ) : (
+                              <h1>Registre as tarifas</h1>
+                           ) }
                         
                            <input
                               type="number" name="energy_tariff"
-                              placeholder='Tarifa de energia (ex: 0.80)'
+                              placeholder={ 
+                                 isEditTariffs ? `Tarifa de energia: ${energy_tariff}Kwh` : 'Tarifa de energia (ex: 0.80)' 
+                              }
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setEnergy_tariff(Number(e.target.value)) }
                            />
                            <input
                               type="number" name="water_tariff"
-                              placeholder='Tarifa de água (ex: 6.50)'
+                              placeholder={ 
+                                 isEditTariffs ? `Tarifa de água: ${water_tariff}m3` : 'Tarifa de água (ex: 6.50)' 
+                              }
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setWater_tariff(Number(e.target.value)) }
                            />
                            <input
                               type="number" name="gas_tariff"
-                              placeholder='Tarifa de gás (ex: 8.00)'
+                              placeholder={ 
+                                 isEditTariffs ? `Tarifa de gás: ${gas_tariff}m3` : 'Tarifa de gás (ex: 8.00)' 
+                              }
                               autoComplete='off'
                               step="0.01" min="0"
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setGas_tariff(Number(e.target.value)) }
                            />
-                           <button type='submit'>
-                              ENVIAR
-                           </button>
+
+                           { loading ? (
+                              <>
+                                 <img 
+                                    src={ loading_img } 
+                                    alt="loading_png"
+                                    className='loading_img' 
+                                 />
+                                 <p className='loading_msg'>
+                                    Carregando...
+                                 </p>
+                              </>
+                           ) : (
+                              <button type='submit'>
+                                 ENVIAR
+                              </button>
+                           ) }
                         </form>
 
                         <div className={ styles.instructions }>
@@ -251,9 +303,25 @@ const Tariffs = () => {
                   </div>
                ) : (
                   <div className={ styles.data_container }>
-                     <button type='button' onClick={ () => setChangeTariffs(true) }>
-                        EDITAR TARIFAS
-                     </button>
+                     { loading ? (
+                        <>
+                           <img 
+                              src={ loading_img } 
+                              alt="loading_png"
+                              className='loading_img' 
+                           />
+                           <p className='loading_msg'>
+                              Carregando...
+                           </p>
+                        </>
+                     ) : (
+                        <button type='button' onClick={ () => {
+                           setChangeTariffs(true);
+                           setIsEditTariffs(true);
+                        } }>
+                           EDITAR TARIFAS
+                        </button>
+                     ) }
 
                      <div className={ styles.data }>
                         <h1>Tarifas atuais</h1>
