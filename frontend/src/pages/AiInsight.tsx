@@ -10,7 +10,6 @@ import goback_img from '@images/utils/back.png';
 import delete_img from '@images/utils/delete.png';
 import loading_img from '@images/utils/loading.png';
 
-
 // import components
 import Navbar from '@components/Navbar';
 import Sidebar from '@components/Sidebar';
@@ -193,16 +192,12 @@ const AiInsight = () => {
 
    // prev insight
    const goPrev = () => {
-      if (currentIndex > 0) {
-         setCurrentIndex(prev => prev - 1);
-      }
+      if(currentIndex > 0) setCurrentIndex(prev => prev - 1);
    };
 
    // next insight
    const goNext = () => {
-      if (currentIndex < insightList.length - 1) {
-         setCurrentIndex(prev => prev + 1);
-      }
+      if(currentIndex < insightList.length - 1) setCurrentIndex(prev => prev + 1);
    };
 
    // delete insight confirmation

@@ -168,7 +168,7 @@ const Tariffs = () => {
 
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Tarifa atualizada com sucesso \n você será redirecionado...`, 
+            msg: `Tarifa atualizada com sucesso`, 
             btt1: false, btt2: false, display: true
          });
 

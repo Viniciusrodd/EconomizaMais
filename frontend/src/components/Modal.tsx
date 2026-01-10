@@ -9,6 +9,7 @@ import type { iModal } from '@interfeces/frontend/Modal.interface';
 import type React from 'react';
 
 
+
 // modal
 const Modal: React.FC<iModal> = ({ title, msg, btt1, btt2, display, modalEvent, onClose }) => {
    return (

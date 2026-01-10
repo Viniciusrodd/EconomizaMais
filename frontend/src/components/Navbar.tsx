@@ -24,6 +24,7 @@ import Modal from '@components/Modal';
 import { LoadingContext } from '@contexts/Loading/Loading.context';
 
 
+
 // navbar
 const Navbar = () => {
    //// variables

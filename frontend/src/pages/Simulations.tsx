@@ -36,6 +36,7 @@ import { LoadingContext } from '@contexts/Loading/Loading.context';
 type ButtonType = 'energy' | 'water' | 'gas' | 'all' | null;
 
 
+
 // simulations
 const Simulations = () => {
    //// variables
@@ -191,16 +192,12 @@ const Simulations = () => {
 
    // prev simulation
    const goPrev = () => {
-      if (currentIndex > 0) {
-         setCurrentIndex(prev => prev - 1);
-      }
+      if(currentIndex > 0) setCurrentIndex(prev => prev - 1);
    };
 
    // next simulation
    const goNext = () => {
-      if (currentIndex < simulationsList.length - 1) {
-         setCurrentIndex(prev => prev + 1);
-      }
+      if(currentIndex < simulationsList.length - 1) setCurrentIndex(prev => prev + 1);
    };
 
    // delete simulation confirmation

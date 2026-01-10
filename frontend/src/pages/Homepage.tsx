@@ -87,7 +87,7 @@ const Homepage = () => {
    // fetch tariffs
    const fetchTariffs = async () => {
       const response = await tariffService.getTariffService();
-      if(!response) throw new Error('❌ Erro ao achar tarifas');
+      if(!response) throw new Error('❌ Erro ao achar as tarifas');
 
       // set tariffs
       setTariffs(response);
@@ -96,7 +96,7 @@ const Homepage = () => {
    // fetch monthly consumptions
    const fetchMonthCons = async () => {
       const response = await monthlyConsumptionService.getMonthConsService();
-      if(!response) throw new Error('❌ Erro ao achar meses de consumo');
+      if(!response) throw new Error('❌ Erro ao achar os meses de consumo');
 
       // sort datas
       const sortedResponse = [...response].sort((a, b) => {
@@ -113,17 +113,17 @@ const Homepage = () => {
    const fetchMonthConsSummary = async () => {
       // energy
       const energy_response = await monthlyConsumptionService.getMonthConsSummaryService('energy_kwh');
-      if(!energy_response) throw new Error('❌ Erro ao achar resumo de consumos de energia');
+      if(!energy_response) throw new Error('❌ Erro ao achar o resumo de consumos de energia');
       setEnergySummary(energy_response);
 
       // water
       const water_response = await monthlyConsumptionService.getMonthConsSummaryService('water_m3');
-      if(!water_response) throw new Error('❌ Erro ao achar resumo de consumos de água');
+      if(!water_response) throw new Error('❌ Erro ao achar o resumo de consumos de água');
       setWaterSummary(water_response);
 
       // gas
       const gas_response = await monthlyConsumptionService.getMonthConsSummaryService('gas_m3');
-      if(!gas_response) throw new Error('❌ Erro ao achar resumo de consumos de gás');
+      if(!gas_response) throw new Error('❌ Erro ao achar o resumo de consumos de gás');
       setGasSummary(gas_response);
    };
 

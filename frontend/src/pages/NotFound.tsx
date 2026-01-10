@@ -6,6 +6,7 @@ import styles from '@styles/pages/NotFound.module.css';
 import { useNavigate } from 'react-router-dom';
 
 
+
 // not found page
 const NotFound = () => {
    //// variables

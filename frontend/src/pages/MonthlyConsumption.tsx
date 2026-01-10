@@ -128,16 +128,12 @@ const MonthlyConsumption = () => {
 
    // prev month
    const goPrev = () => {
-      if (currentIndex > 0) {
-         setCurrentIndex(prev => prev - 1);
-      }
+      if(currentIndex > 0) setCurrentIndex(prev => prev - 1);
    };
 
    // next month
    const goNext = () => {
-      if (currentIndex < monthConsList.length - 1) {
-         setCurrentIndex(prev => prev + 1);
-      }
+      if(currentIndex < monthConsList.length - 1) setCurrentIndex(prev => prev + 1);
    };
    
    // create monthCons
@@ -225,7 +221,7 @@ const MonthlyConsumption = () => {
             msg: 
                energy_kwh > 999 || 
                water_m3 > 999 || 
-               gas_m3 > 999 ? `Valor de mês de consumo muito alto` : `${error}`, 
+               gas_m3 > 999 ? `Valor do mês de consumo muito alto` : `${error}`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
 

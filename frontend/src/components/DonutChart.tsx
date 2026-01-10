@@ -8,6 +8,7 @@ type DonutChartProps = {
 };
 
 
+
 // donut chart 
 const DonutChart: React.FC<DonutChartProps> = ({ percent }) => {
    //// variables
