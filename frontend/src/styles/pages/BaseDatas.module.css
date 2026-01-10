@@ -2,7 +2,7 @@
 
 :root{
    --color1: #0e1116;
-   --color2: #A7B0CA;
+   --color2b: #c0ccff;
    --color3: #D5DCF9;
    --color3b: #d6dcf5;
    --color4: #DA4167;
@@ -288,6 +288,7 @@ strong{
    width: 85%;
    background-color: white;
    border-radius: 10px;
+   border: 3px solid var(--color2b);
 
    & .data_navigate{
       display: flex;
@@ -312,6 +313,15 @@ strong{
 
       & h1{
          font-size: 23px;
+         margin: 0px;
+      }
+   }
+
+   & .data_navigate_2{
+      justify-content: space-between;
+      width: 70%;
+
+      & span{
          margin: 0px;
       }
    }

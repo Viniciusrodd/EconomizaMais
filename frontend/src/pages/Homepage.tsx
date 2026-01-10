@@ -205,12 +205,31 @@ const Homepage = () => {
 
    // prev month cons
    const goPrev = () => {
-      setCurrentIndex(prev => prev - 1);
+      setCurrentIndex(prev => Math.max(0, prev - 1));
    };
 
    // next month cons
    const goNext = () => {
-      setCurrentIndex(prev => prev + 1);
+      setCurrentIndex(prev => Math.min(2, prev + 1));
+   };
+
+   // get summary
+   const getSummary = () => {
+      if (currentIndex === 0) return energySummary;
+      if (currentIndex === 1) return waterSummary;
+      if (currentIndex === 2) return gasSummary;
+      return undefined;
+   };
+
+   // average - visual percent
+   const visualPercent = () => {
+      const average = getSummary()?.average_consume ?? 0;
+   
+      if(average === 0) return 0;
+      else if(average < 50) return 25;
+      else if(average < 150) return 50;
+      else if(average < 300) return 75;
+      else return 100;
    };
 
 
@@ -239,7 +258,7 @@ const Homepage = () => {
             
             <div className={ styles.data_container }>
                <div className={ `${styles.homepage_data_container} ${styles.data}` }>
-                  <div className={ styles.data_navigate }>
+                  <div className={ `${styles.data_navigate_2} ${styles.data_navigate}` }>
                      <span className="tooltip tooltip_btt" data-tooltip="Anterior" onClick={ goPrev }>
                         <img
                            src={ leftArrow_img }
@@ -277,21 +296,22 @@ const Homepage = () => {
                   <div className={ styles.data_registers_2 }>
                      <div className="chart-wrapper">
                         <DonutChart 
-                           percent={ 0 }
+                           percent={ visualPercent() }
                         />
 
                         <div className="legend">
                            <div>
                               <span className="color reduction" /> 
-                              Média de consumo: { currentIndex == 0 ? energySummary?.average_consume : currentIndex == 1 ? waterSummary?.average_consume : currentIndex == 2 ? gasSummary?.average_consume : 0 }
+                              Média de consumo: { getSummary()?.average_consume }
+                              <small>(nível visual aproximado)</small>
                            </div>
                            <div>
                               <span className="color annual" /> 
-                              Variação do mês passado: { currentIndex == 0 ? energySummary?.variation_last_month : currentIndex == 1 ? waterSummary?.variation_last_month : currentIndex == 2 ? gasSummary?.variation_last_month : 0 }
+                              Variação do mês passado: { getSummary()?.variation_last_month }
                            </div>
                            <div>
                               <span className="color month" /> 
-                              Mês de consumo mais alto: { currentIndex == 0 ? energySummary?.highest_consume_month : currentIndex == 1 ? waterSummary?.highest_consume_month : currentIndex == 2 ? gasSummary?.highest_consume_month : 0 }
+                              Mês de consumo mais alto: { getSummary()?.highest_consume_month }
                            </div>
                         </div>
                      </div>
