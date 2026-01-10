@@ -280,7 +280,6 @@ const AiInsight = () => {
                      <form
                         method="post"
                         onSubmit={ createInsight }
-                        className={ styles.form_without_instructions }
                      >
                         <h1>Crie um insight</h1>
                      
@@ -300,7 +299,7 @@ const AiInsight = () => {
                            name='insight_category'
                            onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setInsight_category(e.target.value as Insight_category) }
                         >
-                           <option value="">Selecione um tipo de categoria</option>
+                           <option value="">Selecione uma categoria</option>
                            <option value="tips">Dicas</option>
                            <option value="patterns">Padrões</option>
                            <option value="anomalies">Anomalias</option>
@@ -323,6 +322,16 @@ const AiInsight = () => {
                            </button>
                         )}
                      </form>
+
+                     <div className={ styles.instructions }>
+                        <h1>Regra para criar um insight: </h1>
+                        
+                        <ul>
+                           <li>. Escolha o tipo de conta: (Energia, Água ou Gás)</li>
+                           <li>. Escolha uma categoria: (Anomalia, Dica ou Padrão)</li>
+                           <li>. Não é permitido repetir combinações já existentes (ex: Anomalia de Energia)</li>
+                        </ul>
+                     </div>
                   </div>
 
                   { isInsight && (
