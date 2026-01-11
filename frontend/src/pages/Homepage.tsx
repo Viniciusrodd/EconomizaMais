@@ -215,9 +215,9 @@ const Homepage = () => {
 
    // get summary
    const getSummary = () => {
-      if (currentIndex === 0) return energySummary;
-      if (currentIndex === 1) return waterSummary;
-      if (currentIndex === 2) return gasSummary;
+      if(currentIndex === 0) return energySummary;
+      if(currentIndex === 1) return waterSummary;
+      if(currentIndex === 2) return gasSummary;
       return undefined;
    };
 
@@ -296,7 +296,11 @@ const Homepage = () => {
                   <div className={ styles.data_registers_2 }>
                      <div className="chart-wrapper">
                         <DonutChart 
-                           percent={ visualPercent() }
+                           percent={ 0 }
+                           summary={{ 
+                              average: getSummary()?.average_consume, 
+                              visualPercent: visualPercent() 
+                           }}
                         />
 
                         <div className="legend">

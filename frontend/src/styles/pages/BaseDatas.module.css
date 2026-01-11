@@ -261,7 +261,7 @@ strong{
       border-radius: 10px;
       
       & div{
-         height: 12vh;
+         height: 11vh;
          width: 70%;
          overflow-y: auto;
       }

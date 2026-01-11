@@ -107,7 +107,11 @@ a{
    align-items: center;
    justify-content: center;
    font-weight: bold;
-   font-size: 27px;
+   font-size: 25px;
+}
+
+.donut-hole-2{
+   font-size: 22px;
 }
 
 .legend {
