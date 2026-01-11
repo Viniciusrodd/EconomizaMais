@@ -90,7 +90,6 @@ class MonthlyConsumptionService {
    ): Promise<MonthlyConsumptionSummaryDTO> {
       // get all monthlyConsumptions
       const monthlyConsumptions = await models.MonthlyConsumptionModel.findAll();
-      if(monthlyConsumptions.length <= 0) throw new Error('Meses de consumo não encontrados');
 
       // MonthlyConsumptionHistoryEntity initialize
       const monthlyConsumptionHistoryEntity = new MonthlyConsumptionHistoryEntity(monthlyConsumptions);

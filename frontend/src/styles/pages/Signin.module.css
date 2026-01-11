@@ -63,6 +63,12 @@
       margin-bottom: 15px;
       color: var(--color3b);
    }
+
+   & strong{
+      padding: 1px 5px;
+      background-color: var(--color3c);
+      color: white;
+   }
 }
 
 .data{

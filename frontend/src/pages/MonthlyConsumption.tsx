@@ -55,6 +55,7 @@ const MonthlyConsumption = () => {
    const [ month, setMonth ] = useState<number>(0);
    const [ year, setYear ] = useState<number>(0);
    const [ monthConsID, setMonthConsID ] = useState<string>('');   
+   const currentData = new Date().getFullYear();
 
 
    //// contexts
@@ -328,7 +329,7 @@ const MonthlyConsumption = () => {
                                  isEditMonthCons ? `Ano de consumo: ${currentMonthCons?.year}` : 'Ano de consumo (ex: 2026)' 
                               }
                               autoComplete='off'
-                              min="2026" max="2026"
+                              min={ currentData } max={ currentData }
                               onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setYear(Number(e.target.value)) }
                            />
                            <input

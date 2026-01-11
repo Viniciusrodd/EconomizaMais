@@ -262,12 +262,12 @@ strong{
       
       & div{
          height: 11vh;
-         width: 70%;
+         width: 75%;
          overflow-y: auto;
       }
       
       & p{
-         font-size: 20px;
+         font-size: 19px;
          text-align: left;
       }
    }

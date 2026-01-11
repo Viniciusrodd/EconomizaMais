@@ -43,12 +43,6 @@ button:hover{
    transform: scale(1.02);
 }
 
-strong{
-   padding: 1px 5px;
-   background-color: var(--color3c);
-   color: white;
-}
-
 a{
    text-decoration: none;
 }

@@ -331,13 +331,13 @@ const Homepage = () => {
                      <div className={ `${styles.tariffs_container} ${styles.datas_container}` }>
                         <div>
                            <p>
-                              <strong>. Tarifa de energia:</strong>...............{ tariffs?.energy_tariff }
+                              <strong>. Tarifa de energia:</strong>...............{ tariffs?.energy_tariff.toFixed(2) }Kwh
                            </p>
                            <p>
-                              <strong>. Tarifa de água:</strong>.....................{ tariffs?.water_tariff }
+                              <strong>. Tarifa de água:</strong>.....................{ tariffs?.water_tariff.toFixed(2) }m3
                            </p>
                            <p>
-                              <strong>. Tarifa de gás:</strong>.........................{ tariffs?.gas_tariff }
+                              <strong>. Tarifa de gás:</strong>........................{ tariffs?.gas_tariff.toFixed(2) }m3
                            </p>
                         </div>
                      </div>

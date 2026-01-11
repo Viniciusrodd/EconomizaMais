@@ -171,21 +171,18 @@ const SignIn = () => {
                placeholder='Nome'
                autoComplete='off' value={ name } 
                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value) }
-               required 
             />
             <input 
                type="text" name="residence_name" 
                placeholder='Nome de residência'
                autoComplete='off' value={ residence_name } 
                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setResidence_name(e.target.value) } 
-               required
             />
             <input 
                type="number" name="number_of_residents" 
                placeholder='Número de residentes'
                autoComplete='off' value={number_of_residents} 
                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setNumber_of_residents(e.target.value) } 
-               required
             />
 
             { loading ? (

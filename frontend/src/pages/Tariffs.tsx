@@ -125,7 +125,7 @@ const Tariffs = () => {
 
          modal_config({
             title: 'Sucesso ✔️', 
-            msg: `Tarifas registradas com sucesso \n você será redirecionado...`, 
+            msg: `Tarifas registradas com sucesso`, 
             btt1: false, btt2: false, display: true
          });
 

@@ -19,6 +19,7 @@ import { SimulationsEntities } from '@entities/Simulations.entity';
 
 // import utils
 import { Prompts } from '@utils/Prompts.utils';
+import { targetTypeCheck } from '@utils/Checks.utils';
 
 
 
@@ -42,6 +43,12 @@ class SimulationsService {
       if(!user){
          throw new Error('Usuário não encontrado');
       }
+
+      // simulations exist check
+      const isSimulation = await models.SimulationModel.findOne({
+         where: { reduction_percent, target_type }
+      });
+      if(isSimulation) throw new Error(`Simulação de ${reduction_percent}% sobre ${ targetTypeCheck(target_type) } já foi criada`);
 
       // get monthly consumptions
       const consumptions = await monthlyConsumptionService.getAllMonthConsService();

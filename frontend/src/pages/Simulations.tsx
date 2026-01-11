@@ -51,7 +51,7 @@ const Simulations = () => {
    const [ currentIndex, setCurrentIndex ] = useState<number>(0);
    const currentSimulation = simulationsList[currentIndex] ?? null;
    const [ simulationID, setSimulationID ] = useState<string>('');
-   const [ selectedButton, setSelectedButton ] = useState<ButtonType>('all');
+   const [ selectedButton, setSelectedButton ] = useState<ButtonType>('energy');
    const [ hasAnySimulation, setHasAnySimulation ] = useState<boolean>(false);
    const [ target_type, setTargetType ] = useState<targetType>('all');
    const [ reduction_percent, setReductionPercent ] = useState<number>(0);
@@ -343,13 +343,6 @@ const Simulations = () => {
                         <div className={ styles.buttons }>
                            <button 
                               type='button'
-                              onClick={() => setSelectedButton(selectedButton === 'all' ? null : 'all')} 
-                              className={selectedButton === 'all' ? styles.btt_clicked : ''}
-                           >
-                              TODOS
-                           </button>
-                           <button 
-                              type='button'
                               onClick={() => setSelectedButton(selectedButton === 'energy' ? null : 'energy')} 
                               className={selectedButton === 'energy' ? styles.btt_clicked : ''}
                            >
@@ -368,6 +361,13 @@ const Simulations = () => {
                               className={selectedButton === 'gas' ? styles.btt_clicked : ''}
                            >
                               GÁS
+                           </button>
+                           <button 
+                              type='button'
+                              onClick={() => setSelectedButton(selectedButton === 'all' ? null : 'all')} 
+                              className={selectedButton === 'all' ? styles.btt_clicked : ''}
+                           >
+                              TODOS
                            </button>
                         </div>
                      </div>
