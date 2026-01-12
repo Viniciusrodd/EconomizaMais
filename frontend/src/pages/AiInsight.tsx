@@ -53,8 +53,8 @@ const AiInsight = () => {
    const [ insightID, setInsightID ] = useState<string>('');
    const [ selectedButton, setSelectedButton ] = useState<ButtonType>('anomalies');
    const [ hasAnyInsight, setHasAnyInsight ] = useState<boolean>(false);
-   const [ consume_type, setConsume_type ] = useState<Consume_type>('energy');
-   const [ insight_category, setInsight_category ] = useState<Insight_category>('anomalies');
+   const [ consume_type, setConsume_type ] = useState<Consume_type | ''>('');
+   const [ insight_category, setInsight_category ] = useState<Insight_category | ''>('');
 
 
    //// context
@@ -149,6 +149,16 @@ const AiInsight = () => {
    const createInsight = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setLoading(true);
+
+      if(!consume_type || !insight_category){
+         setLoading(false);
+         modal_config({
+         title: 'Erro ❌',
+         msg: 'Selecione o tipo de conta e a categoria',
+         btt1: false, btt2: 'Tentar novamente', display: true
+      });
+         return;
+      }
 
       // insight data setup
       const data = {
@@ -245,6 +255,22 @@ const AiInsight = () => {
       }
    };
 
+   // category check
+   const categoryCheck = () => {
+      return selectedButton == 'anomalies' ? 'Anomalias' 
+      : selectedButton == 'patterns' ? 'Padrões' 
+      : selectedButton == 'tips' ? 'Dicas' 
+      : ''
+   };
+
+   // consume check
+   const consumeCheck = () => {
+      return currentInsight?.consume_type == 'energy' ? 'Energia' 
+      : currentInsight?.consume_type == 'water' ? 'Água' 
+      : currentInsight?.consume_type == 'gas' ? 'Gás' 
+      : ''
+   };
+
 
    //// jsx
 
@@ -295,9 +321,9 @@ const AiInsight = () => {
                            onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setInsight_category(e.target.value as Insight_category) }
                         >
                            <option value="">Selecione uma categoria</option>
-                           <option value="tips">Dicas</option>
-                           <option value="patterns">Padrões</option>
                            <option value="anomalies">Anomalias</option>
+                           <option value="patterns">Padrões</option>
+                           <option value="tips">Dicas</option>
                         </select>
 
                         { loading ? (
@@ -386,9 +412,13 @@ const AiInsight = () => {
                            </span>
                         ) }
                         
-                        <h1>
-                           { selectedButton == 'anomalies' ? 'Anomalias' : selectedButton == 'patterns' ? 'Padrões' : selectedButton == 'tips' ? 'Dicas' : '' } no consumo de { currentInsight?.consume_type == 'energy' ? 'Energia' : currentInsight?.consume_type == 'water' ? 'Água' : currentInsight?.consume_type == 'gas' ? 'Gás' : '(sem registro)' }
-                        </h1>
+                        { consumeCheck() == '' ? (
+                           <h1>Sem "{ categoryCheck() }" no momento...</h1>
+                        ) : (
+                           <h1>
+                              { categoryCheck() } no consumo de { consumeCheck() }
+                           </h1>
+                        ) }
                         
                         { insightList.length > 1 && (
                            <span className="tooltip tooltip_btt" data-tooltip="Próximo" onClick={ goNext }>
@@ -401,7 +431,7 @@ const AiInsight = () => {
                      </div>
 
                      <div className={ `${styles.desc_2} ${styles.desc}` }>
-                        <p>{ (currentInsight?.ai_response ?? 'Sem insight') }</p>
+                        <p>{ (currentInsight?.ai_response ?? 'Crie um insight acima ⬆️') }</p>
                      </div>
 
                      { insightList.length > 0 && (

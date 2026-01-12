@@ -245,6 +245,15 @@ const Simulations = () => {
       }
    };
 
+   // consume check
+   const consumeCheck = () => {
+      return selectedButton == 'energy' ? 'energia' 
+      : selectedButton == 'water' ? 'água' 
+      : selectedButton == 'gas' ? 'gás' 
+      : selectedButton == 'all' ? 'todas as contas' 
+      : 'sem conta'
+   };
+
 
    //// jsx
 
@@ -276,7 +285,6 @@ const Simulations = () => {
                         <form
                            method="post"
                            onSubmit={ createSimulation }
-                           className={ styles.form_without_instructions }
                         >
                            <h1>Crie uma simulação</h1>
                         
@@ -317,6 +325,16 @@ const Simulations = () => {
                               </button>
                            )}
                         </form>
+
+                        <div className={ styles.instructions }>
+                           <h1>Regra para criar uma simulação: </h1>
+                           
+                           <ul>
+                              <li>. Escolha uma porcentagem de redução: (Ex: 10%)</li>
+                              <li>. Selecione um tipo de conta: (Energia, água, gás ou todas)</li>
+                              <li>. Não é permitido repetir simulações já existentes (ex: 10% de redução sobre energia)</li>
+                           </ul>
+                        </div>
                      </div>
 
                      { isSimulation && (
@@ -385,7 +403,7 @@ const Simulations = () => {
                            
                            <h1>
                               Simulação sobre { (currentSimulation?.reduction_percent ?? 0) }% 
-                              de redução no consumo de { selectedButton == 'energy' ? 'energia' : selectedButton == 'water' ? 'água' : selectedButton == 'gas' ? 'gás' : selectedButton == 'all' ? 'todas as contas' : 'sem conta' }
+                              de redução no consumo de { consumeCheck() }
                            </h1>
                            
                            { simulationsList.length > 1 && (

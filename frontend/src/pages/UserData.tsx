@@ -130,6 +130,7 @@ const UserData = () => {
          setTimeout(() => {
             closeModal();
             setLoading(false);
+            navigate('/');
          }, 4000);
       }
       catch(error){

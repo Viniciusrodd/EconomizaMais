@@ -78,7 +78,7 @@ const ExportHistory = () => {
 
    // history download
    const historyDownload = async (id: string) => {
-      if(!id) throw new Error('❌ ID do histórico inválido');;
+      if(!id) throw new Error('❌ ID do histórico inválido');
 
       await exportHistoryService.downloadPdfService(id);
    };
@@ -90,7 +90,7 @@ const ExportHistory = () => {
       try{
          await pdfCreation();
          const history = await getHistory();
-         await historyDownload(history.id);
+         await historyDownload(history?.id);
 
          modal_config({
             title: 'Sucesso ✔️', 
@@ -108,7 +108,7 @@ const ExportHistory = () => {
 
          modal_config({
             title: 'Erro ❌', 
-            msg: error instanceof Error ? error.message : 'Erro inesperado', 
+            msg: 'Erro ao gerar PDF do histórico. \n Por favor, tente mais tarde...', 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
 
