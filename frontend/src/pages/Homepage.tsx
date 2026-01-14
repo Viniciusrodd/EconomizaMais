@@ -29,6 +29,7 @@ import { useNavigate } from 'react-router-dom';
 // import services
 import { tariffService } from '@services/Tariffs.service';
 import { monthlyConsumptionService } from '@services/MonthlyConsumption.service';
+import { userService } from '@services/User.service';
 
 // import context
 import { LoadingContext } from '@contexts/Loading/Loading.context';
@@ -52,6 +53,7 @@ const Homepage = () => {
    const [ waterSummary, setWaterSummary ] = useState<MonthlyConsumptionSummaryDTO>();
    const [ gasSummary, setGasSummary ] = useState<MonthlyConsumptionSummaryDTO>();
    const months = [ '', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro' ];
+   const [ redirect, setRedirect ] = useState<boolean>(false);
 
 
    //// contexts
@@ -82,6 +84,30 @@ const Homepage = () => {
    const modalEventHandler = () => {
       if(modal_event === 'tariffs_notfound') navigate('/tarifas');
       if(modal_event === 'monthCons_notfound') navigate('/consumosMensais');
+   };
+
+   // redirect
+   useEffect(() =>{
+      if(redirect){
+         const clearMessage = setTimeout(() =>{
+            modal_config({
+               title: '', msg: '', btt1: false, 
+               btt2: false, display: false
+            });
+
+            navigate('/registro');       
+         }, 4000);
+
+         return () =>{
+            clearTimeout(clearMessage);
+         };
+      }
+   }, [redirect, navigate]);
+
+   // fetch user
+   const fetchUser = async () => {
+      const response = await userService.getUser();
+      if(!response) throw new Error('❌ Usuário não encontrado');
    };
 
    // fetch tariffs
@@ -129,6 +155,28 @@ const Homepage = () => {
 
    // check datas
    useEffect(() => {
+      // user
+      const getUser = async () => {
+         setLoading(true);
+
+         try{
+            await fetchUser();
+            setLoading(false);
+         }
+         catch(error){
+            console.error('❌ Error at get user: ', error);
+
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ error }, \n você será redirecionado...`, 
+               btt1: false, btt2: false, display: true
+            });
+
+            setRedirect(true);
+            setLoading(false);
+         }
+      };
+
       // tariffs
       const getTariffs = async () => {
          setLoading(true);
@@ -198,6 +246,7 @@ const Homepage = () => {
          }
       };
 
+      getUser();
       getTariffs();
       getMonthCons();
       getMonthConsSummary();

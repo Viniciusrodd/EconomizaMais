@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/pages/Signin.module.css';
@@ -82,6 +83,37 @@ const SignIn = () => {
          };
       }
    }, [redirect, navigate]);
+
+   // user check
+   useEffect(() => {
+      const getUser = async () => {
+         setLoading(true);
+
+         try{
+            const response = await userService.getUser();
+            if(!response){
+               console.error('⚠️ Unexpected return from API:', response);
+               setLoading(false);
+               return;
+            }
+
+            modal_config({
+               title: 'Espere ❕', 
+               msg: `Usuário já registrado, \n você será redirecionado...`, 
+               btt1: false, btt2: false, display: true
+            });
+
+            setLoading(false);
+            setRedirect(true);
+         }
+         catch(error){
+            console.error('❌ Error at get user: ', error);
+            setLoading(false);
+         }
+      };
+
+      getUser();
+   }, []);
 
    // sign in request
    const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -78,12 +78,7 @@ const Navbar = () => {
          }
          catch(error){
             console.error('❌ Error at get user: ', error);
-
-            modal_config({
-               title: 'Erro ❌', 
-               msg: `${ error }`, 
-               btt1: false, btt2: 'Tentar novamente', display: true
-            });
+            setLoading(false);
          }
       };
       getUser();
