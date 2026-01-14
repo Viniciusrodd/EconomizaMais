@@ -201,6 +201,10 @@ const SignIn = () => {
                   CADASTRAR
                </button>
             ) }
+
+            <p className='advice'>
+               *Este sistema funciona localmente, <br /> é permitido apenas 1 usuário por máquina
+            </p>
          </form>
       </div>
    );

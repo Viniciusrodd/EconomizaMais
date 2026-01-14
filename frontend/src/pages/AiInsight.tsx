@@ -444,6 +444,10 @@ const AiInsight = () => {
                         </div>
                      ) }
                   </div>
+
+                  <p className='advice'>
+                     *As recomendações da IA são estimativas educativas, não substituem orientação técnica.
+                  </p>                  
                </div>
             ) }
          </div>
