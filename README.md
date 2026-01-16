@@ -214,7 +214,7 @@ Caso algo esteja faltando, o instalador exibirá exatamente o que precisa ser in
 
 ---
 
-### ▶️ Iniciando o sistema (modo automático)
+### ▶️ 4. Iniciando o sistema (modo automático)
 Após a instalação, execute:
 ```bash
 start_economizaMais.bat
@@ -237,7 +237,7 @@ Você verá duas janelas abertas:
 
 ---
 
-### 🧭 Acessando o sistema manualmente
+### 🧭 5. Acessando o sistema manualmente
 Abra no navegador:
 ```bash
 👉 http://localhost:5173/
