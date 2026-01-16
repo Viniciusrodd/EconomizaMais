@@ -200,7 +200,7 @@ cd economiza+
 ### ⚙️ 3. Instale tudo com 1 clique
 Na pasta raiz do projeto, execute:
 ```bash
-install-economizaMais.bat
+install_economizaMais.bat
 ``` 
 Esse instalador irá:
 - ✔️ Verificar se Node.js está instalado
