@@ -191,7 +191,7 @@ ou
 
 ### 📥 2. Clonando o repositório via Git
 ```bash
-git clone https://github.com/Viniciusrodd/economizaMais.git
+git clone https://github.com/Viniciusrodd/EconomizaMais.git
 cd economiza+
 ```
 
