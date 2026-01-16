@@ -112,6 +112,10 @@ class PDFService {
 
       doc.moveDown(1);
 
+      // crescent sort setup
+      data.user_month_consumptions.sort((a, b) => a.month - b.month);
+
+      // build
       data.user_month_consumptions.forEach(consumption => {
          doc
             .fontSize(11)
