@@ -180,7 +180,7 @@ const SignIn = () => {
                   simples e visual. 
                </p>
                <p>
-                  Nosso objetivo é ajudar você a <strong>transformar pequenas mudanças em grandes resultados</strong>: menos desperdício,
+                  Nosso objetivo é ajudar você a <strong>transformar pequenas mudanças em grandes resultados:</strong>menos desperdício,
                   mais economia e um impacto positivo no meio ambiente.
                </p>
                <p>

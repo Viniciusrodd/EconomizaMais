@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 
 // import css
 import styles from '@styles/components/Navbar.module.css';
 
 // import images
 import user_img from '@images/homepage/user.png';
-import loading_img from '@images/utils/loading.png';
 
 // import interfaces
 import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
@@ -14,14 +12,11 @@ import type { iModalConfig } from '@interfeces/frontend/Modal.interface';
 import { userService } from '@services/User.service';
 
 // import hooks
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 // import components
 import Modal from '@components/Modal';
-
-// import context
-import { LoadingContext } from '@contexts/Loading/Loading.context';
 
 
 
@@ -35,10 +30,6 @@ const Navbar = () => {
    const [ modal_btt_2, setModal_btt_2 ] = useState<boolean | string>(false);
    const [ userName, setUserName ] = useState<string>('');
    const location = useLocation();
-
-
-   //// context
-   const { loading, setLoading } = useContext(LoadingContext);
 
 
    //// functions
@@ -64,21 +55,16 @@ const Navbar = () => {
    // get user
    useEffect(() => {
       const getUser = async () => {
-         setLoading(true);
-
          try{
             const response = await userService.getUser();
             if(!response){
                console.error('⚠️ Unexpected return from API:', response);
-               setLoading(false);
             }
    
             setUserName(response.name);
-            setLoading(false);
          }
          catch(error){
             console.error('❌ Error at get user: ', error);
-            setLoading(false);
          }
       };
       getUser();
@@ -105,31 +91,21 @@ const Navbar = () => {
                Economiza+
             </Link>
          </h1>
-
-         { loading ? (
-            <div className={ styles.nav_account }>
-               <img 
-                  src={ loading_img } 
-                  alt="loading_png"
-                  className='loading_img' 
-               />
-            </div>
-         ) : (
-            <div className={ styles.nav_account }>
-               <img src={ user_img } alt="user_img" />
-               <Link to='/usuario'>
-                  { location.pathname === '/usuario' ? (
-                     <h2 className={ styles.selected }>
-                        Olá, { userName }
-                     </h2>
-                  ) : (
-                     <h2>
-                        Olá, { userName }
-                     </h2>
-                  )}
-               </Link>
-            </div>
-         ) }
+         
+         <div className={ styles.nav_account }>
+            <img src={ user_img } alt="user_img" />
+            <Link to='/usuario'>
+               { location.pathname === '/usuario' ? (
+                  <h2 className={ styles.selected }>
+                     Olá, { userName }
+                  </h2>
+               ) : (
+                  <h2>
+                     Olá, { userName }
+                  </h2>
+               )}
+            </Link>
+         </div>
       </div>
    );
 };
