@@ -1,10 +1,11 @@
-# 💡 Economiza+ — Plataforma Offline de Monitoramento de Consumo Doméstico
+# 💡 Economiza+ — Plataforma de Monitoramento de Consumo Doméstico
 
 O **Economiza+** é uma plataforma digital **simples, educativa e totalmente offline** voltada ao **monitoramento do consumo doméstico de energia, água e gás**.  
 O sistema ajuda famílias e comunidades a **entender seus hábitos de consumo**, **simular economias**, **visualizar impactos financeiros e ambientais** e receber **insights gerados por IA local**, sem depender de internet.
 
 Tudo roda **localmente**, inclusive a **Inteligência Artificial**, utilizando **Ollama com modelos open-source leves**.
 
+---
 
 ![Tela de cadastro do projeto](./frontend/public/images/readme/register.png)
 
@@ -52,13 +53,13 @@ A proposta é transformar **dados de consumo** em **informação clara**, acess�
   - Dicas educativas
 - 📄 Exportação de relatórios em **PDF**
 
-
+---
 ![Tela de simulações](./frontend/public/images/readme/simulations.png)
 
-
+---
 ![Tela de insights gerados por IA](./frontend/public/images/readme/insights.png)
 
-
+---
 
 ## 🧠 Uso consciente de IA
 
