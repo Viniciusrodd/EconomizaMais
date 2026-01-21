@@ -95,12 +95,13 @@ O backend segue uma **arquitetura em camadas**, priorizando organização, manut
 - **Node.js + TypeScript**
 - **Express**
 - **Sequelize + MySQL**
+- **Jest**
 - **Arquitetura limpa**:
   - Controllers
   - Services (regras de negócio)
   - Repositories
   - Domain (entidades)
-- **IA local via Ollama**
+- **IA local - Ollama mistral**
 - **Geração de PDF**
 - **Tratamento de erros e logs locais**
 
