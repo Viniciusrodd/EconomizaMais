@@ -96,15 +96,15 @@ O backend segue uma **arquitetura em camadas**, priorizando organização, manut
 - **Express**
 - **Sequelize + MySQL**
 - **Jest**
+- **PDFKit** para geração de PDF
+- **UUID** para identificadores locais
+- **Helmet** + **HPP** + **Compression** + **CORS** para segurança e otimização
 - **Arquitetura limpa**:
   - Controllers
   - Services (regras de negócio)
   - Repositories
   - Domain (entidades)
 - **IA local - Ollama mistral**
-- **Geração de PDF**
-- **Tratamento de erros e logs locais**
-
 
 
 ## 🖥️ Estrutura do Frontend (React + TypeScript)
@@ -113,6 +113,8 @@ Frontend focado em **simplicidade, acessibilidade e clareza visual**, seguindo p
 - **React + TypeScript**
 - **Vite**
 - **Axios**
+- **React Router DOM 7**
+- **Context API** para gerenciamento de sessão
 - **Componentização por feature**
 - **Interface simples e intuitiva**
 - **Fluxos curtos e guiados**
