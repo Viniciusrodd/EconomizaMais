@@ -189,7 +189,7 @@ Possíveis evoluções futuras:
 - Extraia o projeto em uma pasta local  
   Exemplo:
   ```text
-  C:\Users\alfa\Documents\Estudos 3\Economiza+
+  C:\Users\alfa\Documents\Economiza+
 
 ou
 
@@ -284,7 +284,7 @@ npm run dev
 ### ❌ Porta já está em uso
 - O script tenta resolver automaticamente, mas se necessário:
 ```bash
-taskkill /F /IM node.exe
+taskkill /IM node.exe /F
 ```
 
 ### ❌ Erro de conexão com banco
