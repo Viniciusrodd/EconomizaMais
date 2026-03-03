@@ -11,6 +11,7 @@
 
 /*modal*/
 
+
 .displayAppear{
    display: block;
 }
@@ -105,6 +106,7 @@
    background-color: #b92929;
 }
 
+
 /* Animação de Aparecer */
 @keyframes fadeIn {
    from {
@@ -122,7 +124,6 @@
 .hidden {
    display: none;
 }
-
 
 /* Cores pré-definidas - title color */
 .primary {

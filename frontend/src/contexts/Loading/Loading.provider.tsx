@@ -12,6 +12,7 @@ type LoadingPropsProvider = {
 };
 
 
+
 // provider
 export const LoadingProvider = ({ children }: LoadingPropsProvider) =>{
    // states

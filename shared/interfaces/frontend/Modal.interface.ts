@@ -1,5 +1,4 @@
 
-
 export interface iModal{
    title: string; 
    msg: string; 
@@ -9,7 +8,6 @@ export interface iModal{
    onClose: () => void; 
    modalEvent?: (event: any) => void;
 };
-
 
 export interface iModalConfig{
    title: string;

@@ -32,6 +32,7 @@ import { simulationsService } from '@services/Simulations.service';
 // import context
 import { LoadingContext } from '@contexts/Loading/Loading.context';
 
+
 // utils
 type ButtonType = 'energy' | 'water' | 'gas' | 'all' | null;
 

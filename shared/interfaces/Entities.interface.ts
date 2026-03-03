@@ -9,7 +9,6 @@ export interface User {
    updated_at?: Date;
 };
 
-
 // Tariff
 export interface Tariff {
    id?: string; // UUID
@@ -20,7 +19,6 @@ export interface Tariff {
    created_at?: Date;
    updated_at?: Date;
 };
-
 
 // Monthly Consumption
 export interface MonthlyConsumption {
@@ -34,7 +32,6 @@ export interface MonthlyConsumption {
    created_at?: Date;
    updated_at?: Date;
 };
-
 
 // Simulation
 export type SimulationTargetType =
@@ -54,7 +51,6 @@ export interface Simulation {
    feedback: string;
    created_at?: Date;
 };
-
 
 // AI Insight
 export type AIInsightCategory =
@@ -76,7 +72,6 @@ export interface AIInsight {
    created_at?: Date;
    updated_at?: Date;
 };
-
 
 // Export History
 export interface ExportHistory {

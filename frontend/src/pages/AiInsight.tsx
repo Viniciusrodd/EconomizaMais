@@ -32,6 +32,7 @@ import { aiInsightsService } from '@services/AiInsights.service';
 // import context
 import { LoadingContext } from '@contexts/Loading/Loading.context';
 
+
 // utils
 type ButtonType = 'tips' | 'patterns' | 'anomalies' | null;
 
