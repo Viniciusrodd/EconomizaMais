@@ -8,7 +8,6 @@ export interface CreateMonthlyConsumptionDTO {
    gas_m3: number;
 };
 
-
 // get monthly_consumption DTO
 export interface MonthlyConsumptionResponseDTO {
    id: string;
@@ -21,14 +20,12 @@ export interface MonthlyConsumptionResponseDTO {
    updated_at: Date;
 };
 
-
 // update monthly_consumption DTO
 export interface UpdateMonthlyConsumptionDTO {
    energy_kwh?: number;
    water_m3?: number;
    gas_m3?: number;
 };
-
 
 // get monthly_consumption summary DTO
 export interface MonthlyConsumptionSummaryDTO {

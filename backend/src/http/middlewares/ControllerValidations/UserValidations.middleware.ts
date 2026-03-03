@@ -3,6 +3,7 @@
 import { body, ValidationChain } from 'express-validator';
 
 
+
 // user creation
 const userRegisterValidation = (): ValidationChain[] => {
    return [
@@ -15,15 +16,15 @@ const userRegisterValidation = (): ValidationChain[] => {
 
       // invalid residence name
       body('residence_name')
-         .notEmpty().withMessage('Nome de residencia é obrigatório')
-         .isString().withMessage('Nome de residencia apenas em caracteres')
-         .isLength({ max: 150 }).withMessage('Nome de residencia deve ter no máximo 150 caracteres')
+         .notEmpty().withMessage('Nome de residência é obrigatório')
+         .isString().withMessage('Nome de residência apenas em caracteres')
+         .isLength({ max: 150 }).withMessage('Nome de residência deve ter no máximo 150 caracteres')
          .trim(),
 
       // invalid number of residents
       body('number_of_residents')
-         .notEmpty().withMessage('Número da residencia é obrigatório')
-         .isInt({ min: 1 }).withMessage('Número da residencia deve ser no minímo 1')
+         .notEmpty().withMessage('Número da residência é obrigatório')
+         .isInt({ min: 1 }).withMessage('Número da residência deve ser no minímo 1')
          .toInt()
    ];
 };
@@ -42,14 +43,14 @@ const userUpdateValidation = (): ValidationChain[] => {
       // invalid residence name
       body('residence_name')
          .optional()
-         .isString().withMessage('Nome de residencia deve ser em caracteres')
-         .isLength({ max: 150 }).withMessage('Nome de residencia deve ter no máximo 150 caracteres')
+         .isString().withMessage('Nome de residência deve ser em caracteres')
+         .isLength({ max: 150 }).withMessage('Nome de residência deve ter no máximo 150 caracteres')
          .trim(),
 
       // invalid number of residents
       body('number_of_residents')
          .optional()
-         .isInt({ min: 1 }).withMessage('Número da residencia deve ser no minímo 1')
+         .isInt({ min: 1 }).withMessage('Número da residência deve ser no minímo 1')
          .toInt()
    ];
 };

@@ -9,6 +9,7 @@ import { ConnectionDatabase } from "@config/database";
 import type { Tariff } from "@interfaces/Entities.interface";
 
 
+
 // class - tariff model
 class TariffModel extends Model<Tariff> {
    public id!: string;
@@ -64,5 +65,6 @@ TariffModel.init({
    underscored: true, // Convert camelCase to snake_case automaticaly
    tableName: 'Tariffs'
 });
+
 
 export default TariffModel;

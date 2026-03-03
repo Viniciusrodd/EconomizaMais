@@ -8,6 +8,7 @@ import { simulationsService } from "@services/Simulations.service";
 // import mocks
 import { simulationsMockRequest, simulationsMockResponse } from '@mocks/simulations.mock';
 
+
 // utils
 const id: string = 'uuid-123';
 const target_type: 'energy' | 'water' | 'gas' | 'all' = 'water';
@@ -20,8 +21,10 @@ const created_at: Date = new Date(Date.now());
 const fakeSimulation = { id, target_type, reduction_percent, monthly_saving, annual_saving, environmental_impact, feedback, created_at };
 
 
+
 // mocks
 jest.mock('@services/Simulations.service');
+
 
 
 describe('SimulationsController', () => {

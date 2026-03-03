@@ -1,5 +1,4 @@
 
-
 // imports
 import { DataTypes, Model } from "sequelize";
 

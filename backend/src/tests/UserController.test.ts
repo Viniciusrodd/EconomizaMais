@@ -19,8 +19,10 @@ const updated_at: Date = new Date(Date.now());
 const fakeUser = { id, name, residence_name, number_of_residents, created_at, updated_at };
 
 
+
 // mocks
 jest.mock('@services/User.service');
+
 
 
 describe('UserController', () => {

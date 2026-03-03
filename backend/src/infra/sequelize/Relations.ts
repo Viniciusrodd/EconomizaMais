@@ -8,6 +8,7 @@ import ExportHistoryModel from "@models/ExportHistory.model";
 import AiInsightModel from "@models/aiInsights.model";
 
 
+
 // 1 user can have 1 tariff
 UserModel.hasOne(TariffModel, { 
    foreignKey: 'user_id', 

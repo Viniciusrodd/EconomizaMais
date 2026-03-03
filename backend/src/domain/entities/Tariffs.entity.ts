@@ -1,7 +1,7 @@
 
-
 // class - tariffs entities
 export class TariffEntity {
+   
    // properties
    private readonly energy_tariff: number;
    private readonly water_tariff: number;

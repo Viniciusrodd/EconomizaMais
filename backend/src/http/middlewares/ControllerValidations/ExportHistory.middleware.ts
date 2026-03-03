@@ -1,6 +1,7 @@
 
 // imports
-import { body, param, query, ValidationChain } from 'express-validator';
+import { param, ValidationChain } from 'express-validator';
+
 
 
 // export history creation

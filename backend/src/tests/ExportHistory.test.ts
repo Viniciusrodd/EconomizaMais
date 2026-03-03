@@ -34,8 +34,10 @@ const fakePDF = { id, user_data, user_tariffs, user_month_consumptions, file_pat
 const fakeHistory = { id, file_path, created_at };
 
 
+
 // mocks
 jest.mock('@services/ExportHistory.service');
+
 
 
 describe('ExportHistoryController', () => {
@@ -103,10 +105,10 @@ describe('ExportHistoryController', () => {
          const res = historyMockResponse();
 
          // spy functions
-         jest.spyOn(exportHistoryService, 'getHistoriesService').mockResolvedValue([fakeHistory]);
+         jest.spyOn(exportHistoryService, 'getHistoricService').mockResolvedValue(fakeHistory);
       
          // controller method
-         await exportHistoryController.getHistories(req, res);
+         await exportHistoryController.getHistoric(req, res);
 
          // expects
          expect(res.status).toHaveBeenCalledWith(200);
@@ -125,10 +127,10 @@ describe('ExportHistoryController', () => {
 
          // spy functions
          const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-         jest.spyOn(exportHistoryService, 'getHistoriesService').mockRejectedValue(new Error('Service error (test)'));
+         jest.spyOn(exportHistoryService, 'getHistoricService').mockRejectedValue(new Error('Service error (test)'));
 
          // controller method
-         await exportHistoryController.getHistories(req, res);
+         await exportHistoryController.getHistoric(req, res);
 
          // expects
          expect(res.status).toHaveBeenCalledWith(500);

@@ -9,6 +9,7 @@ import {
 } from "@DTOs/Tariffs.dtos";
 
 
+
 // request mock
 export const tariffsMockRequest = (body: CreateTariffDTO | UpdateTariffDTO | {}) => ({ // immediately returns a literal object
    body

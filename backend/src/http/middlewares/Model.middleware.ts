@@ -8,6 +8,7 @@ import dotenv from 'dotenv';
 dotenv.config({});
 
 
+
 // IA model (ollama mistral) middleware check
 export async function modelMiddleware(
    req: Request,

@@ -18,6 +18,7 @@ import {
    UpdateMonthlyConsumptionDTO,
 } from '@DTOs/monthlyConsumption.dtos';
 
+
 // utils
 type Consume = 'energy_kwh' | 'water_m3' | 'gas_m3';
 

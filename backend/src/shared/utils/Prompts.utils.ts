@@ -4,6 +4,7 @@ import { CreateSimulationDTO } from "@DTOs/Simulations.dtos";
 import { AIInsightInputDTO } from "@DTOs/aiInsights.dtos";
 
 
+
 // class - prompt utils
 export class Prompts {
 

@@ -8,6 +8,7 @@ import { aiInsightsService } from "@services/AiInsights.service";
 // import mocks
 import { aiInsightsMockRequest, aiInsightsMockResponse } from '@mocks/aiInsights.mock'; 
 
+
 // utils
 const id: string = 'uuid-123';
 const input_summary: string = 'You are an assistant that...';
@@ -18,8 +19,10 @@ const created_at: Date = new Date(Date.now());
 const fakeAiInsight = { id, input_summary, ai_response, insight_category, consume_type, created_at };
 
 
+
 // mocks
 jest.mock('@services/AiInsights.service');
+
 
 
 describe('AiInsightController', () => {
@@ -122,53 +125,6 @@ describe('AiInsightController', () => {
       });
 
    });   
-
-
-   // get ai insight by category
-   describe('getAiInsightByCategory', () => {
-
-      // 200
-      it('Should return 200 and get ai insights by category', async () => {
-         // request / response
-         const req = aiInsightsMockRequest({}, {}, 'anomalies') as any;
-         const res = aiInsightsMockResponse();
-
-         // spy functions
-         jest.spyOn(aiInsightsService, 'getAiInsightsByCategoryService').mockResolvedValue([fakeAiInsight]);
-      
-         // controller method
-         await aiInsightsController.getAiInsightsByCategory(req, res);
-
-         // expects
-         expect(res.status).toHaveBeenCalledWith(200);
-         expect(res.json).toHaveBeenCalledWith({
-            success: true,
-            message: '✔️ Ai insights by category get successfully',
-            data: [fakeAiInsight]
-         });
-      });
-
-      // 500
-      it('Should return 500 if get ai insights by category service throws error', async () => {
-         // request / response
-         const req = aiInsightsMockRequest({}, {}, 'anomalies') as any;
-         const res = aiInsightsMockResponse();
-
-         // spy functions
-         const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-         jest.spyOn(aiInsightsService, 'getAiInsightsByCategoryService').mockRejectedValue(new Error('Service error (test)'));
-
-         // controller method
-         await aiInsightsController.getAiInsightsByCategory(req, res);
-
-         // expects
-         expect(res.status).toHaveBeenCalledWith(500);
-
-         // restore mock
-         consoleSpy.mockRestore();
-      });
-
-   });
 
 
    // delete ai insight

@@ -7,8 +7,10 @@ import { MonthlyConsumptionSummaryDTO } from "@DTOs/monthlyConsumption.dtos";
 type Consume = 'energy_kwh' | 'water_m3' | 'gas_m3';
 
 
+
 // class - MonthlyConsumption entities
 export class MonthlyConsumptionHistoryEntity {
+
    // properties
    private readonly consumptions: MonthlyConsumption[];
 
@@ -105,4 +107,5 @@ export class MonthlyConsumptionHistoryEntity {
          variation_last_month: this.getLastMonthVariation(consume)
       };
    };
+   
 };

@@ -6,7 +6,6 @@ export interface CreateTariffDTO {
    gas_tariff: number;
 };
 
-
 // get tariff DTO
 export interface TariffResponseDTO {
    id: string;
@@ -16,7 +15,6 @@ export interface TariffResponseDTO {
    created_at: Date;
    updated_at: Date;
 };
-
 
 // update tariff DTO
 export interface UpdateTariffDTO {

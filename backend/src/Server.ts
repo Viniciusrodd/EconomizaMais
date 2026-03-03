@@ -23,15 +23,14 @@ dotenv.config({});
 
 // class - server
 export class Server {
+
    // properties
    private app: Application;
-
 
    // constructor
    constructor(app: Application){
       this.app = app;
    };
-
 
    // start methods
    public async start(): Promise<void> {
@@ -114,4 +113,5 @@ export class Server {
          );
       });
    };
+   
 };

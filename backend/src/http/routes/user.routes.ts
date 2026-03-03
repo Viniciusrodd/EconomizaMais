@@ -24,11 +24,13 @@ userRoutes.post(
    userController.createUser
 );
 
+
 // get user - GET
 userRoutes.get(
    '/user',
    userController.getUser
 );
+
 
 // update user - PUT
 userRoutes.put(
@@ -37,6 +39,7 @@ userRoutes.put(
    validate,
    userController.updateUser
 );
+
 
 // delete user - DELETE
 userRoutes.delete(

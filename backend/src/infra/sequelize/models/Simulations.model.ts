@@ -10,6 +10,7 @@ import type { Simulation } from '@interfaces/Entities.interface';
 import type { SimulationTargetType } from "@interfaces/Entities.interface";
 
 
+
 // class - simulation model
 class SimulationModel extends Model<Simulation> {
    public id!: string;

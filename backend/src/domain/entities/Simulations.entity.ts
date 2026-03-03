@@ -10,8 +10,10 @@ interface iTypes {
 };
 
 
+
 // class - Simulations entities
 export class SimulationsEntities {
+
    // properties
    private readonly targetType: TargetTypes;
    private readonly reductionPercent: number;
@@ -97,4 +99,5 @@ export class SimulationsEntities {
 
       return Number(impact.toFixed(2));
    };
+   
 }

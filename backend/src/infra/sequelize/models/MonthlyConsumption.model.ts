@@ -9,6 +9,7 @@ import { ConnectionDatabase } from "@config/database";
 import type { MonthlyConsumption } from '@interfaces/Entities.interface';
 
 
+
 // class - Monthly Consumption model
 class MonthlyConsumptionModel extends Model<MonthlyConsumption> {
    public id!: string;

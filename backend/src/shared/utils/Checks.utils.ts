@@ -3,6 +3,7 @@
 import { targetType } from './../dtos/Simulations.dtos';
 
 
+
 // target type check
 export const targetTypeCheck = (target_type: targetType) => {
    return target_type == 'energy' ? 'energia' 

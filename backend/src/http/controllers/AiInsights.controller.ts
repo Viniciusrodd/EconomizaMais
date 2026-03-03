@@ -18,6 +18,7 @@ import {
 } from '@DTOs/aiInsights.dtos';
 
 
+
 // class - ai insights controller
 class AIinsightsController {
 

@@ -9,6 +9,7 @@ import { ConnectionDatabase } from "@config/database";
 import type { User } from '@interfaces/Entities.interface';
 
 
+
 // class - user model
 class UserModel extends Model<User> {
    public id!: string;

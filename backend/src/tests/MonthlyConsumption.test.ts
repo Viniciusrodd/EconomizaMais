@@ -25,8 +25,10 @@ const fakeMonthCons = { id, year, month, energy_kwh, water_m3, gas_m3, created_a
 const fakeMonthConsSummary = { average_consume, highest_consume_month, variation_last_month };
 
 
+
 // mocks
 jest.mock('@services/MonthlyConsumption.service');
+
 
 
 describe('MonthlyConsumptionController', () => {

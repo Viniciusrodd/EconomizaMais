@@ -8,6 +8,7 @@ import {
 } from "@DTOs/aiInsights.dtos";
 
 
+
 // request mock
 export const aiInsightsMockRequest = (
    body: CreateAIInsightDTO | {},

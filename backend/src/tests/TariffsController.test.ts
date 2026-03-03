@@ -19,8 +19,10 @@ const updated_at: Date = new Date(Date.now());
 const fakeTariff = { id, energy_tariff, water_tariff, gas_tariff, created_at, updated_at };
 
 
+
 // mocks
 jest.mock('@services/Tariffs.service');
+
 
 
 describe('TariffsController', () => {

@@ -23,7 +23,6 @@ export interface MonthConsumptionsToExportDTO {
    gas_m3: number;
 };
 
-
 // Export Response DTO
 export interface PDFResponseDTO {
    id?: string;
@@ -34,7 +33,6 @@ export interface PDFResponseDTO {
    created_at?: Date;
 };
 
-
 // PDF generation DTO
 export interface PDFGenerationDTO {
    user_data: UserDataToExportDTO;
@@ -42,14 +40,12 @@ export interface PDFGenerationDTO {
    user_month_consumptions: MonthConsumptionsToExportDTO[];   
 };
 
-
 // Export Histories Response DTO
 export interface HistoriesResponseDTO {
    id: string;
    file_path: string;
    created_at: Date;
 };
-
 
 // pdf file data response DTO
 export interface FileDataResponseDTO {
