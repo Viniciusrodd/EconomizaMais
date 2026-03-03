@@ -95,15 +95,16 @@ O backend segue uma **arquitetura em camadas**, priorizando organização, manut
 - **Node.js + TypeScript**
 - **Express**
 - **Sequelize + MySQL**
+- **Jest**
+- **PDFKit** para geração de PDF
+- **UUID** para identificadores locais
+- **Helmet** + **HPP** + **Compression** + **CORS** para segurança e otimização
 - **Arquitetura limpa**:
   - Controllers
   - Services (regras de negócio)
   - Repositories
   - Domain (entidades)
-- **IA local via Ollama**
-- **Geração de PDF**
-- **Tratamento de erros e logs locais**
-
+- **IA local - Ollama mistral**
 
 
 ## 🖥️ Estrutura do Frontend (React + TypeScript)
@@ -112,6 +113,8 @@ Frontend focado em **simplicidade, acessibilidade e clareza visual**, seguindo p
 - **React + TypeScript**
 - **Vite**
 - **Axios**
+- **React Router DOM 7**
+- **Context API** para gerenciamento de sessão
 - **Componentização por feature**
 - **Interface simples e intuitiva**
 - **Fluxos curtos e guiados**
@@ -186,7 +189,7 @@ Possíveis evoluções futuras:
 - Extraia o projeto em uma pasta local  
   Exemplo:
   ```text
-  C:\Users\alfa\Documents\Estudos 3\Economiza+
+  C:\Users\alfa\Documents\Economiza+
 
 ou
 
@@ -281,7 +284,7 @@ npm run dev
 ### ❌ Porta já está em uso
 - O script tenta resolver automaticamente, mas se necessário:
 ```bash
-taskkill /F /IM node.exe
+taskkill /IM node.exe /F
 ```
 
 ### ❌ Erro de conexão com banco
