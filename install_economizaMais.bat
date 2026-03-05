@@ -63,8 +63,10 @@ echo 3) VERIFICANDO MODELO DE IA
 echo -----------------------------------------------------
 ollama --version >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
-   echo Baixando modelo Mistral...
-   ollama pull mistral
+   echo ❌ Ollama nao encontrado!
+   echo Instale em:
+   echo https://ollama.com/download
+   pause
 ) ELSE (
    echo ✔ Ollama encontrado!
 )
@@ -102,6 +104,8 @@ echo -----------------------------------------------------
 echo 6) EXECUTANDO MIGRATIONS SEQUELIZE
 echo -----------------------------------------------------
 echo.
+
+cd backend
 
 echo Executando migrations...
 call npx sequelize db:migrate

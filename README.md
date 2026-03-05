@@ -201,7 +201,29 @@ cd economiza+
 
 ---
 
-### ⚙️ 3. Instale tudo com 1 clique
+### 🗄️ 3. Configurar o banco de dados
+O Economiza+ utiliza **MySQL local**.
+
+Antes da primeira execução, é necessário criar o banco.
+
+Abra o MySQL e execute:
+
+```bash
+CREATE DATABASE economiza+;
+```
+
+Configure o arquivo .env em backend/.env:
+```bash
+DB_NAME=economiza+
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+DB_HOST=localhost
+SERVER_PORT=5115  
+```
+
+---
+
+### ⚙️ 4. Instale tudo com 1 clique
 Na pasta raiz do projeto, execute:
 ```bash
 install_economizaMais.bat
@@ -217,7 +239,7 @@ Caso algo esteja faltando, o instalador exibirá exatamente o que precisa ser in
 
 ---
 
-### ▶️ 4. Iniciando o sistema (modo automático)
+### ▶️ 5. Iniciando o sistema (modo automático)
 Após a instalação, execute:
 ```bash
 start_economizaMais.bat
@@ -240,7 +262,7 @@ Você verá duas janelas abertas:
 
 ---
 
-### 🧭 5. Acessando o sistema manualmente
+### 🧭 6. Acessando o sistema manualmente
 Abra no navegador:
 ```bash
 👉 http://localhost:5173/
