@@ -1,4 +1,6 @@
 @echo off
+cd /d "%~dp0"
+
 if "%1"=="" (
    cmd /k "%~f0" run
    exit
@@ -89,6 +91,15 @@ echo -----------------------------------------------------
 if exist backend (
    cd backend
    call npm install
+
+   echo.
+   echo Executando migrations...
+   call npx sequelize db:migrate
+
+   echo.
+   echo Executando seeds...
+   call npx sequelize db:seed:all
+
    cd ..
    echo ✔ Backend instalado com sucesso!
 ) ELSE (
@@ -97,23 +108,6 @@ if exist backend (
    pause
    exit /b
 )
-
-
-echo.
-echo -----------------------------------------------------
-echo 6) EXECUTANDO MIGRATIONS SEQUELIZE
-echo -----------------------------------------------------
-echo.
-
-cd backend
-
-echo Executando migrations...
-call npx sequelize db:migrate
-
-echo.
-echo Executando seeds...
-call npx sequelize db:seed:all
-
 
 
 echo.
