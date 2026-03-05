@@ -59,16 +59,12 @@ IF %ERRORLEVEL% NEQ 0 (
 
 echo.
 echo -----------------------------------------------------
-echo 3) VERIFICANDO OLLAMA
+echo 3) VERIFICANDO MODELO DE IA
 echo -----------------------------------------------------
 ollama --version >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
-    echo ❌ Ollama NAO encontrado!
-    echo Baixe e instale por aqui:
-    echo https://ollama.com/download
-    echo.
-    pause
-    exit /b
+    echo Baixando modelo Mistral...
+    ollama pull mistral
 ) ELSE (
     echo ✔ Ollama encontrado!
 )

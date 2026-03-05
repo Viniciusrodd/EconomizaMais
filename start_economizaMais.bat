@@ -43,6 +43,11 @@ start "Economiza+ Frontend" cmd /k "cd /D "%SCRIPT_DIR%frontend" && npm run dev"
 
 timeout /t 2 >nul
 
+echo Iniciando Ollama AI... 
+start "Ollama Server" cmd /k "ollama serve" 
+
+timeout /t 3 >nul
+
 REM -----------------------------------------------------------
 REM AGUARDAR E ABRIR NAVEGADOR
 REM -----------------------------------------------------------
