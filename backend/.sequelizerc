@@ -1,0 +1,12 @@
+
+// imports
+import path from 'path';
+
+
+// config
+module.exports = {
+   'config': path.resolve('./src/config', 'config.ts'),
+   'models-path': path.resolve('./src/infra/sequelize/models'),
+   'seeders-path': path.resolve('./src/infra/sequelize/seeders'),
+   'migrations-path': path.resolve('./src/infra/sequelize/migrations')
+};

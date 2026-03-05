@@ -28,14 +28,14 @@ echo 1) VERIFICANDO NODE.JS
 echo -----------------------------------------------------
 node --version >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
-    echo ❌ Node.js NAO FOI ENCONTRADO!
-    echo Baixe e instale pelo site oficial:
-    echo https://nodejs.org/en/download
-    echo.
-    pause
-    exit /b
+   echo ❌ Node.js NAO FOI ENCONTRADO!
+   echo Baixe e instale pelo site oficial:
+   echo https://nodejs.org/en/download
+   echo.
+   pause
+   exit /b
 ) ELSE (
-    echo ✔ Node.js encontrado!
+   echo ✔ Node.js encontrado!
 )
 
 
@@ -45,15 +45,15 @@ echo 2) VERIFICANDO NPM
 echo -----------------------------------------------------
 call npm --version >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
-    echo ❌ NPM nao encontrado!
-    echo O NPM deve vir instalado junto com o Node.js.
-    echo Reinstale o Node pelo site oficial:
-    echo https://nodejs.org/en/download
-    echo.
-    pause
-    exit /b
+   echo ❌ NPM nao encontrado!
+   echo O NPM deve vir instalado junto com o Node.js.
+   echo Reinstale o Node pelo site oficial:
+   echo https://nodejs.org/en/download
+   echo.
+   pause
+   exit /b
 ) ELSE (
-    echo ✔ NPM encontrado!
+   echo ✔ NPM encontrado!
 )
 
 
@@ -63,10 +63,10 @@ echo 3) VERIFICANDO MODELO DE IA
 echo -----------------------------------------------------
 ollama --version >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
-    echo Baixando modelo Mistral...
-    ollama pull mistral
+   echo Baixando modelo Mistral...
+   ollama pull mistral
 ) ELSE (
-    echo ✔ Ollama encontrado!
+   echo ✔ Ollama encontrado!
 )
 
 
@@ -85,32 +85,47 @@ echo -----------------------------------------------------
 echo 5) INSTALANDO DEPENDENCIAS DO BACKEND
 echo -----------------------------------------------------
 if exist backend (
-    cd backend
-    call npm install
-    cd ..
-    echo ✔ Backend instalado com sucesso!
+   cd backend
+   call npm install
+   cd ..
+   echo ✔ Backend instalado com sucesso!
 ) ELSE (
-    echo ❌ Pasta /backend NAO encontrada!
-    echo Verifique se voce extraiu o projeto corretamente.
-    pause
-    exit /b
+   echo ❌ Pasta /backend NAO encontrada!
+   echo Verifique se voce extraiu o projeto corretamente.
+   pause
+   exit /b
 )
 
 
 echo.
 echo -----------------------------------------------------
-echo 6) INSTALANDO DEPENDENCIAS DO FRONTEND
+echo 6) EXECUTANDO MIGRATIONS SEQUELIZE
+echo -----------------------------------------------------
+echo.
+
+echo Executando migrations...
+call npx sequelize db:migrate
+
+echo.
+echo Executando seeds...
+call npx sequelize db:seed:all
+
+
+
+echo.
+echo -----------------------------------------------------
+echo 7) INSTALANDO DEPENDENCIAS DO FRONTEND
 echo -----------------------------------------------------
 if exist frontend (
-    cd frontend
-    call npm install
-    cd ..
-    echo ✔ Frontend instalado com sucesso!
+   cd frontend
+   call npm install
+   cd ..
+   echo ✔ Frontend instalado com sucesso!
 ) ELSE (
-    echo ❌ Pasta /frontend NAO encontrada!
-    echo Verifique se voce extraiu o projeto corretamente.
-    pause
-    exit /b
+   echo ❌ Pasta /frontend NAO encontrada!
+   echo Verifique se voce extraiu o projeto corretamente.
+   pause
+   exit /b
 )
 
 
