@@ -71,14 +71,13 @@ const Tariffs = () => {
 
    // fetch tariffs - get
    const fetchTariffs = async () => {
-      setLoading(true);
-
       const response = await tariffService.getTariffService();
       if(!response){
          console.error('⚠️ Unexpected return from API:', response);
          
          setIsTariffs(false);
          setChangeTariffs(true);
+         return;
       }
       
       // set tariffs
@@ -86,7 +85,6 @@ const Tariffs = () => {
       setEnergy_tariff(response.energy_tariff);
       setWater_tariff(response.water_tariff);
       setGas_tariff(response.gas_tariff);
-      setLoading(false);
    };
 
    // check tariffs - get
@@ -97,7 +95,7 @@ const Tariffs = () => {
          }
          catch(error){
             console.error('❌ Error at check tariffs: ', error);
-            
+
             setIsTariffs(false);
             setChangeTariffs(true);
          }

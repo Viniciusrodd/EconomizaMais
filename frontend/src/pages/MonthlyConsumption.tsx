@@ -84,10 +84,10 @@ const MonthlyConsumption = () => {
 
    // fetch month cons - get
    const fetchMonthCons = async () => {
-      setLoading(true);
-
       const response = await monthlyConsumptionService.getMonthConsService();
+      
       if(!response) console.error('⚠️ Unexpected return from API:', response);
+      
       if(response.length === 0){
          setMonthConsList([]);
          setCurrentIndex(0);
@@ -108,7 +108,6 @@ const MonthlyConsumption = () => {
       setCurrentIndex(0);
       setIsMonthCons(true);
       setChangeMonthCons(false);
-      setLoading(false);
    };
 
    // check month cons - get
@@ -412,9 +411,6 @@ const MonthlyConsumption = () => {
                               alt="loading_png"
                               className='loading_img' 
                            />
-                           <p className='loading_msg'>
-                              Carregando...
-                           </p>
                         </>
                      ) : (
                         <div className={ styles.btts_container }>

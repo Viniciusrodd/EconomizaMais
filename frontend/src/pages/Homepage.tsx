@@ -153,103 +153,111 @@ const Homepage = () => {
       setGasSummary(gas_response);
    };
 
+   // fetch safes
+   const fetchUserSafe = async () => {
+      try{
+         await fetchUser();
+         return { ok: true };
+      }catch(error){
+         return { ok: false, error };
+      }
+   };
+   const fetchTariffsSafe = async () => {
+      try{
+         await fetchTariffs();
+         return { ok: true };
+      }catch(error){
+         return { ok: false, error };
+      }
+   };
+   const fetchMonthConsSafe = async () => {
+      try{
+         await fetchMonthCons();
+         return { ok: true };
+      }catch(error){
+         return { ok: false, error };
+      }
+   };
+   const fetchMonthConsSummarySafe = async () => {
+      try{
+         await fetchMonthConsSummary();
+         return { ok: true };
+      }catch(error){
+         return { ok: false, error };
+      }
+   };
+
    // check datas
    useEffect(() => {
-      // user
-      const getUser = async () => {
+      const loadData = async () => {
          setLoading(true);
 
-         try{
-            await fetchUser();
+         // user
+         const user = await fetchUserSafe();
+         if(!user.ok){
+            console.error('❌ Error at check user: ', user.error);
             setLoading(false);
-         }
-         catch(error){
-            console.error('❌ Error at get user: ', error);
-
+            
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ error }, \n você será redirecionado...`, 
+               msg: `${ user.error }, \n você será redirecionado...`, 
                btt1: false, btt2: false, display: true
             });
 
             setRedirect(true);
-            setLoading(false);
+            return;
          }
-      };
 
-      // tariffs
-      const getTariffs = async () => {
-         setLoading(true);
-
-         try{
-            await fetchTariffs();
+         // tariffs
+         const tariffs = await fetchTariffsSafe();
+         if(!tariffs.ok){
+            console.error('❌ Error at check tariffs: ', tariffs.error);
             setLoading(false);
-         }
-         catch(error){
-            console.error('❌ Error at check tariffs: ', error);
-            
-            // call btt1 event
-            setModal_event('tariffs_notfound');
-            
+
+            setModal_event('tariffs_notfound'); // call btt1 event
+
             modal_config({
                title: 'Espere ❕', 
-               msg: `${ error }! \n Registre agora suas Tarifas de consumo`, 
+               msg: `${ tariffs.error }, \n Registre agora suas Tarifas de consumo`, 
                btt1: 'Registrar', btt2: false, display: true
             });
 
-            setLoading(false);
+            return;
          }
-      };
 
-      // monthly consumptions
-      const getMonthCons = async () => {
-         setLoading(true);
-
-         try{
-            await fetchMonthCons();
+         // month cons
+         const monthCons = await fetchMonthConsSafe();
+         if(!monthCons.ok){
+            console.error('❌ Error at check monthly consumptions: ', monthCons.error);
             setLoading(false);
-         }
-         catch(error){
-            console.error('❌ Error at check monthly consumptions: ', error);
-            
-            // call btt1 event
-            setModal_event('monthCons_notfound');
-            
-            modal_config({
-               title: 'Espere ❕', 
-               msg: `${ error }! \n Registre agora seu mês de consumo`, 
-               btt1: 'Registrar', btt2: false, display: true
-            });
 
-            setLoading(false);
-         }
-      };
-
-      // monthly consumptions summary
-      const getMonthConsSummary = async () => {
-         setLoading(true);
-
-         try{
-            await fetchMonthConsSummary();
-            setLoading(false);
-         }
-         catch(error){
-            console.error('❌ Error at check monthly consumptions summary: ', error);
-            
             modal_config({
                title: 'Erro ❌', 
-               msg: `${ error }`, 
+               msg: `${ monthCons.error }`, 
                btt1: false, btt2: 'Tentar novamente', display: true
             });
 
+            return;
+         }
+
+         // month cons summary
+         const monthConsSummary = await fetchMonthConsSummarySafe();
+         if(!monthConsSummary.ok){
+            console.error('❌ Error at check monthly consumptions summary: ', monthConsSummary.error);
             setLoading(false);
+
+            modal_config({
+               title: 'Erro ❌', 
+               msg: `${ monthConsSummary.error }`, 
+               btt1: false, btt2: 'Tentar novamente', display: true
+            });
+
+            return;
          }
       };
 
-      getUser();
-      getTariffs();
-      getMonthCons();
-      getMonthConsSummary();
+      loadData();
+      setLoading(false);
    }, []);
 
    // prev month cons

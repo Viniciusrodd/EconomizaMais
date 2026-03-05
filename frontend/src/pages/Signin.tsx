@@ -79,6 +79,7 @@ const SignIn = () => {
          }, 4000);
 
          return () =>{
+            setLoading(false);
             clearTimeout(clearMessage);
          };
       }
@@ -150,6 +151,8 @@ const SignIn = () => {
             msg: `${ error }`, 
             btt1: false, btt2: 'Tentar novamente', display: true
          });
+
+         setLoading(false);
       }
    };
 
