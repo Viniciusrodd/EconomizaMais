@@ -1,11 +1,11 @@
 
 // imports
-import path from 'path';
+require('dotenv').config();
 
 
 // config
 module.exports = {
-   'config': path.resolve('./src/config', 'config.ts'),
+   'config': path.resolve('./src/config', 'config.js'),
    'models-path': path.resolve('./src/infra/sequelize/models'),
    'seeders-path': path.resolve('./src/infra/sequelize/seeders'),
    'migrations-path': path.resolve('./src/infra/sequelize/migrations')
