@@ -1,0 +1,89 @@
+
+services:
+
+  # mysql
+  database:
+      image: mysql:8.0
+      container_name: mysql-db
+      restart: always
+
+      environment:
+        MYSQL_ROOT_PASSWORD: senha
+        MYSQL_DATABASE: economiza+
+      
+      ports:
+      - '3306:3306'
+
+      volumes:
+        - mysql-data:/var/lib/mysql
+
+      networks:
+        - economizaMais-network
+
+
+  # backend
+  backend:
+      build:
+        context: .
+        dockerfile: backend/Dockerfile
+      
+      container_name: economizaMais-backend
+      restart: unless-stopped
+
+      depends_on:
+        - database
+      
+      env_file:
+        - ./backend/.docker.env
+      
+      ports:
+        - "5115:5115"
+      
+      networks:
+        - economizaMais-network
+
+
+  # frontend
+  frontend:
+      build:
+        context: .
+        dockerfile: frontend/Dockerfile
+      
+      container_name: economizaMais-frontend
+      restart: unless-stopped
+      
+      depends_on:
+        - backend
+      
+      ports:
+        - "3000:80"
+      
+      networks:
+        - economizaMais-network
+
+
+  # ollama
+  ollama:
+      image: ollama/ollama
+      container_name: economizaMais-ollama
+      restart: unless-stopped
+
+      ports:
+        - "11434:11434"
+
+      volumes:
+        - ollama_data:/root/.ollama
+
+      networks:
+        - economizaMais-network
+
+
+volumes:
+    ollama_data:
+    mysql-data:
+
+
+
+networks:
+    economizaMais-network:
+      driver: bridge
