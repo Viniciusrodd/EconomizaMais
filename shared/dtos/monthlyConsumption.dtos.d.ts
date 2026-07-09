@@ -6,7 +6,7 @@ export interface CreateMonthlyConsumptionDTO {
    energy_kwh: number;
    water_m3: number;
    gas_m3: number;
-};
+}
 
 // get monthly_consumption DTO
 export interface MonthlyConsumptionResponseDTO {
@@ -18,18 +18,18 @@ export interface MonthlyConsumptionResponseDTO {
    gas_m3: number;
    created_at: Date;
    updated_at: Date;
-};
+}
 
 // update monthly_consumption DTO
 export interface UpdateMonthlyConsumptionDTO {
    energy_kwh?: number;
    water_m3?: number;
    gas_m3?: number;
-};
+}
 
 // get monthly_consumption summary DTO
 export interface MonthlyConsumptionSummaryDTO {
    average_consume: number;
    highest_consume_month: string | null;
    variation_last_month: number;
-};
+}

@@ -7,7 +7,7 @@ export type Insight_category = 'tips' | 'patterns' | 'anomalies';
 export interface CreateAIInsightDTO {
    consume_type: Consume_type;
    insight_category: Insight_category; 
-};
+}
 
 // AI Insight Input DTO
 export interface AIInsightInputDTO {
@@ -16,7 +16,7 @@ export interface AIInsightInputDTO {
    average_consume: number;
    highest_consume_month: string | null;
    variation_last_month: number;
-};
+}
 
 // AI Insight Response DTO
 export interface AIInsightResponseDTO {
@@ -26,4 +26,4 @@ export interface AIInsightResponseDTO {
    insight_category: Insight_category; 
    consume_type: Consume_type;
    created_at: Date;
-};
+}
