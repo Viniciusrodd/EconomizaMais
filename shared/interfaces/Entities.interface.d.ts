@@ -7,7 +7,7 @@ export interface User {
    number_of_residents: number;
    created_at?: Date;
    updated_at?: Date;
-};
+}
 
 // Tariff
 export interface Tariff {
@@ -18,7 +18,7 @@ export interface Tariff {
    gas_tariff: number;
    created_at?: Date;
    updated_at?: Date;
-};
+}
 
 // Monthly Consumption
 export interface MonthlyConsumption {
@@ -31,7 +31,7 @@ export interface MonthlyConsumption {
    gas_m3: number;
    created_at?: Date;
    updated_at?: Date;
-};
+}
 
 // Simulation
 export type SimulationTargetType =
@@ -50,7 +50,7 @@ export interface Simulation {
    environmental_impact: number;
    feedback: string;
    created_at?: Date;
-};
+}
 
 // AI Insight
 export type AIInsightCategory =
@@ -71,7 +71,7 @@ export interface AIInsight {
    consume_type: AIInsightConsumeType;
    created_at?: Date;
    updated_at?: Date;
-};
+}
 
 // Export History
 export interface ExportHistory {
@@ -80,4 +80,4 @@ export interface ExportHistory {
    file_path: string;
    created_at?: Date;
    updated_at?: Date;
-};
+}

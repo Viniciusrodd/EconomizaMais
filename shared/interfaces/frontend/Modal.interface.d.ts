@@ -7,7 +7,7 @@ export interface iModal{
    display: boolean; 
    onClose: () => void; 
    modalEvent?: (event: any) => void;
-};
+}
 
 export interface iModalConfig{
    title: string;
@@ -15,4 +15,4 @@ export interface iModalConfig{
    btt1: boolean | string;
    btt2: boolean | string;
    display: boolean;
-};
+}
