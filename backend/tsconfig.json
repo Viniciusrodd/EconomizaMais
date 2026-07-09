@@ -18,9 +18,9 @@
          "@services/*": ["./src/domain/services/*"],
          "@models/*": ["./src/infra/sequelize/models/*"],
          "@repositories/*": ["./src/infra/repositories/*"],
-         "@DTOs/*": ["./src/shared/dtos/*"],
          "@errors/*": ["./src/shared/errors/*"],
          "@utils/*": ["./src/shared/utils/*"],
+         "@DTOs/*": ["../shared/dtos/*"],
          "@interfaces/*": ["../shared/interfaces/*"],
          "@mocks/*": ["./src/mocks/*"],
          

@@ -1,6 +1,6 @@
 
 // import interfaces
-import { targetType } from './../dtos/Simulations.dtos';
+import { targetType } from '@DTOs/Simulations.dtos';
 
 
 

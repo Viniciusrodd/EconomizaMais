@@ -37,7 +37,7 @@
          "@services/*": ["src/services/*"],
          "@styles/*": ["src/styles/*"],
          "@interfeces/*": ["../shared/interfaces/*"],
-         "@DTOs/*": ["../backend/src/shared/dtos/*"],
+         "@DTOs/*": ["../shared/dtos/*"],
 
          "@root/*": ["src/*"],         
       }
