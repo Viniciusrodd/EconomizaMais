@@ -48,7 +48,7 @@ const config: Config.InitialOptions = {
       "@services/(.*)": ["<rootDir>/src/domain/services/$1"],
       "@models/(.*)": ["<rootDir>/src/infra/sequelize/models/$1"],
       "@repositories/(.*)": ["<rootDir>/src/infra/repositories/$1"],
-      "@DTOs/(.*)": ["<rootDir>/src/shared/dtos/$1"],
+      "@DTOs/(.*)": ["../shared/dtos/$1"],
       "@errors/(.*)": ["<rootDir>/src/shared/errors/$1"],
       "@utils/(.*)": ["<rootDir>/src/shared/utils/$1"],
       "@interfaces/(.*)": ["../shared/interfaces/$1"],
