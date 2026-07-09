@@ -22,4 +22,4 @@ RUN npm ci --omit=dev
 COPY --from=builder /app/dist ./dist
 RUN mkdir -p /app/temp/pdf
 EXPOSE 5115
-CMD ["node", "dist/app.js"]
+CMD ["node", "dist/src/App.js"]
