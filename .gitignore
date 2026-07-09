@@ -1,0 +1,11 @@
+# .gitignore na raiz do projeto
+
+# Scripts específicos de Windows
+*.cmd
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Logs
+*.log
