@@ -11,47 +11,44 @@ Tudo roda **localmente**, inclusive a **Inteligência Artificial**, utilizando *
 
 
 
-## 🔒 Tudo acontece localmente
+## Tudo acontece localmente
 
-- 🔐 **Privacidade total** — nenhum dado sai da máquina  
-- ☁️ **Sem uso de nuvem**  
-- ⚡ **Baixa latência**  
-- 🖥️ **Funciona offline**  
-- 🌱 Ideal para **comunidades com acesso limitado à internet**
+- **Privacidade total** — nenhum dado sai da máquina  
+- **Sem uso de nuvem**  
+- **Baixa latência**  
+- **Funciona offline**  
+- Ideal para **comunidades com acesso limitado à internet**
 
 
-## 🌟 Propósito do projeto
+## Propósito do projeto
 
 O Economiza+ foi desenvolvido como uma **atividade extensionista**, alinhada ao **ODS 12 — Consumo e Produção Responsáveis**, com foco em:
 
-- 💡 **Educação ambiental prática**
-- 📊 **Consciência sobre gastos domésticos**
-- 🤝 **Inclusão digital**
-- 🏠 Uso real em **famílias, escolas, ONGs e comunidades**
+- **Educação ambiental prática**
+- **Consciência sobre gastos domésticos**
+- **Inclusão digital**
+- Uso real em **famílias, escolas, ONGs e comunidades**
 
 A proposta é transformar **dados de consumo** em **informação clara**, acessível e útil para a tomada de decisão no dia a dia.
 
 
 
-## 🛠️ Funcionalidades principais
-
-### 👤 Para o usuário
-
-- ✍️ Cadastro simples de perfil residencial
-- 📅 Registro mensal de consumo:
-  - ⚡ Energia elétrica (kWh)
-  - 🚿 Água (m³)
-  - 🔥 Gás (m³)
-- 📈 Visualização de histórico de consumo
-- 💰 Configuração de tarifas (energia, água e gás)
-- 📊 Projeções de gastos futuros
-- 🔄 **Simulações de economia** com redução de consumo
-- 🌱 Visualização de impacto ambiental estimado
-- 🧠 **Insights gerados por IA local**, incluindo:
+## Funcionalidades principais
+- Cadastro simples de perfil residencial
+- Registro mensal de consumo:
+  - Energia elétrica (kWh)
+  - Água (m³)
+  - Gás (m³)
+- Visualização de histórico de consumo
+- Configuração de tarifas (energia, água e gás)
+- Projeções de gastos futuros
+- **Simulações de economia** com redução de consumo
+- Visualização de impacto ambiental estimado
+- **Insights gerados por IA local**, incluindo:
   - Anomalias
   - Padrões de consumo
   - Dicas educativas
-- 📄 Exportação de relatórios em **PDF**
+- Exportação de relatórios em **PDF**
 
 ---
 ![Tela de simulações](./frontend/public/images/readme/simulations.png)
@@ -59,9 +56,8 @@ A proposta é transformar **dados de consumo** em **informação clara**, acess�
 ---
 ![Tela de insights gerados por IA](./frontend/public/images/readme/insights.png)
 
----
 
-## 🧠 Uso consciente de IA
+## Uso consciente de IA
 
 A Inteligência Artificial no Economiza+:
 
@@ -74,22 +70,22 @@ A Inteligência Artificial no Economiza+:
 
 
 
-## 📚 Modelagem de Dados (MySQL local)
+## Modelagem de Dados (MySQL local)
 
 O sistema utiliza **MySQL local**, com uma modelagem simples e bem definida:
 
-- 👤 Usuários
-- 📊 Consumos mensais
-- 💰 Tarifas
-- 🔄 Simulações
-- 🧠 Insights da IA
-- 📄 Histórico de exportações
+- Usuários
+- Consumos mensais
+- Tarifas
+- Simulações
+- Insights da IA
+- Histórico de exportações
 
 Todos os dados permanecem **exclusivamente na máquina do usuário**.
 
 
 
-## 🗂️ Estrutura do Backend (Node + TypeScript)
+## Estrutura do Backend (Node + TypeScript)
 
 O backend segue uma **arquitetura em camadas**, priorizando organização, manutenibilidade e clareza.
 - **Node.js + TypeScript**
@@ -107,7 +103,7 @@ O backend segue uma **arquitetura em camadas**, priorizando organização, manut
 - **IA local - Ollama mistral**
 
 
-## 🖥️ Estrutura do Frontend (React + TypeScript)
+## Estrutura do Frontend (React + TypeScript)
 
 Frontend focado em **simplicidade, acessibilidade e clareza visual**, seguindo princípios de IHC.
 - **React + TypeScript**
@@ -122,7 +118,7 @@ Frontend focado em **simplicidade, acessibilidade e clareza visual**, seguindo p
 
 
 
-## ✨ Requisitos Funcionais (resumo)
+## Requisitos Funcionais (resumo)
 
 - Cadastro de perfil residencial
 - Registro de consumo mensal
@@ -136,44 +132,106 @@ Frontend focado em **simplicidade, acessibilidade e clareza visual**, seguindo p
 
 
 
-## ⚙️ Requisitos Não Funcionais
+## Requisitos Não Funcionais
 
-- 🔒 Operação offline
-- ⚡ Respostas rápidas (≤ 3s para IA)
-- 🖥️ Baixo consumo de hardware
-- 📱 Interface acessível e simples
-- 🛡️ Privacidade total dos dados
-- 🧩 Código modular e manutenível
-- ⏱️ Curva de aprendizado < 5 minutos
+- Operação offline
+- Respostas rápidas (≤ 3s para IA)
+- Baixo consumo de hardware
+- Interface acessível e simples
+- Privacidade total dos dados
+- Código modular e manutenível
+- Curva de aprendizado < 5 minutos
 
 
 
-## 🌍 Objetivo Open-Source
+## Objetivo Open-Source
 
 O Economiza+ foi desenvolvido para ser:
 
-- 📘 **Educativo**
-- 🧩 **Fácil de entender**
-- 🔧 **Fácil de modificar**
-- 🤝 **Aberto para contribuições**
-- 🌱 **Aplicável em contextos sociais reais**
+- **Educativo**
+- **Fácil de entender**
+- **Fácil de modificar**
+- **Aberto para contribuições**
+- **Aplicável em contextos sociais reais**
 
 Possíveis evoluções futuras:
 
-- 🌙 Tema claro/escuro
-- 📱 Versão mobile
-- 📊 Dashboards comparativos
-- 🤖 Suporte a novos modelos de IA local
-- 🏘️ Modo multi-residência
+- Tema claro/escuro
+- Versão mobile
+- Suporte a novos modelos de IA local
+- Modo multi-residência
 
 
+## 🐋 Instalação e execução com Docker
 
-## 🚀 Como instalar e executar o projeto (Windows)
+### Pré-requisitos
+Antes de iniciar o economiza+, certifique-se de possuir instalado:
+- Docker Desktop
+- Git
+
+> Todos os outros serviços são executados em containers Docker.
+
+---
+
+### Clonar o projeto
+```bash
+- git clone https://github.com/Viniciusrodd/EconomizaMais.git
+
+- cd Economiza+
+```
+
+---
+
+### Primeira execução
+Na primeira execução é necessário baixar o modelo utilizado pela IA.
+Abra a pasta `launcher` e execute:
+```
+install.bat
+```
+
+O instalador irá:
+- iniciar todos os containers
+- baixar o modelo `mistral:7b-instruct-q4_0`
+
+> O primeiro download pode levar alguns minutos, dependendo da velocidade da internet.
+
+---
+
+### Executando a aplicação
+Após a instalação inicial, basta executar:
+```
+start.bat
+```
+O script irá:
+- iniciar todos os containers
+- abrir automaticamente o navegador em
+```
+http://localhost:3000
+```
+
+---
+
+### Encerrando a aplicação
+Quando terminar de utilizar o economiza+, execute:
+```
+stop.bat
+```
+Esse script interrompe todos os containers da aplicação, liberando memória e processamento da máquina.
+
+
+## ⚠️ Requisitos de hardware
+- 8 GB de RAM (mínimo)
+- 16 GB de RAM (recomendado)
+- CPU com múltiplos núcleos
+- Aproximadamente 8 GB de espaço livre para os modelos e imagens Docker
+
+
+## 🚀 Instalação e execução local (outra opção)
 > ⚠️ **Observação**: o sistema permite **apenas 1 usuário por máquina**, pois funciona localmente e offline.
 
 ---
 
-### 📦 1. Pré-requisitos
+### Pré-requisitos
 - **✔ Node.js (LTS)**  
   https://nodejs.org/en/download  
 - **✔ Git**  
@@ -184,7 +242,7 @@ Possíveis evoluções futuras:
 
 ---
 
-### 🔽 2. Download ZIP (recomendado para usuários leigos)
+### Download ZIP (recomendado para usuários leigos)
 - Clique em **Code → Download ZIP**
 - Extraia o projeto em uma pasta local  
   Exemplo:
@@ -193,7 +251,7 @@ Possíveis evoluções futuras:
 
 ou
 
-### 📥 2. Clonando o repositório via Git
+### Clonando o repositório via Git
 ```bash
 git clone https://github.com/Viniciusrodd/EconomizaMais.git
 cd economiza+
@@ -201,7 +259,7 @@ cd economiza+
 
 ---
 
-### 🗄️ 3. Configurar o banco de dados
+### Configurar o banco de dados
 O Economiza+ utiliza **MySQL local**.
 
 Antes da primeira execução, é necessário criar o banco.
@@ -223,7 +281,7 @@ SERVER_PORT=5115
 
 ---
 
-### ⚙️ 4. Instale tudo com 1 clique
+### Instale tudo com 1 clique
 Na pasta raiz do projeto, execute:
 ```bash
 install_economizaMais.bat
@@ -239,19 +297,19 @@ Caso algo esteja faltando, o instalador exibirá exatamente o que precisa ser in
 
 ---
 
-### ▶️ 5. Iniciando o sistema (modo automático)
+### Iniciando o sistema (modo automático)
 Após a instalação, execute:
 ```bash
 start_economizaMais.bat
 ```
 
 Esse script irá:
-- 🖥️ Iniciar o backend
-- 🌐 Iniciar o frontend
-- 📌 Criar automaticamente um atalho na área de trabalho (na primeira execução)
-- 🌍 Abrir o navegador automaticamente em:
+- Iniciar o backend
+- Iniciar o frontend
+- Criar automaticamente um atalho na área de trabalho (na primeira execução)
+- Abrir o navegador automaticamente em:
 >http://localhost:5173/
-- 🔄 Encerrar serviços antigos caso as portas estejam ocupadas
+- Encerrar serviços antigos caso as portas estejam ocupadas
 
 Você verá duas janelas abertas:
 ```bash
@@ -262,15 +320,15 @@ Você verá duas janelas abertas:
 
 ---
 
-### 🧭 6. Acessando o sistema manualmente
+### Acessando o sistema manualmente
 Abra no navegador:
 ```bash
-👉 http://localhost:5173/
+http://localhost:5173/
 ```
 
 ---
 
-### 🛑 Como parar o sistema
+### Como parar o sistema
 Em cada terminal:
 
 ```bash
@@ -297,7 +355,7 @@ npm run dev
 ```
 
 
-## 🛠️ Problemas comuns
+## Problemas comuns
 
 ### ❌ IA não responde
 - Verifique se o **Ollama está rodando**
@@ -314,7 +372,7 @@ taskkill /IM node.exe /F
 - Confirme variáveis no *.env*
 
 
-## 💬 Contribuições e suporte
+## Contribuições e suporte
 Sinta-se à vontade para:
 - Abrir issues
 - Sugerir melhorias
