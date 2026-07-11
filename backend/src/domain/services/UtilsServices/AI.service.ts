@@ -14,17 +14,15 @@ import { getErrorMessage } from "@utils/ErrorHandler.util";
 class AiService {
 
    public async modelRequest(
-      prompt: string,
-      model: string
+      prompt: string
    ): Promise<string> {
       // validations
       if(!prompt) throw new Error('Prompt for AI model request is necessary');
-      if(!model) throw new Error('Model is a mandatory field');
 
       try{
          // get model response
          const modelResponse = await axios.post(process.env.OLLAMA_URL as string, {
-            'model': model,
+            'model': process.env.OLLAMA_MODEL,
             'prompt': prompt,
             'stream': false
          });

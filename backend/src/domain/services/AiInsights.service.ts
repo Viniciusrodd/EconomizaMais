@@ -87,7 +87,7 @@ class AIinsightsService {
       const prompt = aiResponse.aiResponsePrompt(aiInsightInput);
 
       // AI model request
-      const message = await aiService.modelRequest(prompt, 'mistral');
+      const message = await aiService.modelRequest(prompt);
 
       // ai insight DB creation
       const aiInsights = await models.AiInsightModel.create({

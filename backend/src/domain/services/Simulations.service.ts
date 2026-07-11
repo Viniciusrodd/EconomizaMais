@@ -91,7 +91,7 @@ class SimulationsService {
       const prompt = simulationPrompt.environmentalImpactPrompt(simulationsData);
 
       // AI model request
-      const feedback = await aiService.modelRequest(prompt, 'mistral');
+      const feedback = await aiService.modelRequest(prompt);
 
       // simulations DB creation
       const simulations = await models.SimulationModel.create({
